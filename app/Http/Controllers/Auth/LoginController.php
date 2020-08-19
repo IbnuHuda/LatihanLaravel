@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
 use Socialite;
+use App\User;
+use App\UserCompany;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -41,15 +43,19 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    public function redirectToProvider($provider)
+    public function redirectToProvider($type, $provider)
     {
+        session(['type' => $type]);
+
         try {
             $scopes = config("services.$provider.scopes") ?? [];
 
             if (count($scopes) == 0) return Socialite::driver($provider)->redirect();
-            else return Socialite::driver($provider)->scopes($scopes)->redirect();
+            else return Socialite::driver($provider)->scopes($scopes)->redirect(['type' => $type]);
+            
         } catch (Exception $e) {
-            return redirect('login')->withErrors(['Authentication_denied' => 'Login with ' .ucfirst($provider). ' failed. Please try again!']);
+            if (session('type') == 'company') return redirect()->route('companyLogin')->withErrors(['Authentication_denied' => 'Login with ' . ucfirst($provider) . ' failed. Please try again!']);
+            else return redirect('/login')->withErrors(['Authentication_denied' => 'Login with ' . ucfirst($provider) . ' failed. Please try again!']);
         }
     }
 
@@ -59,17 +65,27 @@ class LoginController extends Controller
             $data = Socialite::driver($provider)->stateless()->user();
 
             return $this->handleSocialUser($provider, $data);
+
         } catch (Exception $e) {
-            return redirect('login')->withErrors(['Authentication_denied' => 'Login with ' .ucfirst($provider). ' failed. Please try again!']);
+            if (session('type') == 'company') return redirect()->route('companyLogin')->withErrors(['Authentication_denied' => 'Login with ' . ucfirst($provider) . ' failed. Please try again!']);
+            else return redirect('/login')->withErrors(['Authentication_denied' => 'Login with ' . ucfirst($provider) . ' failed. Please try again!']);
         }
     }
 
     public function handleSocialUser($provider, $data)
     {
-        $user = User::where(["social->{$provider}->id" => $data->id])->first();
+        if (session('type') == 'company') {
+            $user = UserCompany::where(["social->{$provider}->id" => $data->id])->first();
 
-        if (!$user) $user = User::where(['email' => $data->email])->first();
-        if (!$user) return $this->createUserWithSocialData($provider, $data);
+            if (!$user) $user = UserCompany::where(['email' => $data->email])->first();
+            if (!$user) return $this->createUserWithSocialData($provider, $data);
+
+        } else {
+            $user = User::where(["social->{$provider}->id" => $data->id])->first();
+
+            if (!$user) $user = User::where(['email' => $data->email])->first();
+            if (!$user) return $this->createUserWithSocialData($provider, $data);
+        }
 
         $social = $user->social;
         $social[$provider] = [
@@ -85,7 +101,10 @@ class LoginController extends Controller
     public function createUserWithSocialData($provider, $data)
     {
         try {
-            $user = new User;
+
+            if (session('type') == 'company') $user = new UserCompany;
+            else $user = new User;
+
             $user->name = $data->name;
             $user->email = $data->email;
             $user->social = [
@@ -99,15 +118,24 @@ class LoginController extends Controller
             $user->save();
 
             return $this->socialLogin($user);
+
         } catch (Exception $e) {
-            return redirect('login')->withErrors(['Authentication_denied' => 'Login with ' .ucfirst($provider). ' failed. Please try again!']);
+            if (session('type') == 'company') return redirect()->route('companyLogin')->withErrors(['Authentication_denied' => 'Login with ' . ucfirst($provider) . ' failed. Please try again!']);
+            else return redirect('/login')->withErrors(['Authentication_denied' => 'Login with ' . ucfirst($provider) . ' failed. Please try again!']);
         }
     }
 
     public function socialLogin($user)
     {
-        Auth::loginUsingId($user->id);
+        if (session('type') == 'company') {
+            Auth::guard('company')->loginUsingId($user->id);
 
-        return redirect($this->redirectTo);
+            return redirect('/company/dashboard');
+
+        } else {
+            Auth::loginUsingId($user->id);
+
+            return redirect('/users/dashboard'); 
+        }
     }
 }

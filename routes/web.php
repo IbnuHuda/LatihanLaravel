@@ -19,9 +19,19 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/auth/{provider}', 'Auth\LoginController@redirectToProvider')->name('social.login');
-Route::get('/auth/{provider}/callback', 'Auth\LoginController@handleProviderCallback')->name('social.callback');
+Route::get('/company-login', 'Auth\CompanyLoginController@loginForm')->name('companyLogin');
+Route::post('/company-login', [
+	'as' => 'company-login',
+	'uses' => 'Auth\CompanyLoginController@login'
+]);
+
+Route::get('{type}/auth/{provider}', 'Auth\LoginController@redirectToProvider');
+Route::get('/auth/{provider}/callback', 'Auth\LoginController@handleProviderCallback');
 
 Route::middleware('auth:web')->group(function () {
-	Route::get('/home', 'HomeController@index')->name('home');
+	Route::get('/users/dashboard', 'HomeController@index')->name('users.home');
+});
+
+Route::middleware('auth:company')->group(function () {
+	Route::get('/company/dashboard', function () { return view('pages.company.dashboard'); });
 });

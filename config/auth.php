@@ -46,6 +46,11 @@ return [
             'provider' => 'users',
             'hash' => false,
         ],
+
+        'company' => [
+            'driver' => 'session',
+            'provider' => 'companies'
+        ]
     ],
 
     /*
@@ -69,6 +74,11 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\User::class,
+        ],
+
+        'companies' => [
+            'driver' => 'eloquent',
+            'model' => App\UserCompany::class,
         ],
 
         // 'users' => [
@@ -99,6 +109,13 @@ return [
             'expire' => 60,
             'throttle' => 60,
         ],
+
+        'companies' => [
+            'provider' => 'companies',
+            'table' => 'password_reset',
+            'expire' => 60,
+            'throttle' => 60
+        ]
     ],
 
     /*
