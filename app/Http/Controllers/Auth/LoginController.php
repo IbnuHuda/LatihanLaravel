@@ -130,12 +130,12 @@ class LoginController extends Controller
         if (session('type') == 'company') {
             Auth::guard('company')->loginUsingId($user->id);
 
-            return redirect('/company/dashboard');
+            return redirect()->route('companyDashboard');
 
         } else {
             Auth::loginUsingId($user->id);
 
-            return redirect('/users/dashboard'); 
+            return redirect()->route('usersDashboard');
         }
     }
 }

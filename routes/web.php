@@ -19,19 +19,25 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/company-login', 'Auth\CompanyLoginController@loginForm')->name('companyLogin');
+Route::get('/company-login', 'Auth\CompanyController@loginForm')->name('companyLogin');
 Route::post('/company-login', [
 	'as' => 'company-login',
-	'uses' => 'Auth\CompanyLoginController@login'
+	'uses' => 'Auth\CompanyController@login'
 ]);
+
+Route::get('/company-register', 'Auth\CompanyController@registerForm')->name('companyRegister');
+Route::post('/company-register', 'Auth\CompanyController@register');
 
 Route::get('{type}/auth/{provider}', 'Auth\LoginController@redirectToProvider');
 Route::get('/auth/{provider}/callback', 'Auth\LoginController@handleProviderCallback');
 
-Route::middleware('auth:web')->group(function () {
-	Route::get('/users/dashboard', 'HomeController@index')->name('users.home');
+Route::middleware('auth')->group(function () {
+	Route::get('/users/dashboard', 'HomeController@index')->name('usersDashboard');
 });
 
 Route::middleware('auth:company')->group(function () {
-	Route::get('/company/dashboard', function () { return view('pages.company.dashboard'); });
+	Route::get('/company-profile', 'Auth\CompanyController@profileForm')->name('companyProfile');
+	Route::post('/company-profile', 'Auth\CompanyController@profile');
+
+	Route::get('/company/dashboard', function () { return view('pages.company.dashboard'); })->name('companyDashboard');
 });
