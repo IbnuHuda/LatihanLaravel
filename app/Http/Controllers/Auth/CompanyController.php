@@ -47,7 +47,7 @@ class CompanyController extends Controller
 
         Auth::guard('company')->login($user);
 
-        return redirect()->route('companyProfile');
+        return redirect()->route('companyNewProfile');
     }
 
     public function loginForm()

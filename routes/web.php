@@ -33,11 +33,19 @@ Route::get('/auth/{provider}/callback', 'Auth\LoginController@handleProviderCall
 
 Route::middleware('auth')->group(function () {
 	Route::get('/users/dashboard', 'HomeController@index')->name('usersDashboard');
+	
+	Route::get('/users/profile', 'UsersProfileController@profileForm')->name('usersProfile');
+	Route::get('/users/edit-profile', 'UsersProfileController@editProfileForm')->name('usersEditProfile');
+	Route::post('/users/edit-profile', 'UsersProfileController@editProfile');
 });
 
 Route::middleware('auth:company')->group(function () {
-	Route::get('/company-profile', 'Auth\CompanyController@profileForm')->name('companyProfile');
+	Route::get('/company-profile', 'Auth\CompanyController@profileForm')->name('companyNewProfile');
 	Route::post('/company-profile', 'Auth\CompanyController@profile');
 
 	Route::get('/company/dashboard', function () { return view('pages.company.dashboard'); })->name('companyDashboard');
+
+	Route::get('/company/profile', 'CompanyProfileController@profileForm')->name('companyProfile');
+	Route::get('/company/edit-profile', 'CompanyProfileController@editProfileForm')->name('companyEditProfile');
+	Route::post('/company/edit-profile', 'CompanyProfileController@editProfile');
 });
