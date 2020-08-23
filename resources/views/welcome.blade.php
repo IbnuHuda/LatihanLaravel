@@ -121,17 +121,17 @@
 
             <div class="content">
                 <div class="title m-b-md">
+                    Laravel
+                </div>
+
+                <div class="title m-b-md">
                     <a href="{{ route('companyLogin') }}" class="loginCompany">Login as Company</a>
                     <a href="{{ route('companyRegister') }}" class="registerCompany">Register as Company</a>
                     <a href="{{ route('login') }}" class="loginVendor">Login as Vendor</a>
                     <a href="{{ route('register') }}" class="registerVendor">Register as Company</a>
                 </div>
 
-                <div class="title m-b-md">
-                    Laravel
-                </div>
-
-                <div class="links">
+                <!-- <div class="links">
                     <a href="https://laravel.com/docs">Docs</a>
                     <a href="https://laracasts.com">Laracasts</a>
                     <a href="https://laravel-news.com">News</a>
@@ -140,7 +140,7 @@
                     <a href="https://forge.laravel.com">Forge</a>
                     <a href="https://vapor.laravel.com">Vapor</a>
                     <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
+                </div> -->
             </div>
         </div>
     </body>
