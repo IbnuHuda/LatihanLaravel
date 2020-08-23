@@ -65,6 +65,13 @@
                             </div>
                         </div>
                     </form>
+                    <br />
+                    <div align="center">
+                        <p align="center">Atau</p>
+                        <a href="/company/auth/google" class="btn btn-danger">Login with Google</a>
+                        <a href="/company/auth/facebook" class="btn btn-primary">Login with Facebook</a>
+                        <a href="/company/auth/github" class="btn btn-success">Login with Github</a>
+                    </div>
                 </div>
             </div>
         </div>

@@ -17,7 +17,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 Route::get('/company-login', 'Auth\CompanyController@loginForm')->name('companyLogin');
 Route::post('/company-login', [
@@ -31,7 +31,7 @@ Route::post('/company-register', 'Auth\CompanyController@register');
 Route::get('{type}/auth/{provider}', 'Auth\LoginController@redirectToProvider');
 Route::get('/auth/{provider}/callback', 'Auth\LoginController@handleProviderCallback');
 
-Route::middleware('auth')->group(function () {
+Route::middleware('auth', 'verified')->group(function () {
 	Route::get('/users/dashboard', 'HomeController@index')->name('usersDashboard');
 	
 	Route::get('/users/profile', 'UsersProfileController@profileForm')->name('usersProfile');
@@ -39,7 +39,7 @@ Route::middleware('auth')->group(function () {
 	Route::post('/users/edit-profile', 'UsersProfileController@editProfile');
 });
 
-Route::middleware('auth:company')->group(function () {
+Route::middleware('auth:company', 'verified')->group(function () {
 	Route::get('/company-profile', 'Auth\CompanyController@profileForm')->name('companyNewProfile');
 	Route::post('/company-profile', 'Auth\CompanyController@profile');
 

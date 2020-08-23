@@ -127,15 +127,21 @@ class LoginController extends Controller
 
     public function socialLogin($user)
     {
-        if (session('type') == 'company') {
+        try {
+            if (session('type') == 'company') {
             Auth::guard('company')->loginUsingId($user->id);
 
             return redirect()->route('companyDashboard');
 
-        } else {
-            Auth::loginUsingId($user->id);
+            } else {
+                Auth::loginUsingId($user->id);
 
-            return redirect()->route('usersDashboard');
+                return redirect()->route('usersDashboard');
+            }
+        
+        } catch (Exception $e) {
+            if (session('type') == 'company') return redirect()->route('companyLogin')->withErrors(['Authentication_denied' => 'Access Denied!']);
+            else return redirect('/login')->withErrors(['Access Denied']);
         }
     }
 }

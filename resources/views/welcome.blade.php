@@ -61,25 +61,72 @@
             .m-b-md {
                 margin-bottom: 30px;
             }
+
+            .loginCompany {
+                font-size: 20px;
+                text-decoration: none;
+                color: #fff;
+                font-weight: bold;
+                background: blue;
+                padding: 15px;
+                border-radius: 10px;
+            }
+
+            .registerCompany {
+                font-size: 20px;
+                text-decoration: none;
+                color: #fff;
+                font-weight: bold;
+                background: blue;
+                padding: 15px;
+                border-radius: 10px;
+            }
+
+            .loginVendor {
+                font-size: 20px;
+                text-decoration: none;
+                color: #fff;
+                font-weight: bold;
+                background: red;
+                padding: 15px;
+                border-radius: 10px;
+            }
+
+            .registerVendor {
+                font-size: 20px;
+                text-decoration: none;
+                color: #fff;
+                font-weight: bold;
+                background: red;
+                padding: 15px;
+                border-radius: 10px;
+            }
         </style>
     </head>
     <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
+        <div class="flex-center position-ef full-height">
+            <!-- @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
                         <a href="{{ url('/home') }}">Home</a>
                     @else
                         <a href="{{ route('login') }}">Login</a>
 
-                        @if (Route::has('register'))
+                        @if (Route::has('register'))r
                             <a href="{{ route('register') }}">Register</a>
                         @endif
                     @endauth
                 </div>
-            @endif
+            @endif -->
 
             <div class="content">
+                <div class="title m-b-md">
+                    <a href="{{ route('companyLogin') }}" class="loginCompany">Login as Company</a>
+                    <a href="{{ route('companyRegister') }}" class="registerCompany">Register as Company</a>
+                    <a href="{{ route('login') }}" class="loginVendor">Login as Vendor</a>
+                    <a href="{{ route('register') }}" class="registerVendor">Register as Company</a>
+                </div>
+
                 <div class="title m-b-md">
                     Laravel
                 </div>
