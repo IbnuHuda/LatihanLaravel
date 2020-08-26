@@ -21,7 +21,7 @@ class UserCompany extends Authenticatable
     protected $table = 'users_company';
 
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'verification_code', 'is_verified'
     ];
 
     /**

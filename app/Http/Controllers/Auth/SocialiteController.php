@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use Socialite;
 use App\User;
 use App\UserCompany;
+use App\Http\Controllers\MailController;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -101,9 +102,24 @@ class SocialiteController extends Controller
     {
         try {
             if (session('type') == 'company') {
-            Auth::guard('company')->loginUsingId($user->id);
 
-            return redirect()->route('companyDashboard');
+                if ($user->email_verified_at == null) {
+                    
+                    $verification_code = sha1(time());
+
+                    $user->verification_code = $verification_code;
+                    $user->update();
+
+                    MailController::sendRegisterEmail($user->name, $user->email, $user->verification_code);
+
+                    return redirect()->back()->with(session()->flash('alert-success', 'Your account is recorded. Please verify account at your email address!'));
+
+                } else {
+
+                    Auth::guard('company')->loginUsingId($user->id);
+
+                    return redirect()->route('companyDashboard');
+                }
 
             } else {
                 Auth::loginUsingId($user->id);

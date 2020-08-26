@@ -70,7 +70,7 @@
                         <p align="center">Atau</p>
                         <a href="/vendor/auth/google" class="btn btn-danger">Login with Google</a>
                         <a href="/vendor/auth/facebook" class="btn btn-primary">Login with Facebook</a>
-                        <a href="/vendor/auth/github" class="btn btn-success">Login with Github</a>
+                        <!-- <a href="/vendor/auth/github" class="btn btn-success">Login with Github</a> -->
                     </div>
                 </div>
             </div>

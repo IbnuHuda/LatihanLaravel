@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers\Auth;
 
+use DB;
 use Validator;
 use App\UserCompany;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\MailController;
+use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
@@ -43,11 +46,29 @@ class CompanyController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'verification_code' => sha1(time()),
         ]);
 
-        Auth::guard('company')->login($user);
+        if (!$user) return redirect()->back()->with(session()->flash('alert-error', 'Something wrong happen, try again later!'));
 
-        return redirect()->route('companyNewProfile');
+        MailController::sendRegisterEmail($request->name, $request->email, $user->verification_code);
+
+        return redirect()->back()->with(session()->flash('alert-success', 'Your account has been created. Please verify your account first from your email before using our application!'));
+    }
+
+    public function verifyRegister(Request $request)
+    {
+        $verification_code = $request->code;
+        $getData = UserCompany::where('verification_code', '=', $verification_code)->first();
+
+        if ($getData != null) {
+            $getData->is_verified = 1;
+            $getData->email_verified_at = Carbon::now();
+            $getData->save();
+            return redirect()->route('companyLogin')->with(session()->flash('alert-success', 'Your account has been activated!'));
+        }
+
+        return redirect()->route('companyLogin')->with(session()->flash('alert-error', 'Something wrong happen, try again later!'));
     }
 
     public function loginForm()
@@ -57,40 +78,82 @@ class CompanyController extends Controller
 
     public function login(Request $request)
     {
-    	if (Auth::guard('company')->attempt(['email' => $request->email, 'password' => $request->password])) return redirect()->route('companyDashboard');
+    	if (Auth::guard('company')->attempt(['email' => $request->email, 'password' => $request->password, 'is_verified' => 1], $request->filled('remember'))) return redirect()->route('companyDashboard');
     	
-    	return redirect('/company-login')->withErrors(['password' => 'Email or password are wrong!']);
+    	return redirect('/company-login')->withErrors(['password' => 'Email or password are wrong OR your account is not verified!']);
     }
 
     public function profileForm()
     {
-        return view('auth.companyProfile');
+        
     }
 
     public function profile(Request $request)
     {
-        Validator::make($request->all(), [
-            'name' => ['required', 'string', 'max:255'],
-            'work_field' => ['required', 'string', 'max:255'],
-            'date_of_built' => ['required', 'string', 'max:255'],
-            'address' => ['required', 'string', 'max:255'],
-            'company_logo' => ['required', 'string', 'max:255'],
-            'contact_number' => ['required', 'string', 'max:255'],
-            'contact_email' => ['required', 'string', 'max:255'],
-            'bio' => ['required', 'string', 'max:255'],
+        
+    }
+
+    public function validatePasswordRequestForm()
+    {
+        return view('auth.companyEmail');
+    }
+
+    public function validatePasswordRequest(Request $request)
+    {
+        $user = UserCompany::where('email', '=', $request->email)->first();
+
+        if ($user == null) return redirect()->back()->withErrors(['email' => trans('Email doesnt exist.')]);
+
+        $generateToken = sha1(time());
+
+        DB::table('password_resets')->insert([
+            'email' => $request->email,
+            'token' => $generateToken,
+            'created_at' => Carbon::now()
         ]);
 
-        UserCompany::profileCompany()->create([
-            'user_company_id' => Auth::guard('company')->user()->id,
-            'name' => $request->name,
-            'work_field' => $request->work_field,
-            'date_of_built' => $request->date_of_built,
-            'address' => $request->address,
-            'company_logo' => $request->company_logo,
-            'contact_number' => $request->contact_number,
-            'contact_email' => $request->contact_email,
-            'bio' => $request->bio,
+        try {
+            MailController::sendResetPassword($request->email, $generateToken);
+
+            return redirect()->back()->with('status', trans('A reset link has been sent to your email address.'));
+
+        } catch (Exception $e) {
+            return redirect()->back()->withErrors(['error', trans('Something wrong happen, please try again later!')]);
+        }
+    }
+
+    public function resetPasswordForm(Request $request)
+    {
+        $data = DB::table('password_resets')->where('token', '=', $request->token)->first();
+
+        return view('auth.companyNewPassword')->with([
+            'email' => $data->email,
+            'token' => $request->token
         ]);
+    }
+
+    public function resetPassword(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'token' => 'required',
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,NULL,id,deleted_at,NULL'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
+
+        $tokenData = DB::table('password_resets')->where('token', '=', $request->token)->first();
+
+        if (!$tokenData) return view('auth.companyNewPassword');
+
+        $user = UserCompany::where('email', '=', $tokenData->email)->first();
+
+        if (!$user) return redirect()->back()->withErrors(['email', 'Email not found!']);
+
+        $user->password = Hash::make($request->password);
+        $user->update();
+
+        Auth::guard('company')->login($user);
+
+        DB::table('password_resets')->where('email', '=', $user->email)->delete();
 
         return redirect()->route('companyDashboard');
     }

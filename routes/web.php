@@ -13,9 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', function () { return view('welcome'); });
 
 Auth::routes(['verify' => true]);
 
@@ -28,8 +26,15 @@ Route::post('/company-login', [
 Route::get('/company-register', 'Auth\CompanyController@registerForm')->name('companyRegister');
 Route::post('/company-register', 'Auth\CompanyController@register');
 
+Route::get('/company-reset-password', 'Auth\CompanyController@validatePasswordRequestForm')->name('companyEmailValidationForm');
+Route::post('/company-reset-password', 'Auth\CompanyController@validatePasswordRequest');
+
 Route::get('{type}/auth/{provider}', 'Auth\SocialiteController@redirectToProvider');
 Route::get('/auth/{provider}/callback', 'Auth\SocialiteController@handleProviderCallback');
+
+Route::get('/verify/registration', 'Auth\CompanyController@verifyRegister')->name('companyVerifyRegister');
+Route::get('/verify/reset-password', 'Auth\CompanyController@resetPasswordForm')->name('companyResetPasswordForm');
+Route::post('/verify/reset-password', 'Auth\CompanyController@resetPassword');
 
 Route::middleware(['auth', 'verified'])->group(function () {
 	Route::get('/users/dashboard', 'HomeController@index')->name('usersDashboard');
@@ -39,10 +44,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 	Route::post('/users/edit-profile', 'UsersProfileController@editProfile');
 });
 
-Route::middleware(['auth:company', 'verified'])->group(function () {
-	Route::get('/company-profile', 'Auth\CompanyController@profileForm')->name('companyNewProfile');
-	Route::post('/company-profile', 'Auth\CompanyController@profile');
-
+Route::middleware('auth:company')->group(function () {
 	Route::get('/company/dashboard', function () { return view('pages.company.dashboard'); })->name('companyDashboard');
 
 	Route::get('/company/profile', 'CompanyProfileController@profileForm')->name('companyProfile');

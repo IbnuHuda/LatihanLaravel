@@ -4,6 +4,15 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
+
+            <div class="flash-message">
+                @foreach (['danger', 'warning', 'success', 'info'] as $msg) 
+                    @if (Session::has('alert-' . $msg))
+                        <p class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
+                    @endif
+                @endforeach
+            </div>
+            
             <div class="card">
                 <div class="card-header">Login as Company</div>
 
@@ -57,8 +66,8 @@
                                     {{ __('Login') }}
                                 </button>
 
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
+                                @if (Route::has('companyResetPasswordForm'))
+                                    <a class="btn btn-link" href="{{ route('companyEmailValidationForm') }}">
                                         {{ __('Forgot Your Password?') }}
                                     </a>
                                 @endif
@@ -70,7 +79,7 @@
                         <p align="center">Atau</p>
                         <a href="/company/auth/google" class="btn btn-danger">Login with Google</a>
                         <a href="/company/auth/facebook" class="btn btn-primary">Login with Facebook</a>
-                        <a href="/company/auth/github" class="btn btn-success">Login with Github</a>
+                        <!-- <a href="/company/auth/github" class="btn btn-success">Login with Github</a> -->
                     </div>
                 </div>
             </div>

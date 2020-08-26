@@ -128,7 +128,7 @@
                     <a href="{{ route('companyLogin') }}" class="loginCompany">Login as Company</a>
                     <a href="{{ route('companyRegister') }}" class="registerCompany">Register as Company</a>
                     <a href="{{ route('login') }}" class="loginVendor">Login as Vendor</a>
-                    <a href="{{ route('register') }}" class="registerVendor">Register as Company</a>
+                    <a href="{{ route('register') }}" class="registerVendor">Register as Vendor</a>
                 </div>
 
                 <!-- <div class="links">

@@ -44,11 +44,11 @@ return [
         'scopes' => ['email', 'public_profile'],        
     ],
 
-    'github' => [
-        'client_id' => '32818e3a478912ddc524', 
-        'client_secret' => 'b1e6abc10589590634d1e19501ef6f19d40e6021',
-        'redirect' => 'http://localhost:8000/auth/github/callback',
-        'scopes' => [],
-    ],
+    // 'github' => [
+    //     'client_id' => '32818e3a478912ddc524', 
+    //     'client_secret' => 'b1e6abc10589590634d1e19501ef6f19d40e6021',
+    //     'redirect' => 'http://localhost:8000/auth/github/callback',
+    //     'scopes' => [],
+    // ],
 
 ];
