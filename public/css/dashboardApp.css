@@ -1,0 +1,257 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
+
+body.default-theme {
+  --main-bg-color: #ffffff;
+  --secondary-bg-color: #f5f5f5;
+  --shadow-color: #888888;
+  --main-text-color: #000000;
+  --secondary-text-color: #757575;
+
+  background-color: var(--secondary-bg-color);
+  transition: 0.25s;
+}
+
+body.dark-theme {
+  --main-bg-color: #212121;
+  --secondary-bg-color: #000000;
+  --shadow-color: #696969;
+  --main-text-color: #ffffff;
+  --secondary-text-color: #fafafa;
+
+  background-color: var(--secondary-bg-color);
+  transition: 0.25s;
+}
+
+/* Navbar */
+
+div.navbar {
+	width: 100vw;
+}
+
+div.navbar a.navbar-brand {
+	position: absolute;
+	top: 7.5px;
+	left: 130px;
+}
+
+div.navbar button.navbar-toggler {
+	border: 1px solid #f5f5f5;
+}
+
+div.navbar div.container div.input-group {
+	width: 275px;
+	position: absolute;
+	top: 7.5px;
+	right: 100px;
+}
+
+div.navbar div.container div.input-group input.form-control {
+	border-bottom-left-radius: 0;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+div.navbar div.container div#listUsers {
+	position: fixed;
+	right: 100px;
+	top: 45.5px;
+	width: 275px;
+}
+
+div.navbar div.container div#listUsers a.list-group-item,
+div.navbar div.container div#listUsers p {
+	background-color: var(--main-text-color);
+	color: var(--main-bg-color);
+}
+
+div.navbar img#photo {
+	float: right;
+	width: 37.5px;
+	height: 35px;
+	cursor: pointer;
+	position: absolute;
+	top: 9px;
+	right: 30px;
+}
+
+/* Content */
+
+div.content {
+	width: 100vw;
+	height: auto;
+	float: left;
+}
+
+/* Sidebar */
+
+div.content div#sidebar {
+	float: left;
+	width: 250px;
+	height: 100vh;
+	background-color: var(--main-bg-color);
+	box-shadow: 2px 2px 10px var(--shadow-color);
+	transition: 0.5s;
+}
+
+div.content div#sidebar ul#listMenu {
+	margin-top: 10px;
+}
+
+div.content div#sidebar ul a,
+div.content div#sidebar ul span {
+	text-decoration: none;
+	font-size: 15px;
+	cursor: pointer;
+}
+
+div.content div#sidebar ul span i.fa.fa-chevron-right {
+	font-size: 10px;
+	margin-top: 10px;
+	float: right;
+	transition: 0.25s;
+}
+
+div.content div#sidebar ul li {
+	list-style: none;
+	padding: 15px;
+	color: var(--main-text-color);
+}
+
+div.content div#sidebar ul li i {
+	font-size: 20px;
+}
+
+div.content div#sidebar ul li i:hover li,
+div.content div#sidebar ul a:hover li,
+div.content div#sidebar ul span:hover li {
+	background-color: blue;
+}
+
+div.content div#sidebar ul#teamMenus {
+	display: none;
+}
+
+div.content div#sidebar ul#jobsMenus {
+	display: none;
+}
+
+div.content div#sidebar ul#vendorMenus {
+	display: none;
+}
+
+div.content div#sidebar ul#teamMenus a,
+div.content div#sidebar ul#jobsMenus a,
+div.content div#sidebar ul#vendorMenus a {
+	text-decoration: none;
+	font-size: 15px;
+	cursor: pointer;
+}
+
+div.content div#sidebar ul#teamMenus li,
+div.content div#sidebar ul#jobsMenus li,
+div.content div#sidebar ul#vendorMenus li {
+	list-style: none;
+	padding: 10px;
+	color: var(--main-text-color);
+	margin-left: 70px;
+}
+
+div.content div#sidebar p#reserved {
+	color: var(--main-text-color);
+	font-size: 12px;
+	font-weight: bold;
+	position: absolute;
+	bottom: 0px;
+	left: 17.5px;
+	transition: 0.5s;
+}
+
+/* Content */
+main {
+	margin-top: 10px;
+	color: var(--main-text-color);
+}
+
+/* Icon Theme Toggler */
+div#theme-toggler {
+  width: 50px;
+  height: 50px;
+  padding: 10px;
+  background-color: #303f9f;
+  border-radius: 50px;
+  position: fixed;
+  bottom: 20px;
+  right: 25px;
+  color: #ffffff;
+  font-size: 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+div#theme-toggler i {
+	margin-top: 5px;
+}
+
+/* Profile Tooltip Box */
+
+div#profileBox {
+	display: none;
+	text-align: center;
+	position: fixed;
+	top: 56px;
+	right: 20px;
+	width: 120px;
+	background-color: var(--main-bg-color);
+	color: var(--main-text-color);	
+	border-radius: 5px;
+	padding: 10px;
+	z-index: 1000;
+}
+
+div#profileBox::after {
+	content: "";
+	width: 0px;
+	height: 0px;
+	border-right: 10px solid transparent;
+	border-bottom: 10px solid var(--main-bg-color);
+	border-left: 10px solid transparent;
+	position: fixed;
+	top: 47.5px;
+	right: 38px;
+}
+
+div#profileBox hr {
+	border-color: var(--main-text-color);
+	margin-top: 10px;	
+}
+
+div#profileBox a {
+	color: var(--main-text-color);
+	text-decoration: none;
+	font-size: 15px;
+	margin-top: 0px;	
+}
+
+/* Responsive */
+
+@media screen and (max-width: 1180px) {
+	div.navbar div.container div.input-group,
+	div.navbar div.container div#listUsers {
+		width: 250px;
+	}
+}
+
+@media screen and (max-width: 610px) {
+	div.navbar div.container div.input-group,
+	div.navbar div.container div#listUsers {
+		width: 200px;
+	}
+}

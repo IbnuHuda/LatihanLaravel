@@ -1,0 +1,168 @@
+Table failed_jobs {
+	id bigint(20) [pk, increment]
+	connection text
+	queue text
+	payload longtext
+	exception longtext
+	failed_at timestamp
+}
+
+Table migrations {
+	id int(10) [pk, increment]
+	migration varchar(255)
+	batch int(11)
+}
+
+Table password_resets {
+	email varchar(255)
+	token varchar(255)
+	created_at timestamp
+}
+
+Table users {
+	id bigint(20) [pk, increment]
+	name varchar(255)
+	email varchar(255) [unique]
+	email_verified_at timestamp
+	password varchar(255)
+	remember_token varchar(100)
+	created_at timestamp
+	updated_at timestamp
+	social longtext
+	deleted_at timestamp
+}
+
+Table users_company {
+	id bigint(20) [pk, increment]
+	name varchar(255)
+	email varchar(255) [unique]
+	email_verified_at timestamp
+	password varchar(255)
+	verification_token varchar(255)
+	is_verified int(11) [default: 0]
+	remember_token varchar(100)
+	created_at timestamp
+	updated_at timestamp
+	social longtext
+	deleted_at timestamp
+}
+
+Table users_profile {
+	id bigint(20) [pk, increment]
+	user_id bigint(20)
+	user_company_id bigint(20)
+	gender varchar(255)
+	place_of_birth varchar(255)
+	date_of_birth varchar(255)
+	address varchar(255)
+	contact varchar(255)
+	photo varchar(255)
+	bio varchar(255)
+	created_at timestamp
+	updated_at timestamp
+}
+
+Table company_profile {
+	id bigint(20) [pk, increment]
+	user_company_id bigint(20)
+	name varchar(255)
+	work_field varchar(255)
+	date_of_built varchar(255)
+	company_address varchar(255)
+	company_logo varchar(255)
+	contact_number varchar(255)
+	contact_email varchar(255)
+	company_description varchar(255)
+	created_at timestamp
+	deleted_at timestamp				
+}
+
+Table company_jobs {
+	id bigint(20) [pk, increment]
+	company_id bigint(20)
+	jobs_name varchar(255)
+	available_positions varchar(255)
+	jobs_description varchar(255)
+	jobs_requirements longtext
+	minimum_portofolio int(20)
+	vendor_accepted_total int(20)
+	created_at timestamp
+	deleted_at timestamp
+}
+
+Table users_job_registered {
+	id bigint(20) [pk, increment]
+	user_id bigint(20)
+	company_job_id bigint(20)
+	users_description varchar(255)
+	portofolio_uploaded varchar(255)
+	other_question varchar(255)
+	answer_question varchar(255)
+	created_at timestamp
+	updated_at timestamp
+}
+
+Table company_job_step {
+	id bigint(20) [pk, increment]
+	company_job_id bigint(20)
+	step_name varchar(255)
+	user_id_accepted varchar(255)
+	inweb_message_to_vendor	varchar(255)
+	created_at timestamp
+	updated_at timestamp
+}
+
+Table statistic_users {
+	id bigint(20) [pk, increment]
+	user_id bigint(20)
+	portofolio_sent_amount bigint(20)
+	job_registered_amount bigint(20)
+	rating_granted bigint(20)
+	created_at timestamp
+	updated_at timestamp
+}
+
+Table statistic_company {
+	id bigint(20) [pk, increment]
+	user_company_id bigint(20)
+	job_published_amount bigint(20)
+	users_accepted_amount bigint(20)
+	users_active_on_jobs bigint(20)
+	created_at timestamp
+	updated_at timestamp
+}
+
+Table rating {
+	id bigint(20) [pk, increment]
+	user_id bigint(20)
+	company_id bigint(20)
+	rating varchar(255)
+	created_at timestamp
+	updated_at timestamp
+}
+
+Table users_history {
+	id bigint(20) [pk, increment]
+	user_id bigint(20)
+	users_job_regis_id bigint(20)
+	job_name varchar(20)
+	publisher varchar(20)
+	job_description varchar(20)
+	portofolio_up_amount int(11)
+	created_at timestamp
+	updated_at timestamp
+}
+
+Ref: users_profile.user_id > users.id
+Ref: users_profile.user_company_id > users_company.id
+Ref: company_profile.user_company_id > users_company.id
+Ref: company_jobs.company_id > company_profile.id
+Ref: users_job_registered.user_id > users.id
+Ref: users_job_registered.company_job_id > company_jobs.id
+Ref: company_job_step.company_job_id > company_jobs.id
+Ref: statistic_users.user_id > users.id
+Ref: statistic_company.user_company_id > users_company.id
+Ref: rating.user_id > users.id
+Ref: rating.company_id > company_profile.id
+Ref: users_history.user_id > users.id
+Ref: users_history.users_job_regis_id > users_job_registered.id  

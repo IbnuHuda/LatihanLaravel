@@ -14,14 +14,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () { return view('welcome'); });
+Route::get('/test', function() { return view('test'); });
+
+Route::post('/search/users', 'LiveDataController@searchUsers')->name('searchUsers');
 
 Auth::routes(['verify' => true]);
 
 Route::get('/company-login', 'Auth\CompanyController@loginForm')->name('companyLogin');
-Route::post('/company-login', [
-	'as' => 'company-login',
-	'uses' => 'Auth\CompanyController@login'
-]);
+Route::post('/company-login', ['as' => 'company-login', 'uses' => 'Auth\CompanyController@login']);
 
 Route::get('/company-register', 'Auth\CompanyController@registerForm')->name('companyRegister');
 Route::post('/company-register', 'Auth\CompanyController@register');

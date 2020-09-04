@@ -102,7 +102,6 @@ class SocialiteController extends Controller
     {
         try {
             if (session('type') == 'company') {
-
                 if ($user->email_verified_at == null) {
                     
                     $verification_code = sha1(time());
