@@ -19,11 +19,11 @@ class CreateProfileCompanyTable extends Migration
             $table->string('name');
             $table->string('work_field');
             $table->string('date_of_built');
-            $table->string('address');
+            $table->string('company_address');
             $table->string('company_logo');
             $table->string('contact_number');
             $table->string('contact_email');
-            $table->string('bio');
+            $table->string('company_description');
             $table->timestamps();
         });
     }

@@ -23,14 +23,14 @@
 </head>
 <body class="default-theme">
     <div id="app">
-        <div class="navbar navbar-dark bg-primary box-shadow">
+        <div class="navbar box-shadow" id="navbar">
             <button id="sidebar-toggler" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="container d-flex justify-content-between">
-                <a href="#" class="navbar-brand d-flex align-items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
-                    <strong>VeCo</strong>
+                <a href="{{ route('index') }}" class="navbar-brand d-flex align-items-center">
+                    <img src="{{ asset('images/websites/Logo_VeCo.png') }}" class="img-responsive">
+                    <strong class="ml-2 mt-2">VeCo</strong>
                 </a>
 
                 <div class="input-group">
@@ -50,21 +50,10 @@
             <div id="sidebar">
                 <ul id="listMenu">
                     <a href=""><li><i class="fa fa-home"></i> <span style="margin-left: 27px;">Dashboard</span></li></a>
-                    <span id="Team"><li><i class="fa fa-users"></i> <span style="margin-left: 25px;">Team</span> <i class="fa fa-chevron-right" id="teamChevron"></i></li></span>
-                    <ul id="teamMenus">
-                        <a href=""><li>Create Team</li></a>
-                        <a href=""><li>Profile Team</li></a>
-                    </ul>
                     <span id="Jobs"><li><i class="fa fa-filter"></i> <span style="margin-left: 30px;">Jobs</span> <i class="fa fa-chevron-right" id="jobsChevron"></i></li></span>
                     <ul id="jobsMenus">
                         <a href=""><li>Publish Job</li></a>
-                        <a href=""><li>Your Jobs</li></a>
-                    </ul>
-                    <span id="Vendor"><li><i class="fa fa-list"></i> <span style="margin-left: 25px;">Vendor</span> <i class="fa fa-chevron-right" id="vendorChevron"></i></li></span>
-                    <ul id="vendorMenus">
-                        <a href=""><li>Submission</li></a>
-                        <a href=""><li>Assesment</li></a>
-                        <a href=""><li>Approval</li></a>
+                        <a href=""><li>Jobs Details</li></a>
                     </ul>
                 </ul>
 
@@ -80,10 +69,10 @@
             </div>
 
             <div id="profileBox" class="text-center">
-                <span>Logged as <br /><strong>Ibnu Huda</strong></span>
+                <span>Logged as <br /><strong>{{ Auth::guard('company')->user()->name }}</strong></span>
                 <hr width="100%" />
                 <a href="profile">Profile</a><br />
-                <a href="logout">Logout</a>
+                <a href="{{ route('companyLogout') }}">Logout</a>
             </div>
         </div>
     </div>

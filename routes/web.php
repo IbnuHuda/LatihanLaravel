@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () { return view('welcome'); });
+Route::get('/', function () { return view('welcome'); })->name('index');
 Route::get('/test', function() { return view('test'); });
 
 Route::post('/search/users', 'LiveDataController@searchUsers')->name('searchUsers');
@@ -36,7 +36,7 @@ Route::get('/verify/registration', 'Auth\CompanyController@verifyRegister')->nam
 Route::get('/verify/reset-password', 'Auth\CompanyController@resetPasswordForm')->name('companyResetPasswordForm');
 Route::post('/verify/reset-password', 'Auth\CompanyController@resetPassword');
 
-Route::middleware(['auth', 'verified'])->group(function () {
+Route::group(['middleware' => ['auth', 'verified']], function () {
 	Route::get('/users/dashboard', 'HomeController@index')->name('usersDashboard');
 	
 	Route::get('/users/profile', 'UsersProfileController@profileForm')->name('usersProfile');
@@ -44,10 +44,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
 	Route::post('/users/edit-profile', 'UsersProfileController@editProfile');
 });
 
-Route::middleware('auth:company')->group(function () {
+Route::group(['middleware' => ['auth:company']], function () {
 	Route::get('/company/dashboard', function () { return view('pages.company.dashboard'); })->name('companyDashboard');
 
 	Route::get('/company/profile', 'CompanyProfileController@profileForm')->name('companyProfile');
 	Route::get('/company/edit-profile', 'CompanyProfileController@editProfileForm')->name('companyEditProfile');
 	Route::post('/company/edit-profile', 'CompanyProfileController@editProfile');
+
+	Route::get('/company/logout', 'Auth\CompanyController@logout')->name('companyLogout');
 });

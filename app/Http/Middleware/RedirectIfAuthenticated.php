@@ -18,11 +18,9 @@ class RedirectIfAuthenticated
      */
     public function handle($request, Closure $next, $guard = null)
     {
-        if ($guard == null)
-            if (Auth::guard($guard)->check()) 
-                return redirect()->route('usersDashboard');
-        else if ($guard == 'company')
-            return redirect()->route('companyDashboard');
+        if (Auth::guard($guard)->check()) {
+            return redirect()->route('usersDashboard');
+        }
 
         return $next($request);
     }

@@ -15,7 +15,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class CompanyController extends Controller
 {
-    use AuthenticatesUsers;
+    // use AuthenticatesUsers;
 
     protected $guard = 'company';
 
@@ -160,6 +160,8 @@ class CompanyController extends Controller
 
     public function logout()
     {
-        return Auth::guard('company')->logout();
+        Auth::guard('company')->logout();
+
+        return redirect()->route('index');
     }
 }

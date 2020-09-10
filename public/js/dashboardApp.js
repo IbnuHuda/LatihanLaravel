@@ -3,10 +3,16 @@ window.localStorage;
 $(window).on('load', function() {
 	var bodyClass = document.getElementsByTagName('BODY')[0];
 	var icon = document.getElementById('themeIcon');
+	var navbarDashboard = document.getElementById('navbar');
 
 	if (localStorage.getItem('theme') != null) {
 		bodyClass.className = localStorage.getItem('theme');
 		icon.className = localStorage.getItem('icon');
+
+		if (localStorage.getItem('theme') == 'default-theme') 
+			navbarDashboard.className = 'navbar navbar-dark bg-dark box-shadow';
+		else
+			navbarDashboard.className = 'navbar navbar-light bg-light box-shadow';
 	}
 });
 
@@ -17,13 +23,16 @@ $(window).on('click', function () {
 $('#theme-toggler').on('click', function() {
 	var bodyClass = document.getElementsByTagName('BODY')[0];
 	var icon = document.getElementById('themeIcon');
+	var navbarDashboard = document.getElementById('navbar');
 
 	if (bodyClass.className == 'default-theme') {
 		bodyClass.className = 'dark-theme';
 		icon.className = 'fa fa-sun-o';
+		navbarDashboard.className = 'navbar navbar-light bg-light box-shadow';
 	} else {
 		bodyClass.className = 'default-theme';
 		icon.className = 'fa fa-moon-o';
+		navbarDashboard.className = 'navbar navbar-dark bg-dark box-shadow';
 	}
 
 	localStorage.setItem('theme', bodyClass.className);

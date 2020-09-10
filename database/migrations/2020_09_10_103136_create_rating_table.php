@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class RelationProfileCompanyTable extends Migration
+class CreateRatingTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,12 @@ class RelationProfileCompanyTable extends Migration
      */
     public function up()
     {
-        Schema::table('profile_company', function (Blueprint $table) {
-            $table->foreign('user_company_id')->references('id')->on('users_company');
+        Schema::create('rating', function (Blueprint $table) {
+            $table->id();
+            $table->bigInteger('user_id')->unsigned();
+            $table->bigInteger('company_id')->unsigned();
+            $table->string('rating');
+            $table->timestamps();
         });
     }
 
@@ -25,6 +29,6 @@ class RelationProfileCompanyTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('rating');
     }
 }
