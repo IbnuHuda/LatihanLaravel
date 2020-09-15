@@ -1,0 +1,111 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
+
+body.default-theme {
+  --main-bg-color: #ffffff;
+  --secondary-bg-color: #f5f5f5;
+  --shadow-color: #888888;
+  --main-text-color: #000000;
+  --secondary-text-color: #757575;
+
+  background-color: var(--secondary-bg-color);
+  transition: 0.25s;
+}
+
+body.dark-theme {
+  --main-bg-color: #212121;
+  --secondary-bg-color: #000000;
+  --shadow-color: #696969;
+  --main-text-color: #ffffff;
+  --secondary-text-color: #fafafa;
+
+  background-color: var(--secondary-bg-color);
+  transition: 0.25s;
+}
+
+/* Background */
+
+/*div#background {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  clip-path: polygon(0% 100%, 0 73%, 3% 69%, 6% 65%, 8% 62%, 12% 58%, 15% 56%, 19% 56%, 22% 57%, 26% 59%, 29% 63%, 32% 67%, 35% 70%, 39% 72%, 43% 74%, 46% 75%, 50% 73%, 53% 70%, 56% 67%, 60% 63%, 63% 59%, 66% 56%, 70% 52%, 73% 50%, 76% 48%, 80% 46%, 84% 45%, 89% 44%, 94% 45%, 100% 47%, 100% 100%);
+  background-color: blue;
+  z-index: 1000;
+}*/
+
+/* Navbar */
+
+nav.navbar {
+	width: 100vw;
+}
+
+nav.navbar a.navbar-brand img {
+	width: 35px;
+	height: 30px;
+}
+
+nav.navbar a.navbar-brand strong {
+	color: var(--main-text-color);
+}
+
+nav.navbar div#navbarSupportedContent {
+
+}
+
+nav.navbar ul.navbar-nav a {
+  text-decoration: none;
+  color: var(--main-text-color);
+  margin: 0 15px;
+}
+
+/* Icon Theme Toggler */
+
+div#theme-toggler {
+  width: 50px;
+  height: 50px;
+  padding: 10px;
+  background-color: #303f9f;
+  border-radius: 50px;
+  position: fixed;
+  bottom: 60px;
+  right: 25px;
+  color: #ffffff;
+  font-size: 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+div#theme-toggler i {
+  margin-top: 5px;
+}
+
+/* Footer */
+
+div#footer {
+  width: 100%;
+  height: 3rem;
+  background-color: #fff;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+}
+
+div#footer span i.fa {
+  padding: 5px 5px;
+  margin: 0 5px;
+  background-color: var(--main-bg-color);
+  border-radius: 50px;
+  font-size: 10px;
+  color: var(--main-text-color);
+}
