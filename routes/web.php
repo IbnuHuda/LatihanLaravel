@@ -38,7 +38,7 @@ Route::post('/verify/reset-password', 'Auth\CompanyController@resetPassword');
 
 Route::group(['middleware' => ['auth', 'verified']], function () {
 	Route::get('/users/dashboard', 'HomeController@index')->name('usersDashboard');
-	
+
 	Route::get('/users/profile', 'UsersProfileController@profileForm')->name('usersProfile');
 	Route::get('/users/edit-profile', 'UsersProfileController@editProfileForm')->name('usersEditProfile');
 	Route::post('/users/edit-profile', 'UsersProfileController@editProfile');
