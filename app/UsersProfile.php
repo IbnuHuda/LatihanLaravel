@@ -9,4 +9,14 @@ class UsersProfile extends Model
     protected $table = 'users_profile';
 
     protected $fillable = ['user_id', 'user_company_id', 'gender', 'place_of_birth', 'date_of_birth', 'address', 'contact', 'photo', 'bio'];
+
+    public function users()
+    {
+		return $this->belongsTo(User::class);
+    }
+
+    public function userCompany()
+    {
+		return $this->belongsTo(UserCompany::class);
+    }
 }

@@ -13,7 +13,7 @@ class CreateProfileCompanyTable extends Migration
      */
     public function up()
     {
-        Schema::create('profile_company', function (Blueprint $table) {
+        Schema::create('company_profile', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('user_company_id')->unsigned();
             $table->string('name');
