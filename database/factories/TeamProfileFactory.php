@@ -2,11 +2,17 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Model;
+
+use App\TeamProfile;
 use Faker\Generator as Faker;
 
-$factory->define(Model::class, function (Faker $faker) {
+$factory->define(TeamProfile::class, function (Faker $faker) {
     return [
-        //
+        'name' => 'Team',
+        'owner' => $faker->name,
+        'access_code' => 'a',
+        'address' => 'a',
+        'photo' => 'a',
+        'bio' => 'a',
     ];
 });

@@ -1,13 +1,13 @@
 <style>
 
-    #bg-image {
+    /*#bg-image {
         background: url('/images/websites/wave-login.png') no-repeat;
         width: 100%;
         height: 50%;
         background-size: 100%;
         background-position: bottom;
         background-color: #B9D5FF;
-    }
+    }*/
 
     #text-title {
         color: #4093FB;
@@ -29,11 +29,11 @@
     }
 </style>
 
-@extends('layouts.app')
+@extends('layouts.index')
 
 @section('content')
 
-<div class="container-fluid h-100" id="bg-image">
+<!-- <div class="container-fluid h-100" id="bg-image"> -->
 
 <div class="container p-5">
     <div class="row justify-content-center">

@@ -31,7 +31,7 @@
 
 </style>
 
-@extends('layouts.app')
+@extends('layouts.index')
 
 @section('content')
 

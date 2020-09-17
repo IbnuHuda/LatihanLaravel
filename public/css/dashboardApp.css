@@ -64,9 +64,9 @@ div.navbar div.container div.input-group {
 
 div.navbar div.container div.input-group input.form-control {
 	border-bottom-left-radius: 0;
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-  border-top-left-radius: 0;
+  	border-top-right-radius: 0;
+  	border-bottom-right-radius: 0;
+  	border-top-left-radius: 0;
 }
 
 div.navbar div.container div#listUsers {

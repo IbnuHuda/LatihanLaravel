@@ -2,49 +2,56 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  overflow-y: hidden;
   overflow-x: hidden;
 }
 
 body.default-theme {
   --main-bg-color: #ffffff;
   --secondary-bg-color: #f5f5f5;
-  --shadow-color: #888888;
   --main-text-color: #000000;
   --secondary-text-color: #757575;
 
-  background-color: var(--secondary-bg-color);
+  --shadow-color: #888888;
+  --bg-navbar: #4a69bd;
+  --bg-wave: #0099ff;
+
+  background: linear-gradient(180deg, #eef9f3 0%, #eef9f3 70%, #0099ff 70%, #0099ff 100%);
   transition: 0.25s;
 }
 
 body.dark-theme {
-  --main-bg-color: #212121;
-  --secondary-bg-color: #000000;
-  --shadow-color: #696969;
+  --main-bg-color: #111013;
+  --secondary-bg-color: #212121;
   --main-text-color: #ffffff;
   --secondary-text-color: #fafafa;
 
-  background-color: var(--secondary-bg-color);
+  --shadow-color: #343a40;
+  --bg-navbar: #0c2461;
+  --bg-wave: #0a3d62;
+
+  background: linear-gradient(180deg, #0b0913 0%, #0b0913 70%, #0a3d62 70%, #0a3d62 100%);
   transition: 0.25s;
 }
 
-/* Background */
+/* Wave Background */
 
-/*div#background {
+svg#wave-background {
   position: absolute;
-  bottom: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  clip-path: polygon(0% 100%, 0 73%, 3% 69%, 6% 65%, 8% 62%, 12% 58%, 15% 56%, 19% 56%, 22% 57%, 26% 59%, 29% 63%, 32% 67%, 35% 70%, 39% 72%, 43% 74%, 46% 75%, 50% 73%, 53% 70%, 56% 67%, 60% 63%, 63% 59%, 66% 56%, 70% 52%, 73% 50%, 76% 48%, 80% 46%, 84% 45%, 89% 44%, 94% 45%, 100% 47%, 100% 100%);
-  background-color: blue;
-  z-index: 1000;
-}*/
+  bottom: 0;
+}
+
+svg#wave-background path {
+  stroke: none;
+  fill: var(--bg-wave); 
+  transform: scale(1.1);
+}
 
 /* Navbar */
 
 nav.navbar {
 	width: 100vw;
+  background-color: var(--bg-navbar);
 }
 
 nav.navbar a.navbar-brand img {
@@ -53,17 +60,17 @@ nav.navbar a.navbar-brand img {
 }
 
 nav.navbar a.navbar-brand strong {
-	color: var(--main-text-color);
-}
-
-nav.navbar div#navbarSupportedContent {
-
+	color: #ffffff;
 }
 
 nav.navbar ul.navbar-nav a {
   text-decoration: none;
-  color: var(--main-text-color);
+  color: #ffffff;
   margin: 0 15px;
+}
+
+nav.navbar ul.navbar-nav.ml-auto a {
+  color: #ffffff;
 }
 
 /* Icon Theme Toggler */
@@ -93,8 +100,9 @@ div#theme-toggler i {
 div#footer {
   width: 100%;
   height: 3rem;
-  background-color: #fff;
-  position: absolute;
+  background-color: var(--bg-navbar);
+  color: #ffffff;
+  position: fixed;
   bottom: 0;
   left: 0;
   display: flex;
@@ -104,8 +112,71 @@ div#footer {
 div#footer span i.fa {
   padding: 5px 5px;
   margin: 0 5px;
-  background-color: var(--main-bg-color);
+  background-color: var(--secondary-bg-color);
   border-radius: 50px;
   font-size: 10px;
   color: var(--main-text-color);
+}
+
+/* Responsive */
+
+@media screen and (max-width: 1153px) {
+  svg#wave-background {
+    margin-left: 0;
+    margin-bottom: 0;
+  }
+
+  svg#wave-background path {
+    stroke: none; 
+    transform: scale(1.1);
+  }
+}
+
+@media screen and (max-width: 953px) {
+  svg#wave-background {
+    margin-left: 0;
+    margin-bottom: 25px;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  svg#wave-background {
+    margin-left: 0;
+    margin-bottom: 50px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  nav.navbar ul#menu a {
+    margin: 7.5px 0;
+  }
+
+  nav.navbar ul.navbar-nav.ml-auto a {
+    margin: 0 0;
+  }
+
+  main {
+    margin-bottom: 50px;
+  }
+}
+
+@media screen and (max-width: 681px) {
+  svg#wave-background {
+    margin-left: 0;
+    margin-bottom: 75px;
+  }
+}
+
+@media screen and (max-width: 556px) {
+  svg#wave-background {
+    margin-left: 0;
+    margin-bottom: 100px;
+  }
+}
+
+@media screen and (max-width: 437px) {
+  svg#wave-background {
+    margin-left: 0;
+    margin-bottom: 120px;
+  }
 }
