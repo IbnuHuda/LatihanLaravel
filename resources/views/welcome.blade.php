@@ -147,8 +147,8 @@
         <div class="dropdown my-2 my-lg-0">
           <a class="btn btn-sm my-2 btn-info my-sm-0 dropbtn" type="submit" style="background-color: #67A9FB; width: 100px;"><i class="fa fa-user"></i> Account</a>
           <div class="dropdown-content">
-            <a href="#">Company</a>
-            <a href="#">Developer</a>
+            <a href="{{ route('companyLogin') }}">Company</a>
+            <a href="{{ route('login') }}">Developer</a>
           </div>
         </div>
         </div>
@@ -563,10 +563,10 @@
             <h6 class="footer-title">Account</h6>
             <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
             <p class="sub-account">
-              <a href="#!">Company</a>
+              <a href="{{ route('companyLogin') }}">Company</a>
             </p>
             <p class="sub-account">
-              <a href="#!">Developer</a>
+              <a href="{{ route('login') }}">Developer</a>
             </p>
           </div>
           <div class="col-4" style="padding-right: 10px;">
