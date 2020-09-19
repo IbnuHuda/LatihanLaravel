@@ -4,16 +4,24 @@
         --input-padding-y: .75rem;
     }
 
-    div#card-register {
-        margin-left: 10%;
-        border-radius: 10px;
-        background-color: #fff;
-        width: 80%;
-        height: 30rem;
+    div.col-md-8 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
-    div#card-register h3.text-center {
-        margin-top: 42.5px;
+    div#card-register {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 10px;
+        margin-top: 25px;
+        background-color: var(--main-bg-color);
+        color: var(--main-text-color);
+        width: 26rem;
+        height: 28.5rem;
+        opacity: 0.95;
+        box-shadow: 1px 1px 7.5px var(--shadow-color);
     }
 
     .form-label-group {
@@ -26,6 +34,7 @@
     .form-label-group > label {
         padding: var(--input-padding-y) var(--input-padding-x);
         height: 45px;
+        overflow-y: hidden;
     }
 
     .form-label-group > label {
@@ -34,7 +43,7 @@
         left: 0;
         display: block;
         width: 100%;
-        margin-bottom: 0; /* Override default `<label>` margin */
+        margin-bottom: 0;
         line-height: 1.5;
         color: #495057;
         border: 1px solid transparent;

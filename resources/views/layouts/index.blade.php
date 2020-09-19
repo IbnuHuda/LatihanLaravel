@@ -39,10 +39,10 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto" id="menu">
-                        <a href="">Dashboard</a>
-                        <a href="">Developers</a>
-                        <a href="">Project</a>
-                        <a href="">Support</a>
+                        <a href="{{ route('index') }}#dashboard">Dashboard</a>
+                        <a href="{{ route('index') }}#developers">Developers</a>
+                        <a href="{{ route('index') }}#project">Project</a>
+                        <a href="{{ route('index') }}#support">Support</a>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
