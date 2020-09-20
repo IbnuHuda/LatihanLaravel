@@ -115,7 +115,7 @@
                     </div>
 
                     <div class="form-label-group mt-4 w-75">
-                        <input type="text" id="name" class="form-control" placeholder="Name" required autofocus>
+                        <input type="text" name="name" id="name" class="form-control" placeholder="Name" required autofocus>
                         <label for="name">{{ __('Name') }}</label>
 
                         @error('name')
@@ -126,7 +126,7 @@
                     </div>
 
                     <div class="form-label-group w-75">
-                        <input type="email" id="email" class="form-control" placeholder="E-mail Address" required>
+                        <input type="email" name="email" id="email" class="form-control" placeholder="E-mail Address" required>
                         <label for="email">{{ __('E-Mail Address') }}</label>
 
                         @error('email')
@@ -137,7 +137,7 @@
                     </div>
 
                     <div class="form-label-group w-75">
-                        <input type="password" id="password" class="form-control" placeholder="Password" required>
+                        <input type="password" name="password" id="password" class="form-control" placeholder="Password" required>
                         <label for="password">{{ __('Password') }}</label>
 
                         @error('password')
@@ -148,7 +148,7 @@
                     </div>
 
                     <div class="form-label-group w-75">
-                        <input type="password" id="password-confirm" class="form-control" placeholder="Confirm Password" required>
+                        <input type="password" name="password_confirmation" id="password-confirm" class="form-control" placeholder="Confirm Password" required>
                         <label for="password-confirm">{{ __('Confirm Password') }}</label>
 
                         @error('password-confirm')

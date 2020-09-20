@@ -42,6 +42,8 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 	Route::get('/users/profile', 'UsersProfileController@profileForm')->name('usersProfile');
 	Route::get('/users/edit-profile', 'UsersProfileController@editProfileForm')->name('usersEditProfile');
 	Route::post('/users/edit-profile', 'UsersProfileController@editProfile');
+	Route::get('/users/search/{id}', 'UsersProfileController@searchUsers')->name('usersSearch');
+
 });
 
 Route::group(['middleware' => ['auth:company']], function () {
@@ -51,9 +53,11 @@ Route::group(['middleware' => ['auth:company']], function () {
 	// Route::get('/company/edit-profile', 'CompanyProfileController@editProfileForm')->name('companyEditProfile');
 	// Route::post('/company/edit-profile', 'CompanyProfileController@editProfile');
 
-	Route::get('/company/jobs/detail', 'CompanyJobsController@detailJobs')->name('companyJobsDetail');
+	Route::get('/company/jobs/list', 'CompanyJobsController@listJobs')->name('companyListJobs');
+	Route::get('/company/jobs/detail/{id}', 'CompanyJobsController@detailJobs')->name('companyJobsDetail');
 	Route::get('/company/jobs/publish', 'CompanyJobsController@publishForm')->name('companyPublishJobs');
 	Route::post('/company/jobs/publish', 'CompanyJobsController@publishJobs');
+
 
 	Route::get('/company/logout', 'Auth\CompanyController@logout')->name('companyLogout');
 });

@@ -111,7 +111,7 @@
                     <h4 class="text-center mb-4 mt-5">Sign Up as Company</h4>
 
                     <div class="form-label-group w-75">
-                        <input type="email" id="email" class="form-control" placeholder="E-mail Address" required autofocus>
+                        <input type="email" name="email" id="email" class="form-control" placeholder="E-mail Address" required autofocus>
                         <label for="email">{{ __('E-Mail Address') }}</label>
 
                         @error('email')
@@ -122,7 +122,7 @@
                     </div>
 
                     <div class="form-label-group w-75">
-                        <input type="password" id="password" class="form-control" placeholder="Password" required>
+                        <input type="password" name="password" id="password" class="form-control" placeholder="Password" required>
                         <label for="password">{{ __('Password') }}</label>
 
                         @error('password')

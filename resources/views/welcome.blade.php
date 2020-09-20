@@ -1,619 +1,684 @@
-<!DOCTYPE html>
-<html lang="en">
-
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<!-- Meta Including Start -->
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<!-- End of Meta Including -->
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-	<!-- Title Start -->
-	<title>Home | LewongQ</title>
-	<!-- End of Title -->
+    <title>{{ config('app.name', 'Laravel') }}</title>
 
-	<!-- CSS and JavaScript Including File -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
-    <!-- End of Including File -->
-<style>
-  body{
-    background-color: #A8CBFF;
-    color: white;;
-    font-family: Montserrat;
-  }
-  
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/index.js') }}" defer></script>
 
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
+    <!-- Fonts -->
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f1f1f1;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-}
+    <!-- Styles -->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            overflow-x: hidden;
+        }
 
-.dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-}
+        h1, h2, h3, h4, h5, h6 {
+            overflow-y: hidden;
+        }
 
-.dropdown-content a:hover {background-color: #ddd;}
+        body.default-theme {
+            --main-bg-color: #ffffff;
+            --secondary-bg-color: #f5f5f5;
+            --main-text-color: #000000;
+            --secondary-text-color: #757575;
 
-.dropdown:hover .dropdown-content {display: block;}
+            --btn-color: #3490dc;
+            --shadow-color: #888888;
+            --bg-navbar: #4a69bd;
+            --bg-wave: #0099ff;
 
-.dropdown:hover .dropbtn {background-color: #3e8e41;}
-    ul li{
-        margin-right: 10px;
-    }
-   .card{
-     left: 15px;
-     background-color: #4093FB;
-     box-shadow: #67A9FB  8px 0 7px;
-   }
-   .icon-card{
-     font-size: 80px;
-   }
-   .card-text{
-     font-size: 14px;
-   }
-   .big-icon{
-    font-size: 70px;
-   }
-   .number-count{
-    font-size: 21px;
-    margin-top: -15px;
-   }
-   .text-count{
-    font-size: 17px;
-    margin-top: -10px;
-    font-weight: bold;
-   }
-   .copyright {
-    float: left;
-}
+            background-color: var(--main-bg-color);
+            transition: 0.25s;
+        }
 
-.social { 
-    float: right;
-    margin-right: 10px;
-}
-.footer-title{
-  font-weight: bold;
-}
-.sub-account{
-  margin-bottom: 5px;
-}
-.sub-account a{
-  color: white;
-}
-.img-google {
-  margin-left: -7px;
-  width: 120px;
-}
+        body.dark-theme {
+            --main-bg-color: #111013;
+            --secondary-bg-color: #212121;
+            --main-text-color: #ffffff;
+            --secondary-text-color: #fafafa;
 
-.img-apple {
-  width: 105px;
-}
+            --shadow-color: #343a40;
+            --bg-navbar: #0c2461;
+            --bg-wave: #0a3d62;
+            --btn-color: #d81e1e;
 
-</style>
+            background-color: var(--main-bg-color);
+            transition: 0.25s;
+        }
+
+        /* Navbar */
+
+        nav.navbar {
+            background-color: var(--bg-navbar);
+            width: 100%;
+            position: fixed;
+            z-index: 1000;
+        }
+
+        nav.navbar a.navbar-brand img {
+            width: 35px;
+            height: 30px;
+        }
+
+        nav.navbar a.navbar-brand strong {
+            color: #ffffff;
+        }
+
+        nav.navbar ul.navbar-nav a {
+            text-decoration: none;
+            color: #ffffff;
+            margin: 0 15px;
+        }
+
+        nav.navbar ul.navbar-nav.ml-auto a {
+            color: #ffffff;
+        }
+
+        /* Home */
+
+        div#home {
+            height: 100vh;
+        }
+
+        div#home div#leftSideHome {
+            padding: 120px;
+            margin-top: 75px;
+            color: var(--main-text-color);
+        }
+
+        div#home div#leftSideHome p {
+            margin-bottom: 35px;
+        }
+
+        div#home div#leftSideHome a {
+            text-decoration: none;
+            padding: 12.5px 12.5px;
+            background-color: var(--btn-color);
+            border-radius: 50px;
+            color: #ffffff;
+        }
+
+        div#home div#leftSideHome hr {
+            width: 17.5%; 
+            border: 1px solid var(--main-text-color);
+        }
+
+        div#home div#rightSideHome img {
+            width: 100%;
+        }
+
+        /* About-VeCo */
+
+        div#about-veco {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url("{{ asset('images/websites/Paralax.jpg') }}") no-repeat center center fixed;
+            color: #fff;
+        }
+
+        div#about-veco h2 {
+            margin-top: 50px;
+        }
+
+        div#about-veco header hr {
+            margin-left: 46%;
+            margin-right: 46%;
+            width: 8%; 
+            border: 1px solid var(--main-text-color);
+        }
+
+        div#about-veco footer div.card {
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+        }
+
+        div#about-veco footer div.card i {
+            font-size: 90px;
+        }
+
+        div#about-veco footer div.card div.card-body {
+            padding: 60px 30px;        
+        }
+
+        /* Easy-Goals */
+
+        div#easy-goals {
+            color: var(--main-text-color);
+        }
+
+        div#easy-goals header h2 {
+            margin-top: 50px;
+        }
+
+        div#easy-goals header hr {
+            text-align: center;
+            width: 12%;
+            margin-left: 44%;
+            margin-right: 44%;
+            border: 1px solid var(--main-text-color);
+        }
+
+        div#easy-goals content hr {
+            text-align: center;
+            width: 17.5%;
+            border: 1px solid var(--main-text-color);
+        }
+
+        /* Footer */
+
+        div#contact footer {
+            background-color: var(--bg-navbar);
+            color: #fff;
+        }
+
+        div#contact hr {
+            color: #fff;
+        }
+
+        div#contact .copyright {
+            float: left;
+        }
+
+        div#contact .social { 
+            float: right;
+            margin-right: 10px;
+        }
+
+        div#contact .footer-title{
+            font-weight: bold;
+        }
+
+        div#contact .sub-account{
+            margin-bottom: 5px;
+        }
+
+        div#contact .sub-account a{
+            color: white;
+        }
+
+        div#contact img.img-google {
+            margin-left: -7px;
+            width: 100%;
+        }
+
+        div#contact img.img-apple {
+            width: 90%;
+        }
+
+        /* Theme Toggler */
+
+        div#theme-toggler {
+            width: 50px;
+            height: 50px;
+            padding: 10px;
+            background-color: #303f9f;
+            border-radius: 50px;
+            position: fixed;
+            bottom: 20px;
+            right: 25px;
+            color: #ffffff;
+            font-size: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.5s;
+        }
+
+        div#theme-toggler i {
+            margin-top: 5px;
+        }
+
+        @media screen and (max-width: 998px) {
+            * {
+                padding: 0;
+                margin: 0;
+                box-sizing: border-box;
+            }
+
+            /* Home */
+
+            div#home {
+                height: 65vh;
+            }
+
+            div#home div#leftSideHome {
+                padding: 50px 0px 10px 75px;
+                margin-top: 75px;
+                color: var(--main-text-color);
+            }
+
+            div#home div#leftSideHome {
+                font-size: 12px;
+            }
+
+            div#home div#rightSideHome img {
+                width: 100%;
+            }
+
+            /* About-VeCo */
+
+            div#about-veco {
+                height: auto;
+                padding-bottom: 30px;
+            }
+
+            div#about-veco h2 {
+                margin-top: 10px;
+            }
+
+            div#about-veco header p {
+                font-size: 12px;
+            }
+
+            div#about-veco footer div.card div.card-body {
+                padding: 30px 15px;
+            }
+
+            div#about-veco footer div.card i {
+                font-size: 75px;
+            }
+
+            /* Easy-Goals */
+
+            div#easy-goals content p {
+                font-size: 12px;
+            }
+        }
+
+        @media screen and (max-width: 874px) {
+            /* Home */
+
+            div#home {
+                height: 55vh;
+            }
+
+            div#home div#leftSideHome {
+                padding: 50px 20px 10px 50px;
+                margin-top: 75px;
+                color: var(--main-text-color);
+            }
+
+            div#home div#leftSideHome h2 {
+                font-size: 24px;
+            }
+
+            div#home div#leftSideHome p {
+                font-size: 10px;
+                margin-bottom: 25px;
+            }
+
+            div#home div#rightSideHome img {
+                width: 100%;
+            }
+
+            /* About-VeCo */
+
+            div#about-veco {
+                height: auto;
+            }
+
+            div#about-veco header h2 {
+                font-size: 24px;
+            }
+
+            div#about-veco header p {
+                font-size: 10px;
+            }
+
+            div#about-veco footer div.card i {
+                font-size: 60px;
+            }
+
+            div#about-veco footer div.card h3 {
+                transform: scale(.7);
+            }
+
+            div#about-veco footer div.card p {
+                font-size: 10px;
+            }
+
+            /* Easy-Goals */
+
+            div#easy-goals content p {
+                font-size: 10px;
+            }
+        }
+
+        @media screen and (max-width: 718px) {
+            /* Home */
+
+            div#home {
+                height: 45vh;
+            }
+
+            div#home div#leftSideHome {
+                padding: 35px 20px 10px 50px;
+                margin-top: 75px;
+                color: var(--main-text-color);
+            }
+
+            div#home div#leftSideHome h2 {
+                font-size: 14px;
+            }
+
+            div#home div#leftSideHome p {
+                font-size: 8px;
+                margin-bottom: 15px;
+            }
+
+            div#home div#leftSideHome a {
+                text-decoration: none;
+                font-size: 8px;
+                padding: 7.5px 7.5px;
+                background-color: var(--btn-color);
+                border-radius: 50px;
+                color: var(--main-text-color);
+            }
+
+            div#home div#rightSideHome img {
+                width: 100%;
+            }
+
+            /* About-VeCo */
+
+            div#about-veco {
+                height: auto;
+            }
+
+            div#about-veco h2 {
+                font-size: 14px;
+                margin-top: 0px;
+            }
+
+            div#about-veco header hr {
+                margin-left: 47.3%;
+                margin-right: 47.3%;
+                width: 5.4%;
+            }
+
+            div#about-veco header p {
+                font-size: 6px;
+                padding: 0 20px;
+            }
+
+            div#about-veco footer div.card i {
+                font-size: 40px;
+            }
+
+            div#about-veco footer div.card div.card-body {
+                padding: 20px 10px;
+            }
+
+            div#about-veco footer div.card h3 {
+                font-size: 10px;
+            }
+
+            div#about-veco footer div.card p {
+                font-size: 8px;
+            }
+
+            /* Easy-Goals */
+
+            div#easy-goals {
+                margin-top: 25px;
+            }
+
+            div#easy-goals header h2 {
+                font-size: 14px;
+            }
+
+            div#easy-goals content h3 {
+                font-size: 10px;
+            }
+
+            div#easy-goals content hr {
+                width: 17.5%;
+            }
+
+            div#easy-goals content p {
+                font-size: 6px;
+            }
+
+        }
+    </style>
 </head>
-
-<body>
-
-	<!-- Header Start -->
-
-                
-         
-      <nav class="navbar navbar-expand-lg navbar-light navbar-dark fixed-top" style="background-color: #2E86DE;">
+<body class="default-theme">
+    <nav class="navbar navbar-expand-md navbar-dark shadow-sm">
         <div class="container">
             <a href="{{ route('index') }}" class="navbar-brand d-flex align-items-center">
-            <img src="{{asset('images/websites/Logo_VeCo.png') }}" alt="Logo" style="width:40px;">
+                <img src="{{ asset('images/websites/Logo_VeCo.png') }}" class="img-responsive">
                 <strong class="ml-2">VeCo</strong>
             </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-            
-          <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-            <li class="nav-item active">
-                <a class="nav-link" href="#">Dashboard </a>
-                </li>
-                <li class="nav-item">
-                <a class="nav-link" href="#" style="color:#F3F8FF">Developer</a>
-                </li>
-                <li class="nav-item">
-                <a class="nav-link" href="#" style="color:#F3F8FF">Project</a>
-                </li>
-                <li class="nav-item">
-                <a class="nav-link" href="#" style="color:#F3F8FF">About Us</a>
-                </li>
-          </ul>
-          <!-- <form class="form-inline my-2 my-lg-0">
-            <a class="btn btn-sm my-2 btn-info my-sm-0" type="submit" style="background-color: #67A9FB; width: 100px;"><i class="fa fa-user"></i> Account</a>
-        </form> -->
-        <div class="dropdown my-2 my-lg-0">
-          <a class="btn btn-sm my-2 btn-info my-sm-0 dropbtn" type="submit" style="background-color: #67A9FB; width: 100px;"><i class="fa fa-user"></i> Account</a>
-          <div class="dropdown-content">
-            <a href="{{ route('companyLogin') }}">Company</a>
-            <a href="{{ route('login') }}">Developer</a>
-          </div>
-        </div>
-        </div>
-        </div>
-      </nav> 
-    <!-- End of Header -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-      <div class="scroll" id="home"></div>
-      <div class="container-fluid" style="margin-top:100px ;">
-        <div class="row">
-          <div class="col-2"></div>
-          <div class="col-4" style="top: 100px; left: -30px;  font-size: 17px;">
-           
-            <h1>Work With Us</h1>
-            <br>
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-          </div>
-          <div class="col-6" style="padding-right: 0; top: -100px;">
-            <img src="{{asset('images/websites/Group 2.png') }}" width="100%" alt="">
-           
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <!-- Left Side Of Navbar -->
+                <ul class="navbar-nav mr-auto" id="menu">
+                    <a href="{{ route('index') }}#home">Home</a>
+                    <a href="{{ route('index') }}#about-veco">What is Veco?</a>
+                    <a href="{{ route('index') }}#easy-goals">Easy Goals with Us</a>
+                    <a href="{{ route('index') }}#contact">Contact</a>
+                </ul>
 
-          </div>
-          <!-- <div class="col-6" style="margin-left: 7px; top: -5px;">
-            <img src="assets/img/Group 1.png" width="100%" alt="">
-          </div> -->
-        </div>
-      </div>
-      
-      <div class="container">
-        <center>
-          <h1>Work With Us</h1>
-        </center>
-        <br>
-        <div class="row">
-          <div class="col-4">
-            <div class="card" style="width: 20rem;">
-             <center>
-              <div class="card-body" style="padding: 60px 30px">
-                <i class="fa fa-trophy icon-card"></i>
-                <br>
-                <br>
-                <h3 class="card-title">Best Project</h3>
-                <br>
-                <p class="card-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-              </div>
-            </center>
+                <!-- Right Side Of Navbar -->
+                <ul class="navbar-nav ml-auto">
+                    <a href="{{ route('register') }}" class="btn btn-sm my-2 btn-info my-sm-0 dropbtn" type="submit" style="background-color: #67A9FB;"><i class="fa fa-user"></i> Start as Vendor</a>
+                    <a href="{{ route('companyRegister') }}" class="btn btn-sm my-2 btn-info my-sm-0 dropbtn" type="submit" style="background-color: #67A9FB;"><i class="fa fa-user"></i> Start as Company</a>
+                </ul>
             </div>
-          </div>
-          <div class="col-4">
-            <div class="card" style="width: 20rem;">
-              <center>
-               <div class="card-body" style="padding: 60px 30px">
-                 <i class="fa fa-trophy icon-card"></i>
-                 <br>
-                 <br>
-                 <h3 class="card-title">Best Project</h3>
-                 <br>
-                 <p class="card-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-               </div>
-             </center>
-             </div>
-          </div>
-          <div class="col-4">
-            <div class="card" style="width: 20rem;">
-              <center>
-               <div class="card-body" style="padding: 60px 30px">
-                 <i class="fa fa-trophy icon-card"></i>
-                 <br>
-                 <br>
-                 <h3 class="card-title">Best Project</h3>
-                 <br>
-                 <p class="card-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-               </div>
-             </center>
-             </div>
-          </div>
         </div>
-      </div>
-      <br>
-      <br>
-      <div class="" style="background-color: #4093FB; padding: 10px;">
-        <center><h3 style="font-weight: bold;">Login Now</h3>
-        <div class="container login-banner" style="text-align: center; padding: 10px 0;">
-          <!-- <div class="container"> -->
-            <div class="row">
-              <div class="col-4"></div>
-              <div class="col-4">
-                <div class="container-fluid" >
-                  <div class="row">
-                    <div class="col-5">
-          <a class="btn btn-md my-2 btn-info my-sm-0" type="submit" style="background-color: #67A9FB; padding: 5px 13px;"><i class="fa fa-building"></i> Company</a>
-        </div>
-        <div class="col-3">
-          <h2 style="">&nbsp;|</h2>
-          </div>
-          <div class="col-4">
-            <a class="btn btn-md my-2 btn-info my-sm-0" type="submit" style="background-color: #67A9FB;width: 120px; padding: 5px 13px;"><i class="fa fa-user"></i> Developer</a>
-          </div>
-        </div>
-        </div>
-          </div>
-          <div class="col-4"></div>
-        <!-- </div> -->
-        </div>
-      </div>
-      </center>
-      </div>
-      <br>
-      <br>
-      <br>
+    </nav>
 
-      <div class="container">
-        <center>
-          <h1>Developers</h1>
-        </center>
-        <br>
-        <div class="row">
-          <div class="col-4">
-            <div class="card" style="padding: 10px;">
-              <div class="card-body">
-                <div class="row">
-                  <div class="col-4">
-                    <img src="https://robohash.org/68.186.255.198.png" alt="" class="mx-auto rounded-circle img-fluid" style="border: black solid 1px;">
-                  </div>
-                  <div class="col-8" style="font-size: 16px; ">
-                    <h4>Bara Laily M</h4>
-                    <p>5.0 / 5.0</p>
-                    <p>
-                      <i class="fa fa-star text-warning"></i>
-                      <i class="fa fa-star text-warning"></i>
-                      <i class="fa fa-star text-warning"></i>
-                      <i class="fa fa-star text-warning"></i>
-                      <i class="fa fa-star text-warning"></i>
-                    </p>
-                  </div>
-                </div>
-                <div>
-                  <h5 class="card-title">About</h5>
-                </div>
-                <div style="font-size: 14px;">
-                  <p class="cart-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                </div>
-              </div>
-              <br>
-              <br>
-              <div class="card-footer" style="background-color: #4093FB; border: 0px;">
-                <div class="row">
-                  <div class="col-3"></div>
-                  <div class="col-4">
-                    <a class="btn btn-sm  text-light" type="submit" style="width:100px; background-color:#47C363 "><i class="fa fa-eyes"></i> Details</a>
-                  </div>
-                  <div class="col-2">
-                    <a class="btn btn-sm btn-danger text-light" type="submit" style="width:100px; background-color: #FC544B;"><i class="fa fa-user"></i> Hire</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-4">
-            <div class="card" style="padding: 10px;">
-              <div class="card-body">
-                <div class="row">
-                  <div class="col-4">
-                    <img src="https://robohash.org/68.186.255.198.png" alt="" class="mx-auto rounded-circle img-fluid" style="border: black solid 1px;">
-                  </div>
-                  <div class="col-8" style="font-size: 16px; ">
-                    <h4>Bara Laily M</h4>
-                    <p>5.0 / 5.0</p>
-                    <p>
-                      <i class="fa fa-star text-warning"></i>
-                      <i class="fa fa-star text-warning"></i>
-                      <i class="fa fa-star text-warning"></i>
-                      <i class="fa fa-star text-warning"></i>
-                      <i class="fa fa-star text-warning"></i>
-                    </p>
-                  </div>
-                </div>
-                <div>
-                  <h5 class="card-title">About</h5>
-                </div>
-                <div style="font-size: 14px;">
-                  <p class="cart-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                </div>
-              </div>
-              <br>
-              <br>
-              <div class="card-footer" style="background-color: #4093FB; border: 0px;">
-                <div class="row">
-                  <div class="col-3"></div>
-                  <div class="col-4">
-                    <a class="btn btn-sm  text-light" type="submit" style="width:100px; background-color:#47C363 "><i class="fa fa-eyes"></i> Details</a>
-                  </div>
-                  <div class="col-2">
-                    <a class="btn btn-sm btn-danger text-light" type="submit" style="width:100px; background-color: #FC544B;"><i class="fa fa-user"></i> Hire</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-4">
-            <div class="card" style="padding: 10px;">
-              <div class="card-body">
-                <div class="row">
-                  <div class="col-4">
-                    <img src="https://robohash.org/68.186.255.198.png" alt="" class="mx-auto rounded-circle img-fluid" style="border: black solid 1px;">
-                  </div>
-                  <div class="col-8" style="font-size: 16px; ">
-                    <h4>Bara Laily M</h4>
-                    <p>5.0 / 5.0</p>
-                    <p>
-                      <i class="fa fa-star text-warning"></i>
-                      <i class="fa fa-star text-warning"></i>
-                      <i class="fa fa-star text-warning"></i>
-                      <i class="fa fa-star text-warning"></i>
-                      <i class="fa fa-star text-warning"></i>
-                    </p>
-                  </div>
-                </div>
-                <div>
-                  <h5 class="card-title">About</h5>
-                </div>
-                <div style="font-size: 14px;">
-                  <p class="cart-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                </div>
-              </div>
-              <br>
-              <br>
-              <div class="card-footer" style="background-color: #4093FB; border: 0px;">
-                <div class="row">
-                  <div class="col-3"></div>
-                  <div class="col-4">
-                    <a class="btn btn-sm  text-light" type="submit" style="width:100px; background-color:#47C363 "><i class="fa fa-eyes"></i> Details</a>
-                  </div>
-                  <div class="col-2">
-                    <a class="btn btn-sm btn-danger text-light" type="submit" style="width:100px; background-color: #FC544B;"><i class="fa fa-user"></i> Hire</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+    <div id="home" class="w-100">
+        <div id="leftSideHome" class="w-50 float-left">
+            <h2>Work With Us</h2>
+            <hr />
+            <p class="mt-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+            <a href="{{ route('companyRegister') }}">Join as Company</a>
+            <a href="{{ route('register') }}" class="ml-3">Join as Vendor</a>
         </div>
-      </div>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      
-      <div class="" style="background-color: #4093FB; padding: 10px;">
+
+        <div id="rightSideHome" class="w-50 float-left">
+            <img src="{{ asset('images/websites/Group 2.png') }}" class="float-right img-responsive">
+        </div>
+    </div>
+
+    <br />
+
+    <div id="about-veco" class="w-100 mt-5">
         <div class="container">
-          <div class="row" style="text-align: center;">
-            <div class="col-3">
-              <p class="big-icon"><i class="fa fa-building"></i></p>
-              <p class="number-count">200+</p>
-              <p class="text-count">Companies</p>
-            </div>
-            <div class="col-3">
-              <p class="big-icon"><i class="fa fa-code"></i></p>
-              <p class="number-count">200+</p>
-              <p class="text-count">Companies</p>
-            </div>
-            <div class="col-3">
-              <p class="big-icon"><i class="fa fa-television"></i></p>
-              <p class="number-count">200+</p>
-              <p class="text-count">Companies</p>
-            </div>
-            <div class="col-3">
-              <p class="big-icon"><i class="fa fa-check-square-o"></i></p>
-              <p class="number-count">200+</p>
-              <p class="text-count">Companies</p>
-            </div>
-          </div>
+            <header class="text-center">
+                <br />
+                <h2 class="mb-4">What is VeCo?</h2>
+                <hr />
+                <p class="mt-4">VeCo is Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            </header>
+
+            <footer class="mt-4">
+                <div class="row">
+                    <div class="col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4">
+                        <div class="card text-center">
+                            <div class="card-body">
+                                <i class="fa fa-television icon-card mb-4"></i>
+                                <h3 class="card-title">Best Project</h3>
+                                <p class="card-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4">
+                        <div class="card text-center">
+                            <div class="card-body">
+                                <i class="fa fa-chain icon-card mb-4"></i>
+                                <h3 class="card-title">Best Project</h3>
+                                <p class="card-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4">
+                        <div class="card w-100 text-center">
+                            <div class="card-body">
+                                <i class="fa fa-group icon-card mb-4"></i>
+                                <h3 class="card-title">Best Project</h3>
+                                <p class="card-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
         </div>
-      </div>
-      <br>
-      <br>
-      <br>
-      <br>
-
-      <div class="container">
-        <center>
-          <h1>Developers</h1>
-        </center>
-        <br>
-        <div class="row">
-          <div class="col-12 col-sm-6 col-lg-4">
-            <div class="card" style="height:100%">
-              <div class="card-body">
-                <div class="row">
-                <div class="col-4 col-sm-4"> 
-                  <img src="https://robohash.org/68.186.255.198.png" alt="" class="mx-auto rounded-circle img-fluid" style="border: black solid 1px;">
-                </div>
-                <div class="col-8 col-sm-8">
-                  <h4 class="title-card">Bara Corp</h4>
-                  <p class="date_card" style="font-size: 15px;"><i class="fa fa-clock-o"></i> 06/08/2020</p>
-                </div>
-                </div>
-                <!-- <div class="row" style="margin-top:50px;"> -->
-                  <div class="" style="margin-top:40px;">
-                    <center><h5>Mobile App Design</h5></center>
-                    <ul style="margin-top:20px;">
-                      <li style="margin: 10px 0px;">Requirement 1</li>
-                      <li style="margin: 10px 0px;">Requirement 1</li>
-                      <li>Requirement 1</li>
-                    </ul>
-                    </div>
-                <!-- </div> -->
-              </div>
-              <div class="footer-card row" style=" padding: 10px;">
-                <div class="col-lg-2">
-                </div>
-                <div class="col-lg-5" style="font-size: 15px; margin-top: 5px;">
-                  <p><i class="fa fa-desktop"></i> 0 Applicants</p>
-                </div>
-                <div class="col-lg-4">
-                  <a class="btn btn-sm text-light" type="submit" style="width:100%; background-color: #47C363;"><i class="fa fa-user"></i> Details</a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-12 col-sm-6 col-lg-4">
-            <div class="card" style="height:100%">
-              <div class="card-body">
-                <div class="row">
-                <div class="col-4 col-sm-4"> 
-                  <img src="https://robohash.org/68.186.255.198.png" alt="" class="mx-auto rounded-circle img-fluid" style="border: black solid 1px;">
-                </div>
-                <div class="col-8 col-sm-8">
-                  <h4 class="title-card">Bara Corp</h4>
-                  <p class="date_card" style="font-size: 15px;"><i class="fa fa-clock-o"></i> 06/08/2020</p>
-                </div>
-                </div>
-                <!-- <div class="row" style="margin-top:50px;"> -->
-                  <div class="" style="margin-top:40px;">
-                    <center><h5>Mobile App Design</h5></center>
-                    <ul style="margin-top:20px;">
-                      <li style="margin: 10px 0px;">Requirement 1</li>
-                      <li style="margin: 10px 0px;">Requirement 1</li>
-                      <li>Requirement 1</li>
-                    </ul>
-                    </div>
-                <!-- </div> -->
-              </div>
-              <div class="footer-card row" style=" padding: 10px;">
-                <div class="col-lg-2">
-                </div>
-                <div class="col-lg-5" style="font-size: 15px; margin-top: 5px;">
-                  <p><i class="fa fa-desktop"></i> 0 Applicants</p>
-                </div>
-                <div class="col-lg-4">
-                  <a class="btn btn-sm text-light" type="submit" style="width:100%; background-color: #47C363;"><i class="fa fa-user"></i> Details</a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-12 col-sm-6 col-lg-4">
-            <div class="card" style="height:100%">
-              <div class="card-body">
-                <div class="row">
-                <div class="col-4 col-sm-4"> 
-                  <img src="https://robohash.org/68.186.255.198.png" alt="" class="mx-auto rounded-circle img-fluid" style="border: black solid 1px;">
-                </div>
-                <div class="col-8 col-sm-8">
-                  <h4 class="title-card">Bara Corp</h4>
-                  <p class="date_card" style="font-size: 15px;"><i class="fa fa-clock-o"></i> 06/08/2020</p>
-                </div>
-                </div>
-                <!-- <div class="row" style="margin-top:50px;"> -->
-                  <div class="" style="margin-top:40px;">
-                    <center><h5>Mobile App Design</h5></center>
-                    <ul style="margin-top:20px;">
-                      <li style="margin: 10px 0px;">Requirement 1</li>
-                      <li style="margin: 10px 0px;">Requirement 1</li>
-                      <li>Requirement 1</li>
-                    </ul>
-                    </div>
-                <!-- </div> -->
-              </div>
-              <div class="footer-card row" style=" padding: 10px;">
-                <div class="col-lg-2">
-                </div>
-                <div class="col-lg-5" style="font-size: 15px; margin-top: 5px;">
-                  <p><i class="fa fa-desktop"></i> 0 Applicants</p>
-                </div>
-                <div class="col-lg-4">
-                  <a class="btn btn-sm text-light" type="submit" style="width:100%; background-color: #47C363;"><i class="fa fa-user"></i> Details</a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <br>
-      <br>
-      <div class="scroll" id="footer" style="background-color:#4093FB ;">
-       
-<!-- Footer -->
-<footer class="page-footer font-small unique-color-dark">
-
-  
-
-  <!-- Footer Links -->
-  <div class="container text-center text-md-left mt-5" style="padding-top: 30px;">
-    <div class="row mt-3">
-      <div class="col-md-6 col-lg-7 col-xl-6 mx-auto mb-4 d-flex align-items-center">
-        <img src="{{ asset('images/websites/Logo_VeCo.png') }}" class="img-responsive" style="width: 12%">
-            <strong class="ml-3" style="font-size: 35px;">VeCo</strong>
-      </div>
-      <div class="col-md-6 col-lg-5 mx-auto mb-4">
-        <div class="row">
-          <div class="col-4">
-            <h6 class="footer-title">Account</h6>
-            <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-            <p class="sub-account">
-              <a href="{{ route('companyLogin') }}">Company</a>
-            </p>
-            <p class="sub-account">
-              <a href="{{ route('login') }}">Developer</a>
-            </p>
-          </div>
-          <div class="col-4" style="padding-right: 10px;">
-            <h6 class="footer-title">About Us</h6>
-            <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-            <p class="sub-account">
-              <a href="#!"><i class="fa fa-twitter mr-1" aria-hidden="true"></i> @crazysmile</a>
-            </p>
-            <p class="sub-account">
-              <a href="#!">Developer</a>
-            </p>
-          </div>
-          <div class="col-4">
-            <h6 class="footer-title">Mobile Apps</h6>
-            <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-            <p class="sub-account">
-              <img src="{{ asset('images/websites/google_play.png') }}" class="img-google">
-            </p>
-            <p class="sub-account">
-              <img src="{{ asset('images/websites/app_store.png') }}" class="img-apple">
-            </p>
-          </div>
-         
-          </div>
-      </div>
     </div>
-  </div>
-  <center>
-    <hr class=" accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 80%; background-color: white;">
-  </center>
-  <!-- Footer Links -->
 
-  <!-- Copyright -->
+    <div id="easy-goals" class="w-100">
+        <header class="text-center mb-3">
+            <h2>Reaching Your Goals is Easier with Us</h2>
+            <hr />
+        </header>
 
-  <!-- Copyright -->
-  <div class="container" style="padding-bottom: 40px;">
-    <span class="">&reg; 2020 Alright Reserved by VeCo Team</span>
-    <span class="social"> <i class="fa fa-telegram"></i></span>
-    <span class="social"> <i class="fa fa-facebook"></i></span>
-    <span class="social"> <i class="fa fa-instagram"></i></span>
-    <span class="social">Follow us : </span>
-    <div style="clear: both"></div>
-</div>
-</footer>
-<!-- Footer -->
+        <br />
+
+        <content class="mt-3">
+            <div class="row">
+                <div class="col-7 col-sm-7 col-md-7 col-lg-7 col-xl-7 pl-5 pb-5 pr-5 text-left">
+                    <h3>Rate Up Your Company</h3>
+                    <hr class="float-left" />
+                    <p class="float-left">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                    consequat.</p>
+                </div>
+
+                <div class="col-5 col-sm-5 col-md-5 col-lg-5 col-xl-5">
+                    <img src="{{ asset('images/websites/Easy-1.jpg') }}" class="img-responsive w-100">
+                </div>
+            </div>
+
+            <br />
+
+            <div class="row">
+                <div class="col-5 col-sm-5 col-md-5 col-lg-5 col-xl-5">
+                    <img src="{{ asset('images/websites/Easy-2.jpg') }}" class="img-responsive w-100">
+                </div>
+
+                <div class="col-7 col-sm-7 col-md-7 col-lg-7 col-xl-7 pl-5 pb-5 pr-5 text-right">
+                    <h3>Make Your Connection Wider</h3>
+                    <hr class="float-right" />
+                    <p class="float-right">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                    consequat.</p>
+                </div>
+            </div>
+
+            <br />
+
+            <div class="row">
+                <div class="col-7 col-sm-7 col-md-7 col-lg-7 col-xl-7 pl-5 pb-5 pr-5 text-left">
+                    <h3>Publish and Work Together</h3>
+                    <hr class="float-left" />
+                    <p class="float-left">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                    consequat.</p>
+                </div>
+
+                <div class="col-5 col-sm-5 col-md-5 col-lg-5 col-xl-5">
+                    <img src="{{ asset('images/websites/Easy-3.jpg') }}" class="img-responsive w-100">
+                </div>
+            </div>
+        </content>
+    </div>
+
+    <br />
+
+    <div id="contact" class="mt-4">
+        <footer class="page-footer font-small unique-color-dark">
+            <div class="container text-center text-md-left mt-3" style="padding-top: 30px;">
+                <div class="row">
+                    <div class="col-md-6 col-lg-7 col-xl-6 mx-auto mb-4 d-flex align-items-center">
+                        <img src="{{ asset('images/websites/Logo_VeCo.png') }}" class="img-responsive" style="width: 12%">
+                        <strong class="ml-3" style="font-size: 35px;">VeCo</strong>
+                    </div>
+                    <div class="col-md-6 col-lg-5 mx-auto mb-4">
+                        <div class="row">
+                            <div class="col-4">
+                                <h6 class="footer-title">Account</h6>
+                                <hr class="bg-light accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                                <p class="sub-account">
+                                    <a href="{{ route('companyLogin') }}">Company</a>
+                                </p>
+                                <p class="sub-account">
+                                    <a href="{{ route('login') }}">Developer</a>
+                                </p>
+                            </div>
+
+                            <div class="col-4" style="padding-right: 10px;">
+                                <h6 class="footer-title">About Us</h6>
+                                <hr class="bg-light accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                                <p class="sub-account">
+                                    <a href="#!"><i class="fa fa-twitter mr-1" aria-hidden="true"></i> @crazysmile</a>
+                                </p>
+                                <p class="sub-account">
+                                    <a href="#!">Developer</a>
+                                </p>
+                            </div>
+                  
+                            <div class="col-4">
+                                <h6 class="footer-title">Mobile Apps</h6>
+                                <hr class="bg-light accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                                <p class="sub-account">
+                                    <img src="{{ asset('images/websites/google_play.png') }}" class="img-google img-responsive">
+                                </p>
+                                <p class="sub-account">
+                                    <img src="{{ asset('images/websites/app_store.png') }}" class="img-apple img-responsive">
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
           
-       
+            <center>
+                <hr class="accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 85%; background-color: white;">
+            </center>
+            
+            <div class="container" style="padding-bottom: 40px;">
+                <span class="">&reg; 2020 Alright Reserved by VeCo Team</span>
+                <span class="social"> <i class="fa fa-telegram"></i></span>
+                <span class="social"> <i class="fa fa-facebook"></i></span>
+                <span class="social"> <i class="fa fa-instagram"></i></span>
+                <span class="social">Follow us : </span>
+                <div style="clear: both"></div>
+            </div>
+        </footer>
     </div>
-    </body>
-    </html>
+
+    <div id="theme-toggler">
+        <i class="fa fa-moon-o" id="themeIcon"></i>
+    </div>
+</body>
+</html>
