@@ -10,9 +10,9 @@
         align-items: center;
     }
 
-    div#card-register {
+    div#card-login {
         border-radius: 10px;
-        margin-top: 25px;
+        margin-top: 80px;
         background-color: var(--main-bg-color);
         color: var(--main-text-color);
         width: 26rem;
@@ -104,11 +104,11 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
 
-            <div id="card-register">
+            <div id="card-login">
                 <form method="POST" action="{{ route('login') }}">
                     @csrf
 
-                    <h4 class="text-center mb-4 mt-5">Sign Up as Vendor</h4>
+                    <h4 class="text-center mb-4 mt-5" style="overflow-y: hidden;">Sign Up as Vendor</h4>
 
                     <div class="form-label-group w-75">
                         <input type="email" name="email" id="email" class="form-control" placeholder="E-mail Address" required autofocus>
@@ -151,7 +151,7 @@
 
                     <div id="social-login">
                         <p class="mt-4 text-center">Or Sign Up With</p>
-                        <p class="text-center">
+                        <p class="text-center" style="overflow-y: hidden;">
                             <a href="/vendor/auth/google"><i class="fa fa-google text-danger"></i></a>
                             <a href="/vendor/auth/facebook"><i class="fa fa-facebook text-primary"></i></a>
                         </p>

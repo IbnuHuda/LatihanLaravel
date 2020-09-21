@@ -2,7 +2,7 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  overflow-x: hidden;
+  /*overflow-x: hidden;*/
 }
 
 body.default-theme {
@@ -52,6 +52,8 @@ svg#wave-background path {
 nav.navbar {
 	width: 100vw;
   background-color: var(--bg-navbar);
+  position: fixed;
+  z-index: 1000;
 }
 
 nav.navbar a.navbar-brand img {

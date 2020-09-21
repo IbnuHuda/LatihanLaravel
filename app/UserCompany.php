@@ -18,6 +18,8 @@ class UserCompany extends Authenticatable
      * @var array
      */
 
+    protected $guard = 'company';
+
     protected $table = 'users_company';
 
     protected $fillable = [

@@ -15,11 +15,11 @@
         justify-content: center;
         align-items: center;
         border-radius: 10px;
-        margin-top: 25px;
+        margin-top: 75px;
         background-color: var(--main-bg-color);
         color: var(--main-text-color);
         width: 26rem;
-        height: 28.5rem;
+        height: 29.5rem;
         opacity: 0.95;
         box-shadow: 1px 1px 7.5px var(--shadow-color);
     }
@@ -177,7 +177,7 @@
                 <form method="POST" action="{{ route('register') }}">
                     @csrf
 
-                    <h3 class="text-center">Sign Up for Free Vendor Account</h3>
+                    <h3 class="text-center" style="overflow-y: hidden;">Sign Up for Free Vendor Account</h3>
 
                     <div class="flash-message">
                         @foreach (['danger', 'warning', 'success', 'info'] as $msg) 

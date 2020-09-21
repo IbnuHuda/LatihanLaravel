@@ -41,7 +41,7 @@
             --bg-navbar: #4a69bd;
             --bg-wave: #0099ff;
 
-            background-color: var(--main-bg-color);
+            background-color: #eef9f3;
             transition: 0.25s;
         }
 
@@ -56,7 +56,7 @@
             --bg-wave: #0a3d62;
             --btn-color: #d81e1e;
 
-            background-color: var(--main-bg-color);
+            background-color: #0b0913;
             transition: 0.25s;
         }
 
@@ -137,7 +137,7 @@
             margin-left: 46%;
             margin-right: 46%;
             width: 8%; 
-            border: 1px solid var(--main-text-color);
+            border: 1px solid #fff;
         }
 
         div#about-veco footer div.card {
@@ -632,7 +632,7 @@
                                     <a href="{{ route('companyLogin') }}">Company</a>
                                 </p>
                                 <p class="sub-account">
-                                    <a href="{{ route('login') }}">Developer</a>
+                                    <a href="{{ route('login') }}">Vendor</a>
                                 </p>
                             </div>
 

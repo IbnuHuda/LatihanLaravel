@@ -17,11 +17,9 @@ class CompanyController extends Controller
 {
     // use AuthenticatesUsers;
 
-    protected $guard = 'company';
-
     public function __construct()
     {
-    	$this->middleware('guest')->except('logout');
+    	$this->middleware('guest:company')->except('logout');
     }
 
     public function guard()
@@ -78,7 +76,7 @@ class CompanyController extends Controller
 
     public function login(Request $request)
     {
-    	if (Auth::guard('company')->attempt(['email' => $request->email, 'password' => $request->password, 'is_verified' => 1], $request->filled('remember'))) return redirect()->route('companyDashboard');
+    	if (Auth::guard('company')->attempt(['email' => $request->email, 'password' => $request->password, 'is_verified' => 1], $request->filled('remember'))) return redirect()->intended(route('companyDashboard'));
     	
     	return redirect('/company-login')->withErrors(['password' => 'Email or password are wrong OR your account is not verified!']);
     }

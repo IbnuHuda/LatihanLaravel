@@ -47,8 +47,13 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
-                        <a href="{{ route('register') }}" class="btn btn-sm my-2 btn-info my-sm-0 dropbtn" type="submit" style="background-color: #67A9FB;"><i class="fa fa-user"></i> Start as Vendor</a>
-                        <a href="{{ route('companyRegister') }}" class="btn btn-sm my-2 btn-info my-sm-0 dropbtn" type="submit" style="background-color: #67A9FB;"><i class="fa fa-user"></i> Start as Company</a>
+                        @if (Request::is('register') || Request::is('company-register'))
+                            <a href="{{ route('login') }}" class="btn btn-sm my-2 btn-info my-sm-0 dropbtn" type="submit" style="background-color: #67A9FB;"><i class="fa fa-user"></i> Login as Vendor</a>
+                            <a href="{{ route('companyLogin') }}" class="btn btn-sm my-2 btn-info my-sm-0 dropbtn" type="submit" style="background-color: #67A9FB;"><i class="fa fa-user"></i> Login as Company</a>
+                        @else
+                            <a href="{{ route('register') }}" class="btn btn-sm my-2 btn-info my-sm-0 dropbtn" type="submit" style="background-color: #67A9FB;"><i class="fa fa-user"></i> Start as Vendor</a>
+                            <a href="{{ route('companyRegister') }}" class="btn btn-sm my-2 btn-info my-sm-0 dropbtn" type="submit" style="background-color: #67A9FB;"><i class="fa fa-user"></i> Start as Company</a>
+                        @endif
                     </ul>
                 </div>
             </div>
