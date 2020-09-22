@@ -11,10 +11,9 @@ use Illuminate\Support\Facades\Storage;
 
 class UsersProfileController extends Controller
 {
-    //
     public function profileForm() {
         $data = User::select('users.name', 'users_profile.contact', 'users_profile.gender', 'users_profile.place_of_birth', 'users_profile.date_of_birth', 'users_profile.address', 'users_profile.photo', 'users_profile.bio')
-            ->join('users_profile', 'users_profile.user_id', '=', 'users.id')
+            ->leftJoin('users_profile', 'users_profile.user_id', '=', 'users.id')
             ->first();
 
         return view('pages.vendor.profile', compact('data'));

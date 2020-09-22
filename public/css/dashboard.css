@@ -2,8 +2,6 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  overflow-y: hidden;
-  overflow-x: hidden;
 }
 
 body.default-theme {
@@ -105,7 +103,7 @@ div.content {
 div.content div#sidebar {
 	float: left;
 	width: 250px;
-	height: 100vh;
+	height: 100%;
 	background-color: var(--main-bg-color);
 	box-shadow: 2px 2px 10px var(--shadow-color);
 	transition: 0.5s;
@@ -179,14 +177,14 @@ div.content div#sidebar p#reserved {
 	font-size: 12px;
 	font-weight: bold;
 	position: absolute;
-	bottom: 0px;
+	bottom: 0;
 	left: 17.5px;
 	transition: 0.5s;
 }
 
 /* Content */
 main {
-	margin-top: 10px;
+	padding: 10px 10px;
 	color: var(--main-text-color);
 }
 

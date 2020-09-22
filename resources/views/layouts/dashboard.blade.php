@@ -11,7 +11,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="{{ asset('js/dashboardApp.js') }}" defer></script>
+    <script src="{{ asset('js/dashboard.js') }}" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -19,7 +19,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/dashboardApp.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/dashboard.css') }}">
 </head>
 <body class="default-theme">
     <div id="app">
@@ -49,26 +49,38 @@
         <div class="content">
             <div id="sidebar">
                 <ul id="listMenu">
-                    <a href=""><li><i class="fa fa-home"></i> <span style="margin-left: 27px;">Dashboard</span></li></a>
-                    <span id="Team"><li><i class="fa fa-users"></i> <span style="margin-left: 25px;">Team</span> <i class="fa fa-chevron-right" id="teamChevron"></i></li></span>
-                    <ul id="teamMenus">
-                        <a href=""><li>Create Team</li></a>
-                        <a href=""><li>Profile Team</li></a>
-                    </ul>
-                    <span id="Vendor"><li><i class="fa fa-list"></i> <span style="margin-left: 25px;">Activity</span> <i class="fa fa-chevron-right" id="vendorChevron"></i></li></span>
-                    <ul id="vendorMenus">
-                        <a href=""><li>List Job</li></a>
-                        <a href=""><li>Submission</li></a>
-                        <a href=""><li>Assesment</li></a>
-                        <a href=""><li>Approval</li></a>
-                    </ul>
-                    
+                    <a href="{{ Auth::guard('company')->check() ? route('companyDashboard') : route('usersDashboard') }}"><li><i class="fa fa-home"></i> <span style="margin-left: 27px;">Dashboard</span></li></a>
+
+                    @if (Auth::guard('company')->check())
+
+                        <span id="Jobs"><li><i class="fa fa-filter"></i> <span style="margin-left: 30px;">Jobs</span> <i class="fa fa-chevron-right" id="jobsChevron"></i></li></span>
+                        <ul id="jobsMenus">
+                            <a href=""><li>Publish Job</li></a>
+                            <a href=""><li>Jobs Details</li></a>
+                        </ul>
+
+                    @else
+
+                        <span id="Team"><li><i class="fa fa-users"></i> <span style="margin-left: 25px;">Team</span> <i class="fa fa-chevron-right" id="teamChevron"></i></li></span>
+                        <ul id="teamMenus">
+                            <a href=""><li>Create Team</li></a>
+                            <a href=""><li>Profile Team</li></a>
+                        </ul>
+                        <span id="Vendor"><li><i class="fa fa-list"></i> <span style="margin-left: 25px;">Activity</span> <i class="fa fa-chevron-right" id="vendorChevron"></i></li></span>
+                        <ul id="vendorMenus">
+                            <a href=""><li>List Job</li></a>
+                            <a href=""><li>Submission</li></a>
+                            <a href=""><li>Assesment</li></a>
+                            <a href=""><li>Approval</li></a>
+                        </ul>
+
+                    @endif
                 </ul>
 
                 <p id="reserved">&reg; 2020 Alright Reserved by VeCo Team</p>
             </div>
 
-            <main class="container">
+            <main class="container" id="main-content">
                 @yield('content')
             </main>
 
@@ -77,15 +89,24 @@
             </div>
 
             <div id="profileBox" class="text-center">
-                <span>Logged as <br /><strong>{{ Auth::user()->name }}</strong></span>
-                <hr width="100%" />
-                <a href="profile">Profile</a><br />
-                <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                @if (Auth::guard('company')->check())
+                    <span>Logged as <br /><strong>{{ Auth::guard('company')->user()->name }}</strong></span>
+                    <hr width="100%" />
+                    <a href="profile">Profile</a><br />
+                    <a href="{{ route('companyLogout') }}">Logout</a>
+                @else
+                    <span>Logged as <br /><strong>{{ Auth::user()->name }}</strong></span>
+                    <hr width="100%" />
+                    <a href="{{ route('usersProfile') }}">Profile</a><br />
+                    <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
             </div>
 
             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                 @csrf
             </form>
+
+            @endif
+            </div>
         </div>
     </div>
 </body>

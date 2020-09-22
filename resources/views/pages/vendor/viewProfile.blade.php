@@ -4,7 +4,7 @@
     }
 </style>
 
-@extends('layouts.vendorDashboard')
+@extends('layouts.dashboard')
 
 @section('content')
 <div class="container">
