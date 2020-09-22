@@ -1,3 +1,9 @@
+<style>
+    .img{
+        max-width: 10%;
+    }
+</style>
+
 @extends('layouts.vendorDashboard')
 
 @section('content')
@@ -7,7 +13,7 @@
 
         <div class="card">
           <div class="card-body">
-            <img src="{{ asset($data->photo) }}" class="rounded-circle float-right" id="photo">
+            <img src="{{ url('storage/images/users/'. $data->photo) }}" class="img rounded-circle float-right h-10 w-10" id="photo">
             <h5 class="card-title">{{$data->name}}</h5>
 
             <ul class="list-group list-group-flush">
@@ -26,7 +32,7 @@
           <div class="card-body">
             <h5 class="card-title">Edit Profile</h5>
 
-            <form action="{{route('usersEditProfile')}}" method="post">
+            <form action="{{route('usersEditProfile')}}" method="post" enctype="multipart/form-data">
             @csrf
 
                 <div class="form-row">
@@ -36,23 +42,20 @@
                   </div>
                   <div class="form-group col-md-6">
                     <label for="selectProfileGender">Gender</label>
-                    {{-- <select type="gender" class="custom-select" id="selectProfileGender" required>
-                        <option selected>Gender</option>
-                        <option value="1" @php
-                            if ($data->gender == "Male" || $data->gender == "male") {
-                                echo "selected";
-                            }
-                        @endphp>Male</option>
-
-                        <option value="2" @php
-                        if ($data->gender == "Female" || $data->gender == "female") {
-                            echo "selected";
-                        }
-                        @endphp>Female</option> --}}
-                    <input type="gender" name="gender" class="form-control" id="selectProfilGender" value="{{$data->gender}}" required>
-
-
-
+                    <select name="gender" class="custom-select" id="selectProfileGender" required>
+                        @if ($data->gender == 'Female')
+                            <option disabled>Gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female" selected>Female</option>
+                        @elseif ($data->gender == 'Male')
+                            <option disabled>Gender</option>
+                            <option value="Male" selected>Male</option>
+                            <option value="Female">Female</option>
+                        @else
+                            <option selected disabled>Gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        @endif
                     </select>
                   </div>
                 </div>
