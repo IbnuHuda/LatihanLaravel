@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Dashboard') }}</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -52,7 +52,7 @@
                     <a href=""><li><i class="fa fa-home"></i> <span style="margin-left: 27px;">Dashboard</span></li></a>
                     <span id="Jobs"><li><i class="fa fa-filter"></i> <span style="margin-left: 30px;">Jobs</span> <i class="fa fa-chevron-right" id="jobsChevron"></i></li></span>
                     <ul id="jobsMenus">
-                        <a href=""><li>Publish Job</li></a>
+                    <a href="{{ route('companyPublishJobs')}}"><li>Publish Job</li></a>
                         <a href=""><li>Jobs Details</li></a>
                     </ul>
                 </ul>
