@@ -19,11 +19,11 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/dashboard.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/test.css') }}">
 </head>
-<body class="default-theme">
+<body class="dark-theme">
     <div id="app">
-        <div class="navbar box-shadow" id="navbar">
+        <!-- <div class="navbar box-shadow" id="navbar">
             <button id="sidebar-toggler" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -107,6 +107,79 @@
 
             @endif
             </div>
+        </div> -->
+
+        <div id="sidebar">
+            <header>
+                <a href="{{ route('index') }}" class="d-flex justify-content-center align-items-center mt-3">
+                    <img src="{{ asset('images/websites/Logo_VeCo.png') }}" class="img-responsive">
+                    <h2 class="mt-2 ml-2"><strong>VeCo</strong></h2>
+                </a>
+            </header>
+
+            <hr />
+
+            <content>
+                <ul>
+                    <a href=""><li>
+                        <i class="fa fa-home"></i> <span style="margin-left: 27px;" id="menusTitle">Dashboard</span></li>
+                    </a>
+
+                    <span id="Team">
+                        <li>
+                            <i class="fa fa-users"></i> <span style="margin-left: 25px;" id="menusTitle">Team</span> <i class="fa fa-chevron-right" id="teamChevron"></i>
+                        </li>
+                    </span>
+                    
+                    <ul id="teamMenus">
+                        <a href=""><li>Create Team</li></a>
+                        <a href=""><li>Profile Team</li></a>
+                    </ul>
+
+                    <span id="Vendor">
+                        <li>
+                            <i class="fa fa-list"></i> <span style="margin-left: 25px;" id="menusTitle">Activity</span> <i class="fa fa-chevron-right" id="vendorChevron"></i>
+                        </li>
+                    </span>
+                    
+                    <ul id="vendorMenus">
+                        <a href=""><li>List Job</li></a>
+                        <a href=""><li>Submission</li></a>
+                        <a href=""><li>Assesment</li></a>
+                        <a href=""><li>Approval</li></a>
+                    </ul>
+                </ul>
+            </content>
+
+            <footer>
+                <p id="reserved">&reg; 2020 Alright Reserved by VeCo Team</p>
+            </footer>
+        </div>
+
+        <nav class="navbar navbar-dark" id="navbar">
+            <div class="container-fluid">
+                <button class="navbar-toggler float-left" id="sidebar-toggler" type="button" data-toggle="collapse" data-target="" aria-controls="navbarsExample01" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="input-group w-25 float-left">
+                    <input type="text" class="form-control" id="searchUsers" placeholder="Search user ..." aria-label="Recipient's username" aria-describedby="basic-addon2">
+
+                    <div class="input-group-append">
+                        <span class="input-group-text" id="basic-addon2">@</span>
+                    </div>
+                </div>
+
+                <img src="{{ asset('/images/users/1/示例图片_01.jpg') }}" class="rounded-circle float-right" id="photo" data-toggle="tooltip" data-html="true"> 
+            </div>
+        </nav>
+
+        <main>
+            @yield('content')
+        </main>
+
+        <div id="theme-toggler">
+            <i class="fa fa-moon-o" id="themeIcon"></i>
         </div>
     </div>
 </body>

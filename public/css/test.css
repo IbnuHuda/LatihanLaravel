@@ -1,0 +1,177 @@
+body.default-theme {
+    --main-bg-color: #ffffff;
+    --secondary-bg-color: #f5f5f5;
+    --main-text-color: #000000;
+    --secondary-text-color: #757575;
+
+    --btn-color: #3490dc;
+    --shadow-color: #888888;
+    --bg-navbar: #4a69bd;
+    --bg-wave: #0099ff;
+
+    background-color: #eef9f3;
+    transition: 0.25s;
+}
+
+body.dark-theme {
+    --main-bg-color: #111013;
+    --secondary-bg-color: #212121;
+    --main-text-color: #ffffff;
+    --secondary-text-color: #fafafa;
+
+    --shadow-color: #343a40;
+    --bg-navbar: #0c2461;
+    --bg-wave: #0a3d62;
+    --btn-color: #d81e1e;
+
+    background-color: #0b0913;
+    transition: 0.25s;
+}
+
+/* Sidebar */
+
+div#sidebar {
+    float: left;
+    width: 20%;
+    height: 100vh;
+    background-color: var(--main-bg-color);
+    color: var(--main-text-color);
+    box-shadow: 2px 2px 10px var(--shadow-color);
+    transition: 0.5s;
+}   
+
+div#sidebar header a {
+    text-decoration: none;
+}
+
+div#sidebar header img {
+    width: 20%;
+}
+
+div#sidebar header strong {
+    color: var(--main-text-color)
+}
+
+div#sidebar hr {
+    width: 90%;
+    background-color: var(--main-text-color);
+    margin-top: 17.5px;
+    margin-bottom: 30px;
+}
+
+div#sidebar ul {
+    margin-left: -40px;
+}
+
+div#sidebar ul a,
+div#sidebar ul span {
+    text-decoration: none;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+div#sidebar ul span i.fa.fa-chevron-right {
+    font-size: 10px;
+    margin-top: 10px;
+    float: right;
+    transition: 0.25s;
+}
+
+div#sidebar ul li {
+    list-style: none;
+    padding: 15px;
+    color: var(--main-text-color);
+}
+
+div#sidebar ul li i {
+    font-size: 20px;
+}
+
+div#sidebar ul li i:hover li,
+div#sidebar ul a:hover li,
+div#sidebar ul span:hover li {
+    background-color: blue;
+}
+
+div#sidebar ul#teamMenus {
+    position: fixed;
+    visibility: hidden;
+    opacity: 0;
+}
+
+div#sidebar ul#jobsMenus {
+    position: fixed;
+    visibility: hidden;
+    opacity: 0;
+}
+
+div#sidebar ul#vendorMenus {
+    position: fixed;
+    visibility: hidden;
+    opacity: 0;
+}
+
+div#sidebar ul#teamMenus a,
+div#sidebar ul#jobsMenus a,
+div#sidebar ul#vendorMenus a {
+    text-decoration: none;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+div#sidebar ul#teamMenus li,
+div#sidebar ul#jobsMenus li,
+div#sidebar ul#vendorMenus li {
+    list-style: none;
+    padding: 10px;
+    color: var(--main-text-color);
+    margin-left: 70px;
+}
+
+div#sidebar p#reserved {
+    color: var(--main-text-color);
+    font-size: 12px;
+    font-weight: bold;
+    position: absolute;
+    bottom: 0;
+    left: 23px;
+    transition: 0.5s;
+}
+
+/* Navbar */
+
+nav.navbar {
+    float: left;
+    background-color: var(--bg-navbar);
+    width: 80%;
+    z-index: 1000;
+}
+
+nav.navbar img#photo {
+    float: right;
+    width: 37.5px;
+    height: 35px;
+    cursor: pointer;    
+}
+
+/* Icon Theme Toggler */
+
+div#theme-toggler {
+  width: 50px;
+  height: 50px;
+  padding: 10px;
+  background-color: #303f9f;
+  border-radius: 50px;
+  position: fixed;
+  bottom: 20px;
+  right: 25px;
+  color: #ffffff;
+  font-size: 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+div#theme-toggler i {
+    margin-top: 5px;
+}

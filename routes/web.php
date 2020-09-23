@@ -43,6 +43,10 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 	Route::post('/users/profile', 'UsersProfileController@editProfile')->name('usersEditProfile');
 	Route::get('/users/search/{id}', 'UsersProfileController@searchUsers')->name('usersSearch');
 
+	Route::get('/users/job/list', 'UsersJobRegisteredController@listJobsForm')->name('usersListJobs');
+	Route::get('/users/job/detail/{id}', 'UsersJobRegisteredController@detailJobsForm')->name('usersDetailJobs');
+	Route::get('/users/job/register/{id}', 'UsersJobRegisteredController@registerJobsForm')->name('usersRegisterJobs');
+	Route::post('/users/job/register', 'UsersJobRegisteredController@registerJobs');
 });
 
 Route::group(['middleware' => ['auth:company']], function () {
@@ -56,7 +60,6 @@ Route::group(['middleware' => ['auth:company']], function () {
 	Route::get('/company/jobs/detail/{id}', 'CompanyJobsController@detailJobs')->name('companyJobsDetail');
 	Route::get('/company/jobs/publish', 'CompanyJobsController@publishForm')->name('companyPublishJobs');
 	Route::post('/company/jobs/publish', 'CompanyJobsController@publishJobs');
-
 
 	Route::get('/company/logout', 'Auth\CompanyController@logout')->name('companyLogout');
 });

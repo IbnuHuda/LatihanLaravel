@@ -11,7 +11,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="{{ asset('js/dashboardApp.js') }}" defer></script>
+    <script src="{{ asset('js/dashboard.js') }}" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -19,7 +19,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/dashboardApp.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/dashboard.css') }}">
 </head>
 <body class="default-theme">
     <div id="app">
