@@ -56,7 +56,8 @@
                         </span>
                         <ul id="jobsMenus">
                             <a href="{{ route('companyPublishJobs') }}"><li>Publish Job</li></a>
-                            <a href=""><li>Jobs Details</li></a>
+                            <a href="{{ route('companyListJobs')}}"><li>List Job</li></a>
+
                         </ul>
 
                     @else

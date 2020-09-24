@@ -26,5 +26,18 @@ class CompanyJobsController extends Controller
         $jobs->other = $request->other;
         $jobs->save();
 
+        return redirect('/company/jobs/list');
+    }
+
+    public function listJobs()
+    {
+        $company_jobs = CompanyJobs::orderBy('id', 'desc')->paginate(6);
+        return view('pages.company.jobs.list', compact('company_jobs'));
+    }
+
+    public function detailJobs($id)
+    {
+        $detail_jobs = CompanyJobs::where('id', $id)->first();
+        return view('pages.company.jobs.detail', compact('detail_jobs'));
     }
 }
