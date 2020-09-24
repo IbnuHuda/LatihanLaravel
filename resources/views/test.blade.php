@@ -1,8 +1,5 @@
 <style type="text/css">
-	path {
-/*		transform: scale(2.0);
-		transform-origin: 100px;*/
-	}
+
 </style>
 
 @extends('layouts.dashboard')

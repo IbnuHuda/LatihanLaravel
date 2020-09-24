@@ -1,4 +1,4 @@
-@extends('layouts.companyDashboard')
+@extends('layouts.dashboard')
 
 @section('content')
 <div class="container" style="margin-top:25px">

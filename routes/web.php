@@ -36,11 +36,11 @@ Route::get('/verify/registration', 'Auth\CompanyController@verifyRegister')->nam
 Route::get('/verify/reset-password', 'Auth\CompanyController@resetPasswordForm')->name('companyResetPasswordForm');
 Route::post('/verify/reset-password', 'Auth\CompanyController@resetPassword');
 
-Route::group(['middleware' => ['auth', 'verified']], function () {
+Route::middleware(['auth', 'verified'])->group(function () {
 	Route::get('/users/dashboard', 'HomeController@index')->name('usersDashboard');
 
 	Route::get('/users/profile', 'UsersProfileController@profileForm')->name('usersProfile');
-	Route::post('/users/profile', 'UsersProfileController@editProfile')->name('usersEditProfile');
+	Route::post('/users/profile', 'UsersProfileController@editProfile');
 	Route::get('/users/search/{id}', 'UsersProfileController@searchUsers')->name('usersSearch');
 
 	Route::get('/users/job/list', 'UsersJobRegisteredController@listJobsForm')->name('usersListJobs');
@@ -49,12 +49,12 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 	Route::post('/users/job/register', 'UsersJobRegisteredController@registerJobs');
 });
 
-Route::group(['middleware' => ['auth:company']], function () {
+Route::middleware('auth:company')->group(function () {
 	Route::get('/company/dashboard', function () { return view('pages.company.dashboard'); })->name('companyDashboard');
 
-	// Route::get('/company/profile', 'CompanyProfileController@profileForm')->name('companyProfile');
-	// Route::get('/company/edit-profile', 'CompanyProfileController@editProfileForm')->name('companyEditProfile');
-	// Route::post('/company/edit-profile', 'CompanyProfileController@editProfile');
+	Route::get('/company/company-profile', 'CompanyProfileController@profileProfileForm')->name('companySelfProfile');
+	Route::get('/company/profile', 'CompanyProfileController@profileForm')->name('companyProfile');
+	Route::get('/company/profile', 'CompanyProfileController@editProfile');
 
 	Route::get('/company/jobs/list', 'CompanyJobsController@listJobs')->name('companyListJobs');
 	Route::get('/company/jobs/detail/{id}', 'CompanyJobsController@detailJobs')->name('companyJobsDetail');

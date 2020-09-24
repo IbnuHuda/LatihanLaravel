@@ -19,101 +19,15 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/test.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/dashboard.css') }}">
 </head>
 <body class="dark-theme">
     <div id="app">
-        <!-- <div class="navbar box-shadow" id="navbar">
-            <button id="sidebar-toggler" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="container d-flex justify-content-between">
-                <a href="{{ route('index') }}" class="navbar-brand d-flex align-items-center">
-                    <img src="{{ asset('images/websites/Logo_VeCo.png') }}" class="img-responsive">
-                    <strong class="ml-2 mt-2">VeCo</strong>
-                </a>
-
-                <div class="input-group">
-                    @csrf
-                    <input type="hidden" id="tokenUsers" value="{{ csrf_token() }}">
-                    <input class="form-control" type="text" id="searchUsers" placeholder="Search Users">
-                </div>  
-                <div id="listUsers" class="list-group list-group-flush">
-                    
-                </div>
-            </div>
-
-            <img src="{{ asset('/images/users/1/示例图片_01.jpg') }}" class="rounded-circle float-right" id="photo" data-toggle="tooltip" data-html="true" title="aaaaaaa"> 
-        </div>
-
-        <div class="content">
-            <div id="sidebar">
-                <ul id="listMenu">
-                    <a href="{{ Auth::guard('company')->check() ? route('companyDashboard') : route('usersDashboard') }}"><li><i class="fa fa-home"></i> <span style="margin-left: 27px;">Dashboard</span></li></a>
-
-                    @if (Auth::guard('company')->check())
-
-                        <span id="Jobs"><li><i class="fa fa-filter"></i> <span style="margin-left: 30px;">Jobs</span> <i class="fa fa-chevron-right" id="jobsChevron"></i></li></span>
-                        <ul id="jobsMenus">
-                            <a href=""><li>Publish Job</li></a>
-                            <a href=""><li>Jobs Details</li></a>
-                        </ul>
-
-                    @else
-
-                        <span id="Team"><li><i class="fa fa-users"></i> <span style="margin-left: 25px;">Team</span> <i class="fa fa-chevron-right" id="teamChevron"></i></li></span>
-                        <ul id="teamMenus">
-                            <a href=""><li>Create Team</li></a>
-                            <a href=""><li>Profile Team</li></a>
-                        </ul>
-                        <span id="Vendor"><li><i class="fa fa-list"></i> <span style="margin-left: 25px;">Activity</span> <i class="fa fa-chevron-right" id="vendorChevron"></i></li></span>
-                        <ul id="vendorMenus">
-                            <a href=""><li>List Job</li></a>
-                            <a href=""><li>Submission</li></a>
-                            <a href=""><li>Assesment</li></a>
-                            <a href=""><li>Approval</li></a>
-                        </ul>
-
-                    @endif
-                </ul>
-
-                <p id="reserved">&reg; 2020 Alright Reserved by VeCo Team</p>
-            </div>
-
-            <main class="container" id="main-content">
-                @yield('content')
-            </main>
-
-            <div id="theme-toggler">
-                <i class="fa fa-moon-o" id="themeIcon"></i>
-            </div>
-
-            <div id="profileBox" class="text-center">
-                @if (Auth::guard('company')->check())
-                    <span>Logged as <br /><strong>{{ Auth::guard('company')->user()->name }}</strong></span>
-                    <hr width="100%" />
-                    <a href="profile">Profile</a><br />
-                    <a href="{{ route('companyLogout') }}">Logout</a>
-                @else
-                    <span>Logged as <br /><strong>{{ Auth::user()->name }}</strong></span>
-                    <hr width="100%" />
-                    <a href="{{ route('usersProfile') }}">Profile</a><br />
-                    <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
-            </div>
-
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                @csrf
-            </form>
-
-            @endif
-            </div>
-        </div> -->
-
         <div id="sidebar">
             <header>
                 <a href="{{ route('index') }}" class="d-flex justify-content-center align-items-center mt-3">
-                    <img src="{{ asset('images/websites/Logo_VeCo.png') }}" class="img-responsive">
-                    <h2 class="mt-2 ml-2"><strong>VeCo</strong></h2>
+                    <img src="{{ asset('images/websites/Logo_VeCo.png') }}" id="VeCoLogo" class="img-responsive">
+                    <h2 class="mt-2 ml-2" id="VeCoHeader"><strong>VeCo</strong></h2>
                 </a>
             </header>
 
@@ -121,33 +35,57 @@
 
             <content>
                 <ul>
-                    <a href=""><li>
-                        <i class="fa fa-home"></i> <span style="margin-left: 27px;" id="menusTitle">Dashboard</span></li>
+                    <a href="{{ Auth::guard('company')->check() ? route('companyDashboard') : route('usersDashboard') }}">
+                        <li>
+                            <i class="fa fa-home" id="iconDashboard"></i> <span style="margin-left: 27px;" id="dashboardTitle">Dashboard</span>
+                        </li>
                     </a>
 
-                    <span id="Team">
-                        <li>
-                            <i class="fa fa-users"></i> <span style="margin-left: 25px;" id="menusTitle">Team</span> <i class="fa fa-chevron-right" id="teamChevron"></i>
-                        </li>
-                    </span>
-                    
-                    <ul id="teamMenus">
-                        <a href=""><li>Create Team</li></a>
-                        <a href=""><li>Profile Team</li></a>
-                    </ul>
+                    @if (Auth::guard('company')->check())
 
-                    <span id="Vendor">
-                        <li>
-                            <i class="fa fa-list"></i> <span style="margin-left: 25px;" id="menusTitle">Activity</span> <i class="fa fa-chevron-right" id="vendorChevron"></i>
-                        </li>
-                    </span>
-                    
-                    <ul id="vendorMenus">
-                        <a href=""><li>List Job</li></a>
-                        <a href=""><li>Submission</li></a>
-                        <a href=""><li>Assesment</li></a>
-                        <a href=""><li>Approval</li></a>
-                    </ul>
+                        <a href="">
+                            <li>
+                                <i class="fa fa-building" id="iconCompanyProfile"></i> <span style="margin-left: 27px;" id="companyProfileTitle">Company Profile</span>
+                            </li>
+                        </a>
+
+                        <span id="Jobs">
+                            <li>
+                                <i class="fa fa-filter" id="iconJobs"></i> <span style="margin-left: 30px;" id="jobsTitle">Jobs</span> <i class="fa fa-chevron-right" id="jobsChevron"></i>
+                            </li>
+                        </span>
+                        <ul id="jobsMenus">
+                            <a href="{{ route('companyPublishJobs') }}"><li>Publish Job</li></a>
+                            <a href=""><li>Jobs Details</li></a>
+                        </ul>
+
+                    @else
+
+                        <span id="Team">
+                            <li>
+                                <i class="fa fa-users" id="iconTeam"></i> <span style="margin-left: 25px;" id="teamTitle">Team</span> <i class="fa fa-chevron-right" id="teamChevron"></i>
+                            </li>
+                        </span>
+                        
+                        <ul id="teamMenus">
+                            <a href=""><li>Create Team</li></a>
+                            <a href=""><li>Profile Team</li></a>
+                        </ul>
+
+                        <span id="Activity">
+                            <li>
+                                <i class="fa fa-list" id="iconActivity"></i> <span style="margin-left: 25px;" id="activityTitle">Activity</span> <i class="fa fa-chevron-right" id="activityChevron"></i>
+                            </li>
+                        </span>
+                        
+                        <ul id="activityMenus">
+                            <a href="{{ route('usersListJobs') }}"><li>List Job</li></a>
+                            <a href=""><li>Submission</li></a>
+                            <a href=""><li>Assesment</li></a>
+                            <a href=""><li>Approval</li></a>
+                        </ul>
+
+                    @endif
                 </ul>
             </content>
 
@@ -158,9 +96,12 @@
 
         <nav class="navbar navbar-dark" id="navbar">
             <div class="container-fluid">
-                <button class="navbar-toggler float-left" id="sidebar-toggler" type="button" data-toggle="collapse" data-target="" aria-controls="navbarsExample01" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler float-left" id="{{ (Auth::guard('company')->check()) ? 'company-toggler' : 'users-toggler' }}" type="button" data-toggle="collapse" aria-controls="navbarsExample01" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+
+                @csrf
+                <input type="hidden" id="tokenUsers" value="{{ csrf_token() }}">
 
                 <div class="input-group w-25 float-left">
                     <input type="text" class="form-control" id="searchUsers" placeholder="Search user ..." aria-label="Recipient's username" aria-describedby="basic-addon2">
@@ -175,12 +116,38 @@
         </nav>
 
         <main>
-            @yield('content')
+            <div class="container-fluid" id="main-content">
+                <br />
+                <br />
+                <br />
+                @yield('content')
+                <br />
+            </div>
         </main>
 
         <div id="theme-toggler">
             <i class="fa fa-moon-o" id="themeIcon"></i>
         </div>
+
+        <div id="profileBox" class="text-center">
+            @if (Auth::guard('company')->check())
+                <span>Logged as <br /><strong>{{ Auth::guard('company')->user()->name }}</strong></span>
+                <hr width="100%" />
+                <a href="">Profile</a><br />
+                <a href="{{ route('companyLogout') }}">Logout</a>
+        </div>
+            @else
+                <span>Logged as <br /><strong>{{ Auth::user()->name }}</strong></span>
+                <hr width="100%" />
+                <a href="{{ route('usersProfile') }}">Profile</a><br />
+                <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+        </div>
+
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            @csrf
+        </form>
+
+        @endif
     </div>
 </body>
 </html>

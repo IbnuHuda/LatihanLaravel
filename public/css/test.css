@@ -44,7 +44,11 @@ div#sidebar header a {
     text-decoration: none;
 }
 
-div#sidebar header img {
+div#sidebar header h2#VeCoHeader {
+    display: block;
+}
+
+div#sidebar header img#VeCoLogo {
     width: 20%;
 }
 
@@ -75,6 +79,7 @@ div#sidebar ul span i.fa.fa-chevron-right {
     margin-top: 10px;
     float: right;
     transition: 0.25s;
+    display: inline-block;
 }
 
 div#sidebar ul li {
@@ -83,8 +88,49 @@ div#sidebar ul li {
     color: var(--main-text-color);
 }
 
-div#sidebar ul li i {
+div#sidebar ul li i#iconDashboard {
     font-size: 20px;
+    margin-left: 0;
+}
+
+div#sidebar ul li i#iconCompanyProfile {
+    font-size: 20px;
+    margin-left: 0;
+}
+
+div#sidebar ul li i#iconTeam {
+    font-size: 20px;
+    margin-left: 0;
+}
+
+div#sidebar ul li i#iconJobs {
+    font-size: 20px;
+    margin-left: 0;
+}
+
+div#sidebar ul li i#iconActivity {
+    font-size: 20px;
+    margin-left: 0;
+}
+
+div#sidebar span#dashboardTitle {
+    display: inline-block;
+}
+
+div#sidebar span#companyProfileTitle {
+    display: inline-block;
+}
+
+div#sidebar span#teamTitle {
+    display: inline-block;
+}
+
+div#sidebar span#jobsTitle {
+    display: inline-block;
+}
+
+div#sidebar span#activityTitle {
+    display: inline-block;
 }
 
 div#sidebar ul li i:hover li,
@@ -94,26 +140,20 @@ div#sidebar ul span:hover li {
 }
 
 div#sidebar ul#teamMenus {
-    position: fixed;
-    visibility: hidden;
-    opacity: 0;
+    display: none;
 }
 
 div#sidebar ul#jobsMenus {
-    position: fixed;
-    visibility: hidden;
-    opacity: 0;
+    display: none;
 }
 
-div#sidebar ul#vendorMenus {
-    position: fixed;
-    visibility: hidden;
-    opacity: 0;
+div#sidebar ul#activityMenus {
+    display: none;
 }
 
 div#sidebar ul#teamMenus a,
 div#sidebar ul#jobsMenus a,
-div#sidebar ul#vendorMenus a {
+div#sidebar ul#activityMenus a {
     text-decoration: none;
     font-size: 15px;
     cursor: pointer;
@@ -121,7 +161,7 @@ div#sidebar ul#vendorMenus a {
 
 div#sidebar ul#teamMenus li,
 div#sidebar ul#jobsMenus li,
-div#sidebar ul#vendorMenus li {
+div#sidebar ul#activityMenus li {
     list-style: none;
     padding: 10px;
     color: var(--main-text-color);
@@ -136,6 +176,7 @@ div#sidebar p#reserved {
     bottom: 0;
     left: 23px;
     transition: 0.5s;
+    display: block;
 }
 
 /* Navbar */
@@ -174,4 +215,44 @@ div#theme-toggler {
 
 div#theme-toggler i {
     margin-top: 5px;
+}
+
+/* Profile Tooltip Box */
+
+div#profileBox {
+    display: none;
+    text-align: center;
+    position: fixed;
+    top: 56px;
+    right: 20px;
+    width: 120px;
+    background-color: var(--main-bg-color);
+    color: var(--main-text-color);  
+    border-radius: 5px;
+    padding: 10px;
+    z-index: 1000;
+}
+
+div#profileBox::after {
+    content: "";
+    width: 0px;
+    height: 0px;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid var(--main-bg-color);
+    border-left: 10px solid transparent;
+    position: fixed;
+    top: 47.5px;
+    right: 38px;
+}
+
+div#profileBox hr {
+    border-color: var(--main-text-color);
+    margin-top: 10px;   
+}
+
+div#profileBox a {
+    color: var(--main-text-color);
+    text-decoration: none;
+    font-size: 15px;
+    margin-top: 0px;    
 }
