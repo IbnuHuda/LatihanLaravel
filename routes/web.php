@@ -1,5 +1,6 @@
 <?php
 
+use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -45,8 +46,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 	Route::get('/users/job/list', 'UsersJobRegisteredController@listJobsForm')->name('usersListJobs');
 	Route::get('/users/job/detail/{id}', 'UsersJobRegisteredController@detailJobsForm')->name('usersDetailJobs');
-	Route::get('/users/job/register/{id}', 'UsersJobRegisteredController@registerJobsForm')->name('usersRegisterJobs');
-	Route::post('/users/job/register', 'UsersJobRegisteredController@registerJobs');
+    Route::get('/users/job/register/{id}', 'UsersJobRegisteredController@registerJobsForm')->name('usersRegisterJobs');
+	Route::post('/users/job/register', 'UsersJobRegisteredController@registerJobs')->name('usersJobsRegister');
 });
 
 Route::middleware('auth:company')->group(function () {
