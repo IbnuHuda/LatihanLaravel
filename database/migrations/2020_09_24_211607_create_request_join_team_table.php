@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCompanyJobStepTable extends Migration
+class CreateRequestJoinTeamTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,10 @@ class CreateCompanyJobStepTable extends Migration
      */
     public function up()
     {
-        Schema::create('company_job_step', function (Blueprint $table) {
+        Schema::create('request_join_team', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('company_job_id')->unsigned();
-            $table->string('step_name');
-            $table->string('user_id_accepted');
-            $table->string('inweb_message_to_vendor')->nullable();
+            $table->bigInteger('user_id')->unsigned();
+            $table->bigInteger('team_id')->unsigned();
             $table->timestamps();
         });
     }
@@ -30,6 +28,6 @@ class CreateCompanyJobStepTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('company_job_step');
+        Schema::dropIfExists('request_join_team');
     }
 }

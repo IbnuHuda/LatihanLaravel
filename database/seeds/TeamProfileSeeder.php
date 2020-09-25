@@ -11,6 +11,6 @@ class TeamProfileSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\TeamProfile::class, 10)->create();
+        factory(App\TeamProfile::class, 1)->create();
     }
 }

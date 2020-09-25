@@ -14,4 +14,14 @@ class CompanyJobs extends Model
     {
 		return $this->belongsTo(CompanyProfile::class);
     }
+
+    public function usersJobRegistered()
+    {
+    	return $this->hasMany(UsersJobRegistered::class);
+    }
+
+    public function companyStepJob()
+    {
+    	return $this->hasMany(CompanyJobStep::class);
+    }
 }

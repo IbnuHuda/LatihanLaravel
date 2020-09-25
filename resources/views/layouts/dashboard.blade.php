@@ -54,10 +54,22 @@
                                 <i class="fa fa-filter" id="iconJobs"></i> <span style="margin-left: 30px;" id="jobsTitle">Jobs</span> <i class="fa fa-chevron-right" id="jobsChevron"></i>
                             </li>
                         </span>
+
                         <ul id="jobsMenus">
                             <a href="{{ route('companyPublishJobs') }}"><li>Publish Job</li></a>
                             <a href="{{ route('companyListJobs')}}"><li>List Job</li></a>
+                        </ul>
 
+                        <span id="Activity">
+                            <li>
+                                <i class="fa fa-list" id="iconActivity"></i> <span style="margin-left: 25px;" id="activityTitle">Activity</span> <i class="fa fa-chevron-right" id="activityChevron"></i>
+                            </li>
+                        </span>
+                        
+                        <ul id="activityMenus">
+                            <a href=""><li>Submission</li></a>
+                            <a href=""><li>Assesment</li></a>
+                            <a href=""><li>Approval</li></a>
                         </ul>
 
                     @else

@@ -20,10 +20,10 @@ class CreateProfileCompanyTable extends Migration
             $table->string('work_field');
             $table->string('date_of_built');
             $table->string('company_address');
-            $table->string('company_logo');
-            $table->string('contact_number');
+            $table->string('company_logo')->nullable();
+            $table->string('contact_number')->nullable();
             $table->string('contact_email');
-            $table->string('company_description');
+            $table->string('company_description')->nullable();
             $table->timestamps();
         });
     }

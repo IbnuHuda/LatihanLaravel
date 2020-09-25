@@ -50,6 +50,11 @@ class UserCompany extends Authenticatable
         $this->attributes['email'] = strtolower($value);
     }
 
+    public function usersProfile() 
+    {
+        return $this->hasMany(UsersProfile::class);
+    }
+
     public function profileCompany() 
     {
         return $this->hasMany(ProfileCompany::class);

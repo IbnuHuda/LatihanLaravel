@@ -11,6 +11,6 @@ class UsersJobRegisteredSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\UsersJobRegistered::class, 10)->create();
+        factory(App\UsersJobRegistered::class, 3)->create();
     }
 }

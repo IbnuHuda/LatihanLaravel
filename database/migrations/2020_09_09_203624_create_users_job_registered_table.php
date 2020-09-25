@@ -15,12 +15,12 @@ class CreateUsersJobRegisteredTable extends Migration
     {
         Schema::create('users_job_registered', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('user_id')->unsigned();
-            $table->bigInteger('team_id')->unsigned();
-            $table->bigInteger('company_job_id')->unsigned();
-            $table->string('users_description');
-            $table->string('portofolio_uploaded');
-            $table->string('other_question');
+            $table->bigInteger('user_id')->unsigned()->nullable();
+            $table->bigInteger('team_id')->unsigned()->nullable();
+            $table->bigInteger('company_job_id')->unsigned()->nullable();
+            $table->string('users_description')->nullable();
+            $table->string('portofolio_uploaded')->nullable();
+            $table->string('other_question')->nullable();
             $table->timestamps();
         });
     }

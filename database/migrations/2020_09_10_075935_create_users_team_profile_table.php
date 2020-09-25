@@ -18,9 +18,9 @@ class CreateUsersTeamProfileTable extends Migration
             $table->string('name');
             $table->string('owner');
             $table->string('access_code');
-            $table->string('address');
-            $table->string('photo');
-            $table->string('bio');
+            $table->string('address')->nullable();
+            $table->string('photo')->nullable();
+            $table->string('bio')->nullable();
             $table->timestamps();
         });
     }

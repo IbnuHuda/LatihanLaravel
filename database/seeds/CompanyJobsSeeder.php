@@ -11,6 +11,6 @@ class CompanyJobsSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\CompanyJobs::class, 10)->create();
+        factory(App\CompanyJobs::class, 1)->create();
     }
 }

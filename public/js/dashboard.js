@@ -122,7 +122,12 @@ $('#company-toggler').on('click', function() {
 	var iconJobs = document.getElementById('iconJobs');
 	var jobsTitle = document.getElementById('jobsTitle');
 	var jobsChevron = document.getElementById('jobsChevron');
-	var jobsMenus = document.getElementById('jobsMenus');	
+	var jobsMenus = document.getElementById('jobsMenus');
+
+	var iconActivity = document.getElementById('iconActivity');
+	var activityTitle = document.getElementById('activityTitle');
+	var activityChevron = document.getElementById('activityChevron');
+	var activityMenus = document.getElementById('activityMenus');	
 
 	var cap = document.getElementById('reserved');
 	var mainContent = document.getElementById('main-content');
@@ -148,9 +153,15 @@ $('#company-toggler').on('click', function() {
 		jobsTitle.style.display = 'none';
 		jobsChevron.style.display = 'none';
 
+		iconActivity.style.fontSize = '25px';
+		iconActivity.style.marginLeft = '7px';
+		activityTitle.style.display = 'none';
+		activityChevron.style.display = 'none';
+
 		mainContent.className = 'container';
 
 		if (jobsMenus.style.display == 'block') jobsMenus.style.display = 'none';
+		if (activityMenus.style.display == 'block') activityMenus.style.display = 'none';
 
 	} else {
 		sidebarMenu.style.width = '20%';
@@ -173,9 +184,15 @@ $('#company-toggler').on('click', function() {
 		jobsTitle.style.display = 'inline-block';
 		jobsChevron.style.display = 'inline-block';
 
+		iconActivity.style.fontSize = '20px';
+		iconActivity.style.marginLeft = '0px';
+		activityTitle.style.display = 'inline-block';
+		activityChevron.style.display = 'inline-block';
+
 		mainContent.className = 'container-fluid';
 
 		if (jobsChevron.style.transform == 'rotate(90deg)') jobsMenus.style.display = 'block';
+		if (activityChevron.style.transform == 'rotate(90deg)') activityMenus.style.display = 'block';
 	}
 });
 
@@ -252,6 +269,11 @@ $('#Jobs').on('click', function() {
 	var jobsTitle = document.getElementById('jobsTitle');
 	var jobsChevron = document.getElementById('jobsChevron');
 
+	var iconActivity = document.getElementById('iconActivity');
+	var activityTitle = document.getElementById('activityTitle');
+	var activityChevron = document.getElementById('activityChevron');
+	var activityMenus = document.getElementById('activityMenus');
+
 	var menu = document.getElementById('jobsMenus');
 	var chevronIcon = document.getElementById('jobsChevron');
 
@@ -279,6 +301,11 @@ $('#Jobs').on('click', function() {
 		jobsTitle.style.display = 'inline-block';
 		jobsChevron.style.display = 'inline-block';
 
+		iconActivity.style.fontSize = '20px';
+		iconActivity.style.marginLeft = '0px';
+		activityTitle.style.display = 'inline-block';
+		activityChevron.style.display = 'inline-block';
+
 		mainContent.className = 'container-fluid';
 	}
 
@@ -297,47 +324,95 @@ $('#Activity').on('click', function() {
 	var veCoHeader = document.getElementById('VeCoHeader');
 	var veCoLogo = document.getElementById('VeCoLogo');
 
-	var iconDashboard = document.getElementById('iconDashboard');
-	var dashboardTitle = document.getElementById('dashboardTitle');
-
-	var iconTeam = document.getElementById('iconTeam');
-	var teamTitle = document.getElementById('teamTitle');
-	var teamChevron = document.getElementById('teamChevron');
-
-	var iconActivity = document.getElementById('iconActivity');
-	var activityTitle = document.getElementById('activityTitle');
-	var activityChevron = document.getElementById('activityChevron');
-
 	var menu = document.getElementById('activityMenus');
 	var chevronIcon = document.getElementById('activityChevron');
 
 	var cap = document.getElementById('reserved');
 	var mainContent = document.getElementById('main-content');
 
-	if (sidebarMenu.style.width == '5%') {
-		sidebarMenu.style.width = '20%';
-		navbarDashboard.style.width = '80%';
-		cap.style.display = 'block';
+	if (document.getElementById('company-toggler')) {
+		var iconDashboard = document.getElementById('iconDashboard');
+		var dashboardTitle = document.getElementById('dashboardTitle');
 
-		veCoHeader.style.display = 'block';
-		veCoLogo.style.width = '20%';
+		var iconCompanyProfile = document.getElementById('iconCompanyProfile');
+		var companyProfileTitle = document.getElementById('companyProfileTitle');
 
-		iconDashboard.style.fontSize = '20px';
-		iconDashboard.style.marginLeft = '0px';
-		dashboardTitle.style.display = 'inline-block';
+		var iconJobs = document.getElementById('iconJobs');
+		var jobsTitle = document.getElementById('jobsTitle');
+		var jobsChevron = document.getElementById('jobsChevron');
+		var jobsMenus = document.getElementById('jobsMenus');
 
-		iconTeam.style.fontSize = '20px';
-		iconTeam.style.marginLeft = '0px';
-		teamTitle.style.display = 'inline-block';
-		teamChevron.style.display = 'inline-block';
+		var iconActivity = document.getElementById('iconActivity');
+		var activityTitle = document.getElementById('activityTitle');
+		var activityChevron = document.getElementById('activityChevron');
 
-		iconActivity.style.fontSize = '20px';
-		iconActivity.style.marginLeft = '0px';
-		activityTitle.style.display = 'inline-block';
-		activityChevron.style.display = 'inline-block';
+		if (sidebarMenu.style.width == '5%') {
+			sidebarMenu.style.width = '20%';
+			navbarDashboard.style.width = '80%';
+			cap.style.display = 'block';
 
-		mainContent.className = 'container-fluid';
+			veCoHeader.style.display = 'block';
+			veCoLogo.style.width = '20%';
+
+			iconDashboard.style.fontSize = '20px';
+			iconDashboard.style.marginLeft = '0px';
+			dashboardTitle.style.display = 'inline-block';
+
+			iconCompanyProfile.style.fontSize = '20px';
+			iconCompanyProfile.style.marginLeft = '0px';
+			companyProfileTitle.style.display = 'inline-block';
+
+			iconJobs.style.fontSize = '20px';
+			iconJobs.style.marginLeft = '0px';
+			jobsTitle.style.display = 'inline-block';
+			jobsChevron.style.display = 'inline-block';
+
+			iconActivity.style.fontSize = '20px';
+			iconActivity.style.marginLeft = '0px';
+			activityTitle.style.display = 'inline-block';
+			activityChevron.style.display = 'inline-block';
+
+			mainContent.className = 'container-fluid';
+		}
+
 	}
+	else {
+		var iconDashboard = document.getElementById('iconDashboard');
+		var dashboardTitle = document.getElementById('dashboardTitle');
+
+		var iconTeam = document.getElementById('iconTeam');
+		var teamTitle = document.getElementById('teamTitle');
+		var teamChevron = document.getElementById('teamChevron');
+
+		var iconActivity = document.getElementById('iconActivity');
+		var activityTitle = document.getElementById('activityTitle');
+		var activityChevron = document.getElementById('activityChevron');
+
+		if (sidebarMenu.style.width == '5%') {
+			sidebarMenu.style.width = '20%';
+			navbarDashboard.style.width = '80%';
+			cap.style.display = 'block';
+
+			veCoHeader.style.display = 'block';
+			veCoLogo.style.width = '20%';
+
+			iconDashboard.style.fontSize = '20px';
+			iconDashboard.style.marginLeft = '0px';
+			dashboardTitle.style.display = 'inline-block';
+
+			iconTeam.style.fontSize = '20px';
+			iconTeam.style.marginLeft = '0px';
+			teamTitle.style.display = 'inline-block';
+			teamChevron.style.display = 'inline-block';
+
+			iconActivity.style.fontSize = '20px';
+			iconActivity.style.marginLeft = '0px';
+			activityTitle.style.display = 'inline-block';
+			activityChevron.style.display = 'inline-block';
+
+			mainContent.className = 'container-fluid';
+		}
+	}	
 
 	if (menu.style.display == 'none') {
 		menu.style.display = 'block';

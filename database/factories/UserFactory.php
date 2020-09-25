@@ -20,7 +20,6 @@ use Illuminate\Support\Str;
 
 $factory->define(User::class, function (Faker $faker) {
     return [
-    	'team_id' => TeamProfile::pluck('id')->random(1)[0],
         'name' => $faker->name,
         'email' => $faker->unique()->safeEmail,
         'email_verified_at' => now(),

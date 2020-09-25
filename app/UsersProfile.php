@@ -14,9 +14,4 @@ class UsersProfile extends Model
     {
 		return $this->belongsTo(User::class);
     }
-
-    public function userCompany()
-    {
-		return $this->belongsTo(UserCompany::class);
-    }
 }

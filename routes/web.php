@@ -44,6 +44,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
 	Route::post('/users/profile', 'UsersProfileController@editProfile');
 	Route::get('/users/search/{id}', 'UsersProfileController@searchUsers')->name('usersSearch');
 
+	Route::get('/users/team/create', 'TeamProfileController@craeteTeamForm')->name('usersCreateTeam');
+	Route::post('/users/team/create', 'TeamProfileController@craeteTeam');
+	Route::get('/users/team/profile', 'TeamProfileController@profileTeamForm')->name('usersProfileTeam');
+
 	Route::get('/users/job/list', 'UsersJobRegisteredController@listJobsForm')->name('usersListJobs');
 	Route::get('/users/job/detail/{id}', 'UsersJobRegisteredController@detailJobsForm')->name('usersDetailJobs');
     Route::get('/users/job/register/{id}', 'UsersJobRegisteredController@registerJobsForm')->name('usersRegisterJobs');
@@ -61,6 +65,14 @@ Route::middleware('auth:company')->group(function () {
 	Route::get('/company/jobs/detail/{id}', 'CompanyJobsController@detailJobs')->name('companyJobsDetail');
 	Route::get('/company/jobs/publish', 'CompanyJobsController@publishForm')->name('companyPublishJobs');
 	Route::post('/company/jobs/publish', 'CompanyJobsController@publishJobs');
+
+	Route::get('/company/step/submission', 'CompanyJobStepController@submissionForm')->name('companyStepSubmission');
+	Route::get('/company/step/submission/{id}', 'CompanyJobStepController@submissionDetailForm')->name('companyStepDetailSubmission');
+	Route::post('/company/step/submission', 'CompanyJobStepController@submissionProcess');
+	Route::get('/company/step/assesment', 'CompanyJobStepController@assesmentForm')->name('companyStepAssesment');
+	Route::get('/company/step/assesment/{id}', 'CompanyJobStepController@assesmentDetailForm')->name('companyStepDetailAssesment');
+	Route::post('/company/step/assesment', 'CompanyJobStepController@assesmentProcess');
+	Route::get('/company/step/approval', 'CompanyJobStepController@approvalForm')->name('companyStepApproval');
 
 	Route::get('/company/logout', 'Auth\CompanyController@logout')->name('companyLogout');
 });
