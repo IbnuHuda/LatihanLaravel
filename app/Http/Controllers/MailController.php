@@ -24,5 +24,16 @@ class MailController extends Controller
 		$data = ['token' => $token];
 
 		Mail::to($email)->send(new CompanyResetPassword($data));
-	}
+    }
+
+    public static function sendRequestJoinTeam($team_id, $owner_email, $id_request, $name_request)
+    {
+        $data = [
+            'team_id' => $team_id,
+            'id' => $id_request,
+            'name' => $name_request
+        ];
+
+        Mail::to($owner_email)->send(new UsersRequestJoinTeam($data));
+    }
 }

@@ -10,13 +10,8 @@ class TeamProfile extends Model
 
     protected $fillable = ['name', 'owner', 'access_code', 'address', 'photo', 'bio'];
 
-    public function users()
+    public function user()
     {
     	return $this->hasMany(User::class);
-    }
-
-    public function requestJoinTeam()
-    {
-    	return $this->hasMany(RequestJoinTeam::class);
     }
 }

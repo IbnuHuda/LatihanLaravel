@@ -44,9 +44,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
 	Route::post('/users/profile', 'UsersProfileController@editProfile');
 	Route::get('/users/search/{id}', 'UsersProfileController@searchUsers')->name('usersSearch');
 
-	Route::get('/users/team/create', 'TeamProfileController@craeteTeamForm')->name('usersCreateTeam');
-	Route::post('/users/team/create', 'TeamProfileController@craeteTeam');
-	Route::get('/users/team/profile', 'TeamProfileController@profileTeamForm')->name('usersProfileTeam');
+	Route::get('/users/team/create', 'TeamProfileController@createTeamForm')->name('usersCreateTeam');
+	Route::post('/users/team/create', 'TeamProfileController@createTeam');
+    Route::get('/users/team/profile', 'TeamProfileController@profileTeamForm')->name('usersProfileTeam');
+    Route::post('/users/team/join', 'TeamProfileController@joinTeam')->name('usersJoinTeam');
+    Route::post('/users/team/joined', 'TeamProfileController@joinedTeam');
 
 	Route::get('/users/job/list', 'UsersJobRegisteredController@listJobsForm')->name('usersListJobs');
 	Route::get('/users/job/detail/{id}', 'UsersJobRegisteredController@detailJobsForm')->name('usersDetailJobs');
