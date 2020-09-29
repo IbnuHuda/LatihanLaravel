@@ -55,8 +55,13 @@ class UserCompany extends Authenticatable
         return $this->hasMany(UsersProfile::class);
     }
 
-    public function profileCompany() 
+    public function companyJob() 
     {
-        return $this->hasMany(ProfileCompany::class);
+        return $this->hasMany(CompanyJobs::class);
+    }
+
+    public function companyProfile() 
+    {
+        return $this->hasMany(CompanyProfile::class);
     }
 }

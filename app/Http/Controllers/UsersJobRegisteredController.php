@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 class UsersJobRegisteredController extends Controller
 {
     public function registerJobsForm($id) {
-        $job = CompanyJobs::where('id','=',$id)->first();
+        $job = CompanyJobs::where('id','=', $id)->first();
 
         return view('pages.vendor.registerJob', compact('job'));
     }

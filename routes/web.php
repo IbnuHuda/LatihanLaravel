@@ -57,12 +57,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
 });
 
 Route::middleware('auth:company')->group(function () {
-	Route::get('/company/dashboard', function () { return view('pages.company.dashboard'); })->name('companyDashboard');
+	Route::get('/company/dashboard', 'CompanyDashboardController@home')->name('companyDashboard');
 
-	Route::get('/company/company-profile', 'CompanyProfileController@profileProfileForm')->name('companySelfProfile');
+	Route::get('/company/company-profile', 'CompanyProfileController@companyProfileForm')->name('companySelfProfile');
+	Route::post('/company/company-profile', 'CompanyProfileController@companyProfile');
 	Route::get('/company/profile', 'CompanyProfileController@profileForm')->name('companyProfile');
-	Route::get('/company/profile', 'CompanyProfileController@editProfile');
+	Route::post('/company/profile', 'CompanyProfileController@editProfile');
 
+	Route::get('/company/jobs/my-jobs', 'CompanyJobsController@myJobs')->name('myCompanyJobs');
 	Route::get('/company/jobs/list', 'CompanyJobsController@listJobs')->name('companyListJobs');
 	Route::get('/company/jobs/detail/{id}', 'CompanyJobsController@detailJobs')->name('companyJobsDetail');
 	Route::get('/company/jobs/publish', 'CompanyJobsController@publishForm')->name('companyPublishJobs');

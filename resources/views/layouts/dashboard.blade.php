@@ -43,7 +43,7 @@
 
                     @if (Auth::guard('company')->check())
 
-                        <a href="">
+                        <a href="{{ route('companySelfProfile') }}">
                             <li>
                                 <i class="fa fa-building" id="iconCompanyProfile"></i> <span style="margin-left: 27px;" id="companyProfileTitle">Company Profile</span>
                             </li>
@@ -56,6 +56,7 @@
                         </span>
 
                         <ul id="jobsMenus">
+                            <a href="{{ route('myCompanyJobs')}}"><li>My Job</li></a>
                             <a href="{{ route('companyPublishJobs') }}"><li>Publish Job</li></a>
                             <a href="{{ route('companyListJobs')}}"><li>List Job</li></a>
                         </ul>

@@ -14,7 +14,7 @@ class RelationCompanyJobsTable extends Migration
     public function up()
     {
         Schema::table('company_jobs', function ($table) {
-            $table->foreign('company_id')->references('id')->on('company_profile');
+            $table->foreign('user_company_id')->references('id')->on('users_company');
         });
     }
 

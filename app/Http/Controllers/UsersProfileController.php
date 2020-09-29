@@ -29,7 +29,7 @@ class UsersProfileController extends Controller
         if ($request->hasFile('photo')) {
             if ($request->file('photo')->isValid()) {
                 $validate = $request->validate([
-                    'photo' => 'mimes:png,jpg'
+                    'photo' => 'mimes:png,jpg,jpeg'
                     ]);
 
                 $extension = $request->photo->extension();
