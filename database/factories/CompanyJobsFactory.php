@@ -2,13 +2,13 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\CompanyProfile;
+use App\UserCompany;
 use App\CompanyJobs;
 use Faker\Generator as Faker;
 
 $factory->define(CompanyJobs::class, function (Faker $faker) {
     return [
-        'company_id' => CompanyProfile::pluck('id')->random(1)[0],
+        'company_id' => UserCompany::pluck('id')->random(1)[0],
         'available_positions' => 'Designer',
         'jobs_description' => 'KWokawokawokawokowa 1 butuh awkoawkowakoawkoawk 2',
         'jobs_requirements' => 'Good looking, Elek, Ra jelas',

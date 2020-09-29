@@ -66,9 +66,9 @@
                                 <i class="fa fa-list" id="iconActivity"></i> <span style="margin-left: 25px;" id="activityTitle">Activity</span> <i class="fa fa-chevron-right" id="activityChevron"></i>
                             </li>
                         </span>
-                        
+
                         <ul id="activityMenus">
-                            <a href=""><li>Submission</li></a>
+                            <a href="{{route('companyStepSubmission')}}"><li>Submission</li></a>
                             <a href=""><li>Assesment</li></a>
                             <a href=""><li>Approval</li></a>
                         </ul>
@@ -80,7 +80,7 @@
                                 <i class="fa fa-users" id="iconTeam"></i> <span style="margin-left: 25px;" id="teamTitle">Team</span> <i class="fa fa-chevron-right" id="teamChevron"></i>
                             </li>
                         </span>
-                        
+
                         <ul id="teamMenus">
                             <a href=""><li>Create Team</li></a>
                             <a href=""><li>Profile Team</li></a>
@@ -91,7 +91,7 @@
                                 <i class="fa fa-list" id="iconActivity"></i> <span style="margin-left: 25px;" id="activityTitle">Activity</span> <i class="fa fa-chevron-right" id="activityChevron"></i>
                             </li>
                         </span>
-                        
+
                         <ul id="activityMenus">
                             <a href="{{ route('usersListJobs') }}"><li>List Job</li></a>
                             <a href=""><li>Submission</li></a>
@@ -125,7 +125,7 @@
                     </div>
                 </div>
 
-                <img src="{{ asset('/images/users/1/示例图片_01.jpg') }}" class="rounded-circle float-right" id="photo" data-toggle="tooltip" data-html="true"> 
+                <img src="{{ asset('/images/users/1/示例图片_01.jpg') }}" class="rounded-circle float-right" id="photo" data-toggle="tooltip" data-html="true">
             </div>
         </nav>
 

@@ -20,6 +20,7 @@ class CreateUsersJobRegisteredTable extends Migration
             $table->bigInteger('company_job_id')->unsigned()->nullable();
             $table->string('users_description')->nullable();
             $table->string('portofolio_uploaded')->nullable();
+            $table->string('score')->nullable();
             $table->string('other_question')->nullable();
             $table->timestamps();
         });

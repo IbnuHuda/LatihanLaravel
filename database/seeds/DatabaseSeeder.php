@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
             // TeamProfileSeeder::class,
             UsersSeeder::class,
         	UserCompanySeeder::class,
-            // UsersProfileSeeder::class,
+            UsersProfileSeeder::class,
             CompanyProfileSeeder::class,
             CompanyJobsSeeder::class,
             UsersJobRegisteredSeeder::class,

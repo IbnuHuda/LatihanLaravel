@@ -1,9 +1,12 @@
 @extends('layouts.dashboard')
 
+
+{{-- <div class="container">
+    <div class="row"> --}}
 @section('content')
-    <div class="container">
-        <div class="row">
-            <div class="card">
+        <div>
+            <div class="card-deck">
+            <div class="card mt-4" style="width: 60%">
                 <div class="card-header bg-primary text-light">
                 <h3>Detail Jobs {{$detail_jobs->id}}</h3>
                 </div>
@@ -13,7 +16,7 @@
                             <img src="{{ asset('/images/users/1/示例图片_01.jpg') }}" class="rounded img-fluid" alt="Cinque Terre" width="80%">
                         </div>
                         <div class="col-md-9">
-                            <table border="0" class="table"  style="font-size: 16px; color:black">
+                            <table border="0" class="table"  style="font-size: 15px; color:black">
                                 <tbody>
                                 <tr style="">
                                     <td>Company Name</td>
@@ -66,7 +69,7 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <div class="float-right">
+                    <div class="float-left">
                     <a href="{{route('companyListJobs')}}" class="btn btn-md btn-danger"><i class="fa fa-arrow-left"></i> Back</a>
                         <a href="" class="btn btn-md btn-primary"><i class="fa fa-pencil"></i> Edit</a>
                     </div>
@@ -75,3 +78,5 @@
         </div>
     </div>
 @endsection
+{{-- </div>
+</div> --}}
