@@ -12,7 +12,7 @@ class UsersJobRegistered extends Model
 
     public function companyJob()
     {
-        return $this->belongsTo('App\CompanyJobs');
+        return $this->belongsTo(CompanyJobs::class);
     }
 
     public function user()
