@@ -22,22 +22,34 @@ class CompanyJobsController extends Controller
         else return redirect()->route('companySelfProfile')->with(session()->flash('alert-warning', 'Please fill profile first before access page!'));
     }
 
-    public function publishForm()
+    public function publishForm(Request $request)
     {
         $data = CompanyProfile::where('user_company_id', '=', Auth::guard('company')->user()->id)->first();
 
-        if ($data != null) return view('pages.company.jobs.create', compact('data'));
+        if ($data != null) {
+            if ($request->id) {
+                $company_jobs = CompanyJobs::where('id', '=', $request->id)->first();
+
+                return view('pages.company.jobs.create', compact('data', 'company_jobs'));
+            }
+
+            else return view('pages.company.jobs.create', compact('data'));
+        }
+
         else return redirect()->route('companySelfProfile')->with(session()->flash('alert-warning', 'Please fill profile first before access page!'));
     }
     
-    public function publishJobs(Request $request, $id = null)
+    public function publishJobs(Request $request)
     {
         if ($request->minimum_portofolio < 0 || $request->vendor_accepted_total <= 0)
             return redirect()->route('companyPublishJobs')->with(session()->flash('alert-danger', 'Minimum portofolio at least 0 or vendor total accepted must higher then 0'));
 
         else {
             CompanyJobs::updateOrCreate(
-                ['user_company_id' => Auth::guard('company')->user()->id],
+                [
+                    'id' => ($request->job != null) ? $request->job : null,
+                    'user_company_id' => Auth::guard('company')->user()->id
+                ],
                 [
                     'available_positions' => $request->available_positions,
                     'jobs_description' => $request->jobs_description,
@@ -55,29 +67,29 @@ class CompanyJobsController extends Controller
 
     public function listJobs()
     {
-        // $company_jobs = CompanyJobs::orderBy('id', 'desc')->paginate(6);
-
-        // $companies_data = [];
-
-        // foreach ($company_jobs as $job) $companies_data[] =  CompanyProfile::where('user_company_id', '=', $job->user_company_id)->first();
-
-        $data = UserCompany::all();
-
-        // $data = array_merge($company_jobs, $companies_data)
+        $companies_jobs = CompanyJobs::orderBy('created_at', 'desc')->paginate(6);
         
-        return response()->json($data->companyProfile);
+        $companies_profile = [];
 
-        // return view('pages.company.jobs.list', compact('company_jobs', 'companies_data'));
+        foreach ($companies_jobs as $job) {
+            $getData = CompanyProfile::where('user_company_id', '=', $job->user_company_id)->first();
+
+            if (!in_array($getData, $companies_profile)) $companies_profile[] = $getData;
+        }
+
+        return view('pages.company.jobs.list', compact('companies_jobs', 'companies_profile'));
     }
 
     public function detailJobs($id)
     {
         $data = CompanyProfile::where('user_company_id', '=', Auth::guard('company')->user()->id)->first();
 
-        if ($data != null) return view('pages.company.jobs.detail', compact('data'));
-        else return redirect()->route('companySelfProfile')->with(session()->flash('alert-warning', 'Please fill profile first before access page!'));
+        if ($data != null) {
+            $detail_jobs = CompanyJobs::where('id', '=', $id)->first();
 
-        // $detail_jobs = CompanyJobs::where('id', $id)->first();
-        // return view('pages.company.jobs.detail', compact('detail_jobs'));
+            return view('pages.company.jobs.detail', compact('data', 'detail_jobs'));
+        }
+
+        else return redirect()->route('companySelfProfile')->with(session()->flash('alert-warning', 'Please fill profile first before access page!'));
     }
 }
