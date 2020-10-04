@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\UsersJobRegistered;
+use App\CompanyJobStep;
 use App\CompanyJobs;
 use Illuminate\Support\Facades\Auth;
 
@@ -39,6 +40,28 @@ class CompanyJobStepController extends Controller
         );
 
         return redirect()->route('companyStepSubmission')->with(session()->flash('alert-success', 'Job publish successful!'));
+    }
+
+    function assesmentForm(){
+
+        $result = UsersJobRegistered::orderBy('score','desc')->paginate(8);
+        return view('pages.company.activity.assesment', compact('result'));
+    }
+
+    function assesmentProcess(Request $request){
+        $total = count($request->accept) ;
+        for ($i=0; $i < $total; $i++) {
+            $new = new CompanyJobStep;
+            $new->company_job_id = $request->company_job_id[$i];
+            $new->step_name = $request->step_name[$i];
+            $new->user_id_accepted	 = $request->user_id_accept[$i];
+            $new->inweb_message_to_vendor = $request->inweb_message_to_vendor[$i];
+        $new->save();          # code...
+
+        }
+
+
+        return redirect()->route('companyStepAssesment')->with(session()->flash('alert-success', 'Assesment successful!'));
     }
 
 }

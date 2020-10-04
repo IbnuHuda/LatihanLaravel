@@ -29,7 +29,7 @@ class CompanyJobsController extends Controller
         if ($data != null) return view('pages.company.jobs.create', compact('data'));
         else return redirect()->route('companySelfProfile')->with(session()->flash('alert-warning', 'Please fill profile first before access page!'));
     }
-    
+
     public function publishJobs(Request $request, $id = null)
     {
         if ($request->minimum_portofolio < 0 || $request->vendor_accepted_total <= 0)
@@ -64,7 +64,7 @@ class CompanyJobsController extends Controller
         $data = UserCompany::all();
 
         // $data = array_merge($company_jobs, $companies_data)
-        
+
         return response()->json($data->companyProfile);
 
         // return view('pages.company.jobs.list', compact('company_jobs', 'companies_data'));

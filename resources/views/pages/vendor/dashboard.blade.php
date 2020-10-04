@@ -21,7 +21,7 @@
                         </div>
                         <div class="col-6">
                             <div class="text-right">
-                                <p id="font">{{$data_stat->portofolio_sent_amount}}</p>
+                                {{-- <p id="font">{{$data_stat->portofolio_sent_amount}}</p> --}}
                             </div>
                         </div>
                     </div>
@@ -41,7 +41,7 @@
                         </div>
                         <div class="col-6">
                             <div class="text-right">
-                                <p id="font">{{$data_stat->job_registered_amount}}</p>
+                                {{-- <p id="font">{{$data_stat->job_registered_amount}}</p> --}}
                             </div>
                         </div>
                     </div>
