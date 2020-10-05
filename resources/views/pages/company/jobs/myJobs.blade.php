@@ -31,25 +31,29 @@
 
                 <br />
 
+                <div class="mt-2"></div>
+
                 @if ($jobs->isEmpty())
                     <p class="alert alert-danger w-100"><i class="fa fa-times-circle"></i> You not publish a job. <a href="{{ route('companyPublishJobs') }}">Publish now.</a></p>
                 @else
-                    @foreach($jobs as $job)
-                        <div class="col-md-4">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h5 class="card-title">{{ $job->available_positions }}</h5>
-                                    <h6 class="card-subtitle text-muted mb-2">Created at {{ explode(' ', $job->created_at)[0] }}</h6>
-                                    <hr class="float-left" />
+                    <div class="row">
+                        @foreach($jobs as $job)
+                            <div class="col-md-4">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ $job->available_positions }}</h5>
+                                        <h6 class="card-subtitle text-muted mb-2">Created at {{ explode(' ', $job->created_at)[0] }}</h6>
+                                        <hr class="float-left" />
 
-                                    <br />
+                                        <br />
 
-                                    <p class="card-text">{{ (str_word_count($job->jobs_description) > 2) ? substr($job->jobs_description, 0, 75)."..." : $job->jobs_description}}</p>
-                                    <a href="{{ route('companyJobsDetail', $job->id) }}" class="card-link float-right">Read more</a>
+                                        <p class="card-text">{{ (str_word_count($job->jobs_description) > 2) ? substr($job->jobs_description, 0, 75)."..." : $job->jobs_description}}</p>
+                                        <a href="{{ route('companyJobsDetail', $job->id) }}" class="card-link float-right">Read more</a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    @endforeach
+                        @endforeach
+                    </div>
                 @endif
             </div>
         </div>

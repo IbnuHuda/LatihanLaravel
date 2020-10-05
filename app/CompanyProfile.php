@@ -10,9 +10,9 @@ class CompanyProfile extends Model
 
     protected $fillable = ['user_company_id', 'name', 'work_field', 'date_of_built', 'company_address', 'company_logo', 'contact_number', 'contact_email', 'company_description'];
 
-    public function usersCompany()
+    public function userCompany()
     {
-        return $this->belongsTo(UsersProfile::class);
+        return $this->belongsTo(UserCompany::class);
     }
 
     public function companyJobs()

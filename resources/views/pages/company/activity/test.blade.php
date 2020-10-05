@@ -1,51 +1,54 @@
+<style type="text/css">
+    div.card div.card-body hr {
+        width: 5%;
+        border: 1px solid #000;
+        margin-top: 0px;
+    }
+</style>
 @extends('layouts.dashboard')
 
 @section('content')
-      <div class="card-deck">
-      <div class="card mt-5 ml-5" style="border: 0px; background-color:rgba(255, 0, 0, 0);">
-      <form action="{{route('companyStepSubmission')}}">
-              <div class="float-right mb-3">
-                  <button class="btn btn-md btn-success"><i class="fa fa-plus"></i> Submit</button>
-              </div>
-        <table class="table table-hover table-light ">
-            <thead>
-              <tr class="bg-primary text-light ">
-                <th scope="col">#</th>
-                <th scope="col" >Name</th>
-                <th scope="col">Email</th>
-                <th scope="col">Portofolio</th>
-                <th scope="col">Status</th>
-                <th scope="col" colspan="2">Action</th>
-              </tr>
-            </thead>
-            <tbody>
+<div class="row">
+	<div class="col-md-12">
+		<div class="card">
+			<div class="card-body">
+				<h4 class="card-title">Submission Jobs</h4>
+                <hr class="float-left" />
 
+                <br />
+                <div class="mt-3"></div>
 
-                <tr>
-                    @forelse ($list_user_jobs as $list)
-                    @php
-                        $portofolio = explode("|",$list->portofolio_uploaded);
-                        $total_portofolio = count($portofolio);
-
-                            // $name = $_POST['name'];
-                            // $email = $_POST['email'];
-                            // $mobile = $_POST['mobile'];
-                            // }
-                    @endphp
-                    @if ($list->companyJob->user_company_id == Auth::guard('company')->user()->id)
-
-
-                <th scope="row">{{$loop->iteration}}</th>
-                    <td>{{$list->user->name}}</td>
-                    <td>{{$list->user->email}}</td>
-                    <td>{{$total_portofolio}}</td>
-                    {{-- <td>{{$total_portofolio}}</td> --}}
-                    <td><button class="btn btn-sm btn-danger rounded-pill">Not Validated</button></td>
-                    <td>
-                        <button type="button" class="btn btn-md text-light" data-toggle="modal" data-target="#exampleModalCenter" style="background-color: #FFC10A">
-                            <i class="fa fa-eye"> View</i>
-                          </button>
-                    </td>
+                <table class="table table-light table-striped">
+            		<thead>
+              			<tr class="bg-primary text-light ">
+			                <th scope="col">#</th>
+			                <th scope="col" >Name</th>
+			                <th scope="col">Email</th>
+			                <th scope="col">Portofolio</th>
+			                <th scope="col">Status</th>
+			                <th scope="col" colspan="2">Action</th>
+			            </tr>
+            		</thead>
+            
+            		<tbody>
+            			<tr>
+                    		@forelse ($list_user_jobs as $list)
+                    		@php
+                        		$portofolio = explode("|",$list->portofolio_uploaded);
+                        		$total_portofolio = count($portofolio);
+                    		@endphp
+                    
+                    		@if ($list->companyJob->user_company_id == Auth::guard('company')->user()->id)
+			                <td align="center">{{ $loop->iteration }}</td>
+		                    <td>{{ $list->user->name }}</td>
+		                    <td>{{ $list->user->email }}</td>
+		                    <td>{{ $total_portofolio }}</td>
+		                    <td><button class="btn btn-sm btn-danger rounded-pill">Not Validated</button></td>
+		                    <td>
+		                        <button type="button" class="btn btn-md" data-toggle="modal" data-target="#exampleModalCenter" style="background-color: #FFC10A; color: #fff;">
+		                            <i class="fa fa-eye"> View</i>
+		                        </button>
+		                    </td>
 
 
                         <!-- Modal -->
@@ -123,27 +126,8 @@
 
             </tbody>
           </table>
-          {{-- @php
-               if(isset($_POST['submit'])) {
-                        $value = 0;
-                        $text = ''; // added
-                        for ($i=1; $i <=3; $i++) {
-
-                            $gambar = $_POST['num'.$i];
-                            $text .= $i==1 ? $i : '+' . $i;  // added
-                            $value+= $_POST['num'.$i];
-
-                        }
-                        echo $value;
-
-                        }
-          @endphp --}}
-          <div>
-
-              {{$list_user_jobs->links()}}
-          {{-- <p>{{$list_user_jobs->company_jobs->id}}</p> --}}
-          </div>
-        </form>
-        </div>
-      </div>
+			</div>
+		</div>
+	</div>
+</div>
 @endsection
