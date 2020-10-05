@@ -2,57 +2,59 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\TeamProfile;
 use App\User;
-use Illuminate\Support\Facades\Auth;
+use App\TeamProfile;
 use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\MailController;
 
 class TeamProfileController extends Controller
 {
-
     public function createTeamForm() {
-        return view('pages.vendor.createTeam');
+        return view('pages.vendor.team.create');
     }
 
-    public function createTeam(Request $request) {
-
+    public function createTeam(Request $request, $id = null) {
         $data = TeamProfile::where('id' , '=' , Auth::user()->team_id)->first();
 
-        if ($data != null && $data->name == $request->name) {
-            return "name has taken";
-        }
-        elseif ($data != null && $data->owner == Auth::user()->name) {
-            return "you are already on the team";
-        }
+        if (Auth::user()->team_id != null) 
+            return redirect()->route('usersCreateTeam')->with(session()->flash('alert-error', 'You already in team. Cannot create or join team'));
+
+        else if ($data != null && $data->name == $request->name) 
+            return redirect()->route('usersCreateTeam')->with(session()->flash('alert-error', 'Team name already taken. Try again!'));
+
         else {
-            if($file = $request->file('photo')){
-                $photo = $file->getClientOriginalName();
-                $file->storeAs('public/images/team/',$request->input('name') . "_" . $photo);
+
+            if ($request->hasFile('photo')) {
+                $validate = $request->validate(['photo' => 'mimes:png,jpg,jpeg,PNG,JPG,JPEG']);
+
+                $photo = $request->photo->getClientOriginalName();
+                
+                if ($data != null && $data->photo != null) unlink(public_path('storage') . '/images/team/' . $data->photo);
+
+                $request->photo->storeAs('public/images/team/', Auth::user()->id . "_" . $photo);
+
+                TeamProfile::updateOrCreate(
+                    ['id' => $id],
+                    ['photo' => Auth::user()->id . "_" . $photo]
+                );
             }
 
-            $upload_photo = $request->input('name') . "_" . $photo;
+            $team = TeamProfile::updateOrCreate(
+                ['id' => $id],
+                [
+                    'name' => $request->name,
+                    'address' => $request->address,
+                    'bio' => $request->bio,
+                    'owner' => Auth::user()->name,
+                    'access_code' => Str::random(10),
+                ]
+            );
 
-            TeamProfile::insert([
-                'name' => $request->input('name'),
-                'address' => $request->input('address'),
-                'bio' => $request->input('bio'),
-                'owner' => Auth::user()->name,
-                'access_code' => Str::random(10),
-                'photo' => $upload_photo
-            ]);
+            User::where('id', '=', Auth::user()->id)->update(['team_id' => $team->id]);
 
-
-            $update_id = TeamProfile::where('name' , '=' , $request->name)->first();
-            if ($update_id->owner == Auth::user()->name) {
-                $update = User::where('id', '=', Auth::user()->id);
-                $update->update([
-                    'team_id' => $update_id->id
-                ]);
-            }
-
-            return redirect()->route('usersProfileTeam');
+            return redirect()->route('usersDashboard')->with(session()->flash('alert-success', 'Team created!'));
         }
     }
 
@@ -69,7 +71,7 @@ class TeamProfileController extends Controller
                 $i++;
             }
 
-            return view('pages.vendor.teamProfile', compact('data','i', 'total'));
+            return view('pages.vendor.team.profile', compact('data', 'i', 'total'));
         }
     }
 

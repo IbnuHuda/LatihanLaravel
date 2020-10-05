@@ -16,9 +16,9 @@ class CreateStatisticUsersTable extends Migration
         Schema::create('statistic_users', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('user_id')->unsigned();
-            $table->string('portofolio_sent_amount');
-            $table->string('job_registered_amount');
-            $table->string('rating_granted');
+            $table->string('portofolio_sent_amount')->nullable();
+            $table->string('job_registered_amount')->nullable();
+            $table->string('rating_granted')->nullable();
             $table->timestamps();
         });
     }

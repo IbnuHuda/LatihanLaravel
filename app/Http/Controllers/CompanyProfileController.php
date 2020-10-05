@@ -36,7 +36,7 @@ class CompanyProfileController extends Controller
             if ($request->file('photo')->isValid()) {
                 $validate = $request->validate(['photo' => 'mimes:png,jpg,jpeg,PNG,JPG,JPEG']);
 
-                $filename = $request->file('photo')->getClientOriginalName();
+                $filename = $request->photo->getClientOriginalName();
                 $request->photo->storeAs('public/images/company/', $data->id . '_' . str_replace(' ', '_', $data->name) . '_' . $filename);
 
                 if ($checkData != null && $checkData->company_logo != null) unlink(public_path('storage') . '/images/company/' . $checkData->company_logo);

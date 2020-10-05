@@ -18,6 +18,7 @@ Route::get('/', function () { return view('welcome'); })->name('index');
 Route::get('/test', function() { return view('test'); });
 
 Route::post('/search/users', 'LiveDataController@searchUsers')->name('searchUsers');
+Route::post('/submission/get-image', 'LiveDataController@getImage');
 
 Auth::routes(['verify' => true]);
 
@@ -45,6 +46,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 	Route::get('/users/search/{id}', 'UsersProfileController@searchUsers')->name('usersSearch');
 
 	Route::get('/users/team/create', 'TeamProfileController@createTeamForm')->name('usersCreateTeam');
+	// Route::get('/users/team/edit/{id}', 'TeamProfileController@createTeamForm')->name('usersCreateTeam');
 	Route::post('/users/team/create', 'TeamProfileController@createTeam');
     Route::get('/users/team/profile', 'TeamProfileController@profileTeamForm')->name('usersProfileTeam');
     Route::post('/users/team/join', 'TeamProfileController@joinTeam')->name('usersJoinTeam');

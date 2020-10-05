@@ -82,8 +82,8 @@
                         </span>
 
                         <ul id="teamMenus">
-                            <a href=""><li>Create Team</li></a>
-                            <a href=""><li>Profile Team</li></a>
+                            <a href="{{ route('usersCreateTeam') }}"><li>Create Team</li></a>
+                            <a href="{{ route('usersProfileTeam') }}"><li>Profile Team</li></a>
                         </ul>
 
                         <span id="Activity">

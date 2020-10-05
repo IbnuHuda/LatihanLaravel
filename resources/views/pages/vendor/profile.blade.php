@@ -7,6 +7,16 @@
 @extends('layouts.dashboard')
 
 @section('content')
+<div class="row">
+    <div class="flash-message col-lg-12">
+        @foreach (['danger', 'warning', 'success', 'info'] as $msg) 
+            @if (Session::has('alert-' . $msg))
+                <p class="alert alert-{{ $msg }} w-100">{{ Session::get('alert-' . $msg) }} <a href="" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
+            @endif
+        @endforeach
+    </div>
+</div>
+
 <div>
     <div class="card-deck">
         <div class="card">
@@ -16,7 +26,7 @@
 
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">Gender : {{ (!$data->gender) ? '-' : $data->gender }}</li>
-                    <li class="list-group-item">Birth : {{ (!$data->place_of_birth && !$data->date_of_birth) ? '-' : $data->place_of_birth . ' / ' . $data->date_of_birth }}</li>
+                    <li class="list-group-item">Birth : {{ (!$data->place_of_birth && !$data->date_of_birth) ? '-' : $data->place_of_birth . ', ' . $data->date_of_birth }}</li>
                     <li class="list-group-item">Address : {{ (!$data->address) ? '-' : $data->address }}</li>
                     <li class="list-group-item">Contact : {{ (!$data->contact) ? '-' : $data->contact }}</li>
                     <li class="list-group-item">Bio : <br />{{ (!$data->bio) ? '-' : $data->bio }}</li>

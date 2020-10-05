@@ -45,23 +45,13 @@ class User extends Authenticatable implements MustVerifyEmail
         $this->attributes['email'] = strtolower($value);
     }
 
-    public function teamProfile()
+    public function usersTeamProfile()
     {
         return $this->belongsTo(TeamProfile::class);
-    }
-
-    public function requestJoinTeam()
-    {
-        return $this->hasMany(RequestJoinTeam::class);
     }
 
     public function usersProfile()
     {
         return $this->hasMany(UsersProfile::class);
-    }
-
-    public function usersJobRegistered()
-    {
-        return $this->hasMany(UsersJobRegistered::class);
     }
 }

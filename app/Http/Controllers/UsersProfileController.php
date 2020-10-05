@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\UsersProfile;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 
 class UsersProfileController extends Controller
@@ -20,41 +19,42 @@ class UsersProfileController extends Controller
     }
 
     public function editProfile(Request $request) {
-
-        $name_data = User::where('id', '=', Auth::user()->id)->first();
+        $name_data = User::where('id', '=', Auth::user()->id);
         $data = UsersProfile::where('user_id', '=', Auth::user()->id);
-
-        $name_data->update(['name' => $request->name]);
 
         if ($request->hasFile('photo')) {
             if ($request->file('photo')->isValid()) {
-                $validate = $request->validate([
-                    'photo' => 'mimes:png,jpg,jpeg'
-                    ]);
+                $validate = $request->validate(['photo' => 'mimes:png,jpg,jpeg,PNG,JPG,JPEG']);
 
-                $extension = $request->photo->extension();
-                $request->photo->storeAs('public/images/users', $name_data->id . '_' . str_replace(' ', '_', $name_data->name) . '.' . $extension);
+                $filename = $request->photo->getClientOriginalName();
 
-                $data->update([
-                    'photo' => $name_data->id . '_' . str_replace(' ', '_', $name_data->name) . '.' . $extension
-                ]);
+                if ($data != null && $data->photo != null) unlink(public_path('storage') . '/images/users/' . $data->photo);
+                $request->photo->storeAs('public/images/users/', $name_data->id . '_' . str_replace(' ', '_', $name_data->name) . '_' . $filename);
+
+                UsersProfile::updateOrCreate(
+                    ['user_id' => Auth::user()->id],
+                    [
+                        'photo' => $name_data->id . '_' . str_replace(' ', '_', $name_data->name) . '_' . $filename
+                    ]
+                );
             }
         }
 
-        $data->update([
-            'date_of_birth' => $request->date_of_birth,
-            'place_of_birth' => $request->place_of_birth,
-            'address' => $request->address,
-            'bio' => $request->bio,
-            'contact' => $request->contact,
-            'gender' => $request->gender,
-        ]);
+        $name_data->update(['name' => $request->name]);
 
-        return redirect()->route('usersProfile');
-    }
+        UsersProfile::updateOrCreate(
+            ['user_id' => Auth::user()->id],
+            [
+                'date_of_birth' => $request->date_of_birth,
+                'place_of_birth' => $request->place_of_birth,
+                'address' => $request->address,
+                'bio' => $request->bio,
+                'contact' => $request->contact,
+                'gender' => $request->gender,
+            ]
+        );
 
-    public function editProfileForm() {
-        return view('pages.vendor.profile');
+        return redirect()->route('usersProfile')->with(session()->flash('alert-success', 'Profile data saved!'));
     }
 
     public function searchUsers($id) {
