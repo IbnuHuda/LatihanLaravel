@@ -70,7 +70,7 @@
                         <ul id="activityMenus">
                             <a href="{{route('companyStepSubmission')}}"><li>Submission</li></a>
                             <a href="{{route('companyStepAssesment')}}"><li>Assesment</li></a>
-                            <a href=""><li>Approval</li></a>
+                            <a href="{{route('companyStepApproval')}}"><li>Approval</li></a>
                         </ul>
 
                     @else

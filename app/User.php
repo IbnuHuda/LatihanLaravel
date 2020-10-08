@@ -50,8 +50,13 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->belongsTo(TeamProfile::class);
     }
 
-    public function usersProfile()
+    public function userProfile()
     {
         return $this->hasMany(UsersProfile::class);
+    }
+
+    public function usersJobRegistered()
+    {
+        return $this->hasMany(UsersJobRegistered::class);
     }
 }

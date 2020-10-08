@@ -1,9 +1,20 @@
+<style type="text/css">
+    div.card div.card-body hr {
+        width: 7.5%;
+        border: 1px solid #000;
+        margin-top: 0px;
+    }
+</style>
 @extends('layouts.dashboard')
 
 @section('content')
-    {{-- <div class="container"> --}}
-      <div class="card-deck">
-      <div class="card mt-5 ml-5" style="border: 0px; background-color:rgba(255, 0, 0, 0);">
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Assesment</h4>
+                <hr class="float-left" />
+
         <div class="flash-message col-lg-12">
             @foreach (['danger', 'warning', 'success', 'info'] as $msg)
                 @if (Session::has('alert-' . $msg))
@@ -54,15 +65,13 @@
                                 {{-- <td>{{$total_portofolio}}</td> --}}
                                 <td>IDR 1.500.000</td>
                                 <td>
-                                    <button type="button" class="btn btn-md text-light" data-toggle="modal" data-target="#exampleModalCenter" style="background-color: #FFC10A">
+                                    {{-- <button type="button" class="btn btn-md text-light" data-toggle="modal" data-target="#exampleModalCenter" style="background-color: #FFC10A">
                                         <i class="fa fa-eye"> Profile</i>
-                                      </button>
+                                      </button> --}}
+                                      <a href="{{ route('companyStepDetailAssesment', $data->user_id) }}" class="btn btn-md text-light" style="background-color: #FFC10A">Profile</a>
+
                                 </td>
                               </tr>
-
-
-
-
                 @else
                 {{-- <tr>
                     <td>tidak ada</td>
@@ -86,5 +95,6 @@
         </form>
         </div>
       </div>
-    {{-- </div> --}}
+    </div>
+</div>
 @endsection

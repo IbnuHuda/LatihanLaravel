@@ -11,7 +11,7 @@
 <div class="row">
 	<div class="col-md-12">
         <div class="flash-message col-lg-12">
-            @foreach (['danger', 'warning', 'success', 'info'] as $msg) 
+            @foreach (['danger', 'warning', 'success', 'info'] as $msg)
                 @if (Session::has('alert-' . $msg))
                     <p class="alert alert-{{ $msg }} w-100">{{ Session::get('alert-' . $msg) }} <a href="" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
                 @endif
@@ -42,14 +42,19 @@
                                     <th scope="col" colspan="2">Action</th>
                                 </tr>
                             </thead>
-                    
+
                             <tbody>
                                 @foreach ($list_user_jobs as $list)
+                                @php
+                                    $date = new DateTime($list->created_at);
+                                        $result = $date->format('j F Y');
+                                @endphp
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $list->user->name }}</td>
                                     <td>{{ $list->user->email }}</td>
-                                    <td>{{ explode(' ', $list->created_at)[0] }}</td>
+                                    {{-- <td>{{  explode(' ', $list->created_at)[0] }}</td> --}}
+                                    <td>{{$result}}</td>
                                     <td>{{ count(explode('|', $list->portofolio_uploaded)) }}</td>
                                     <td>
                                         @if ($list->score == null)
