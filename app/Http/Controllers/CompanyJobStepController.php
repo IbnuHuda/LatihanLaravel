@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\CompanyJobs;
 use App\CompanyProfile;
-use App\CompanyJobsStep;
+use App\CompanyJobStep;
 use App\UsersJobRegistered;
+use App\UsersProfile;
+use App\User;
+use App\UserCompany;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -23,7 +26,7 @@ class CompanyJobStepController extends Controller
         else return redirect()->route('companySelfProfile')->with(session()->flash('alert-warning', 'Please fill profile first before access page!'));
     }
 
-    public function submissionDetailForm($id) 
+    public function submissionDetailForm($id)
     {
         $data = CompanyProfile::where('user_company_id', '=', Auth::guard('company')->user()->id)->first();
 
@@ -68,4 +71,19 @@ class CompanyJobStepController extends Controller
         return redirect()->route('companyStepAssesment')->with(session()->flash('alert-success', 'Assesment successful!'));
     }
 
+    function assesmentDetailForm($id){
+        $user = User::find($id);
+        $user_profile = UsersProfile::where('user_id', $id)->get();
+        // dd($user_profile[0]);
+        return view('pages.company.activity.user-profile', compact('user','user_profile'));
+
+
+    }
+
+    function approvalForm(){
+
+        $result = CompanyJobStep::all();
+        $company_profile = UserCompany::where('id', Auth::guard('company')->user()->id)->get();
+        return view('pages.company.activity.approval', compact('result', 'company_profile'));
+    }
 }
