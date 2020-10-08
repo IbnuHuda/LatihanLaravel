@@ -38,13 +38,8 @@ class CompanyJobsController extends Controller
 
         else return redirect()->route('companySelfProfile')->with(session()->flash('alert-warning', 'Please fill profile first before access page!'));
     }
-<<<<<<< HEAD
 
     public function publishJobs(Request $request, $id = null)
-=======
-    
-    public function publishJobs(Request $request)
->>>>>>> feaf0190d2cd8e25a01918183eac107c39a68616
     {
         if ($request->minimum_portofolio < 0 || $request->vendor_accepted_total <= 0)
             return redirect()->route('companyPublishJobs')->with(session()->flash('alert-danger', 'Minimum portofolio at least 0 or vendor total accepted must higher then 0'));
@@ -73,20 +68,14 @@ class CompanyJobsController extends Controller
     public function listJobs()
     {
         $companies_jobs = CompanyJobs::orderBy('created_at', 'desc')->paginate(6);
-        
+
         $companies_profile = [];
 
         foreach ($companies_jobs as $job) {
             $getData = CompanyProfile::where('user_company_id', '=', $job->user_company_id)->first();
 
-<<<<<<< HEAD
-        // $data = array_merge($company_jobs, $companies_data)
-
-        return response()->json($data->companyProfile);
-=======
             if (!in_array($getData, $companies_profile)) $companies_profile[] = $getData;
         }
->>>>>>> feaf0190d2cd8e25a01918183eac107c39a68616
 
         return view('pages.company.jobs.list', compact('companies_jobs', 'companies_profile'));
     }

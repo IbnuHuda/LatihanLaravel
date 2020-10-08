@@ -15,7 +15,7 @@ class UsersJobRegisteredController extends Controller
     public function listJobsForm()
     {
         $companies_jobs = CompanyJobs::orderBy('created_at', 'desc')->paginate(6);
-        
+
         $companies_profile = [];
 
         foreach ($companies_jobs as $job) {
@@ -33,21 +33,23 @@ class UsersJobRegisteredController extends Controller
 
         if ($data != null) {
             $detail_jobs = CompanyJobs::where('id', '=', $id)->first();
+            $detail_companies = CompanyProfile::where('user_company_id', "=", $detail_jobs->user_company_id)->first();
 
-            return view('pages.vendor.jobs.jobDetail', compact('data', 'detail_jobs'));
+            return view('pages.vendor.activity.jobDetail', compact('detail_companies', 'detail_jobs'));
+
         }
 
         else return redirect()->route('usersProfile')->with(session()->flash('alert-warning', 'Please fill profile first before access page!'));
     }
 
-    public function registerJobsForm($id) 
+    public function registerJobsForm($id)
     {
         $job = CompanyJobs::where('id', '=', $id)->first();
 
-        return view('pages.vendor.registerJob', compact('job'));
+        return view('pages.vendor.activity.registerJob', compact('job'));
     }
 
-    public function registerJobs(Request $request) 
+    public function registerJobs(Request $request)
     {
         $data = UsersJobRegistered::where('id','=',Auth::user()->id);
         $p_amount = 0;
@@ -71,7 +73,8 @@ class UsersJobRegisteredController extends Controller
             'company_job_id' => $request->job,
             'users_description' => $request->proposal,
             'other_question' => $request->question,
-            'portofolio_uploaded' => $result
+            'portofolio_uploaded' => $result,
+            'salary' => $request->salary
         ]);
 
         $stats = StatisticUsers::where('user_id', '=', Auth::user()->id)->first();

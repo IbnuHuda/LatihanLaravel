@@ -18,10 +18,10 @@ class TeamProfileController extends Controller
     public function createTeam(Request $request, $id = null) {
         $data = TeamProfile::where('id' , '=' , Auth::user()->team_id)->first();
 
-        if (Auth::user()->team_id != null) 
+        if (Auth::user()->team_id != null)
             return redirect()->route('usersCreateTeam')->with(session()->flash('alert-error', 'You already in team. Cannot create or join team'));
 
-        else if ($data != null && $data->name == $request->name) 
+        else if ($data != null && $data->name == $request->name)
             return redirect()->route('usersCreateTeam')->with(session()->flash('alert-error', 'Team name already taken. Try again!'));
 
         else {
@@ -30,15 +30,15 @@ class TeamProfileController extends Controller
                 $validate = $request->validate(['photo' => 'mimes:png,jpg,jpeg,PNG,JPG,JPEG']);
 
                 $photo = $request->photo->getClientOriginalName();
-                
+
                 if ($data != null && $data->photo != null) unlink(public_path('storage') . '/images/team/' . $data->photo);
 
                 $request->photo->storeAs('public/images/team/', Auth::user()->id . "_" . $photo);
 
-                TeamProfile::updateOrCreate(
-                    ['id' => $id],
-                    ['photo' => Auth::user()->id . "_" . $photo]
-                );
+                // TeamProfile::updateOrCreate(
+                //     ['id' => $id],
+                //     ['photo' => Auth::user()->id . "_" . $photo]
+                // );
             }
 
             $team = TeamProfile::updateOrCreate(
@@ -49,6 +49,7 @@ class TeamProfileController extends Controller
                     'bio' => $request->bio,
                     'owner' => Auth::user()->name,
                     'access_code' => Str::random(10),
+                    'photo' => Auth::user()->id . "_" . $photo
                 ]
             );
 
@@ -61,7 +62,7 @@ class TeamProfileController extends Controller
     public function profileTeamForm() {
 
         if (Auth::user()->team_id == null) {
-            return "Not Joined Yet";
+            return  redirect()->route('usersDashboard')->with(session()->flash('alert-danger', "Hasn't Joined a Team Yet"));
         }
         else {
             $data = TeamProfile::where('id' , '=' , Auth::user()->team_id)->first();

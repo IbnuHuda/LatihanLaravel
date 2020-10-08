@@ -26,9 +26,7 @@
                             <div class="card">
                                 <div class="card-body">
                                     @foreach ($companies_profile as $profile)
-                                        @if ($job->user_company_id == $profile->user_company_id)
-                                        <h5 class="card-title float-left">{{ $profile->name }}</h5>
-                                        @endif
+                                        <h5 class="card-title float-left">{{ $profile['name'] }}</h5>
                                     @endforeach
                                     <p class="float-right" style="font-style: oblique;">Expired at {{ $job->jobs_expired }}</p>
                                     <div style="clear: both;"></div>
@@ -53,7 +51,7 @@
 
     <!-- <div class="container">
         <div class="flash-message">
-            @foreach (['danger', 'warning', 'success', 'info'] as $msg) 
+            @foreach (['danger', 'warning', 'success', 'info'] as $msg)
                 @if (Session::has('alert-' . $msg))
                     <p class="alert alert-{{ $msg }} w-100">{{ Session::get('alert-' . $msg) }} <a href="" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
                 @endif
@@ -73,7 +71,7 @@
             </thead>
             <tbody>
                 @php
-                    $number = 1;    
+                    $number = 1;
                 @endphp
                 @foreach ($companies_jobs as $list_jobs)
                     <tr>

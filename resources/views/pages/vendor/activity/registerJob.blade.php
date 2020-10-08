@@ -26,13 +26,23 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="salary">Salary</label>
+                        <div class="input-group">
+                            <input type="number" class="form-control" name="salary" id="salary" placeholder="Rp. 10.000.000">
+                            <div class="input-group-append">
+                                <div class="input-group-text">IDR</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
                         <label for="text-area-q">Question</label>
                         <textarea name="question" class="form-control" id="text-area-q" rows="3" placeholder="Any Question ?"></textarea>
                     </div>
 
                     <div class="custom-file">
                         <input type="file" class="custom-file-input" id="portofolio" name="portofolios[]" multiple>
-                        <label class="custom-file-label" for="portofolio"></label>
+                        <label class="custom-file-label" for="portofolio">Portofolio</label>
                     </div>
 
                     <div class="mt-3">

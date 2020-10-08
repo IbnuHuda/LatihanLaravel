@@ -21,8 +21,8 @@
 
                 <div class="row">
                     <div class="col-md-4 text-center">
-                        <h4>{{ $data->name }}</h4>
-                        <img src="{{ url('storage/images/company/'. $data->company_logo) }}" class="w-100 mt-4">
+                        <h4>{{ $detail_companies->name }}</h4>
+                        <img src="{{ url('storage/images/company/'. $detail_companies->company_logo) }}" class="w-100 mt-4">
                     </div>
 
                     <div class="col-md-8">
@@ -31,7 +31,7 @@
                                 <tr>
                                     <td>Publisher</td>
                                     <td>:</td>
-                                    <td>{{ $data->userCompany->name }}</td>
+                                    <td>{{ $detail_companies->name }}</td>
                                 </tr>
                                 <tr>
                                     <td>Available Positions</td>
@@ -75,13 +75,11 @@
                         </table>
 
                         <div class="float-right mt-2">
+
                             <button onclick="window.history.back();" class="btn btn-md btn-danger"><i class="fa fa-arrow-left"></i> Back</button>
-                            
-                            @if ($detail_jobs->user_company_id == Auth::guard('company')->user()->id)
-                            <a href="{{ route('companyPublishJobs') }}?id={{ $detail_jobs->id }}" class="btn btn-md btn-primary"><i class="fa fa-pencil"></i> Edit</a>
-                            @elseif (!Auth::guard('company')->check())
-                            <a href="{{ route('companyPublishJobs') }}?id={{ $detail_jobs->id }}" class="btn btn-md btn-success"><i class="fa fa-pencil"></i> Apply Job</a>
-                            @endif
+                            <a href="{{ route('usersRegisterJobs', $detail_jobs->id) }}" class="btn btn-md btn-primary">Enroll</a>
+
+
                         </div>
                     </div>
                 </div>
