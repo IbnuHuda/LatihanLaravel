@@ -15,9 +15,9 @@ class CreateUsersTeamProfileTable extends Migration
     {
         Schema::create('users_team_profile', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('owner');
-            $table->string('access_code');
+            $table->string('name')->nullable();
+            $table->string('owner')->nullable();
+            $table->string('access_code')->nullable();
             $table->string('address')->nullable();
             $table->string('photo')->nullable();
             $table->string('bio')->nullable();

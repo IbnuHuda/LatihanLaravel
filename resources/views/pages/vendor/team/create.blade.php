@@ -48,7 +48,7 @@
                             <label for="uploadPhoto">Photo Profile</label>
                             <div class="custom-file">
                                 <input type="file" class="custom-file-input" id="uploadPhoto" name="photo">
-                                <label class="custom-file-label" for="customFile">Choose file</label>
+                                <label class="custom-file-label" id="imageLabel" for="customFile">Choose file</label>
                             </div>
                         </div>
                     </div>
@@ -87,4 +87,6 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript" src="{{ asset('js/image.js') }}" defer></script>
 @endsection

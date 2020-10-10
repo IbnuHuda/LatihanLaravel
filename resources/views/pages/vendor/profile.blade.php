@@ -6,8 +6,8 @@
     }
 
     .img-responsive.rounded-circle.mt-3 {
-        width: 50%;
-        margin-left: 25%;
+        width: 200px;
+        height: 200px;
     }
 </style>
 
@@ -33,7 +33,10 @@
 
                 <div style="clear: both;"></div>
 
-                <img src="{{ (!$data->photo) ? asset('images/websites/def_photo.png') : url('storage/images/users/'. $data->photo) }}" class="img-responsive rounded-circle mt-3" id="photo">
+                <div class="text-center">
+                    <img src="{{ (!$data->photo) ? asset('images/websites/def_photo.png') : url('storage/images/users/'. $data->photo) }}" class="img-responsive rounded-circle mt-3" id="photo">
+                </div>
+                
                 <table border="0" class="table table-striped mt-4"  style="font-size: 15px; color:black">
                     <tbody>
                         <tr>
@@ -59,7 +62,7 @@
                         <tr>
                             <td>Contact</td>
                             <td>:</td>
-                            <td>{{ (!$data->contact) ? '-' : $data->contact }}</td>
+                            <td>{{ (!$data->contact) ? '-' : '+62' . $data->contact }}</td>
                         </tr>
                         <tr>
                             <td>Bio</td>
@@ -150,7 +153,7 @@
                         <textarea name="bio" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="My hobby is ...">{{ $data->bio }}</textarea>
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="submit" class="btn btn-primary float-right">Save</button>
                 </form>
             </div>
         </div>

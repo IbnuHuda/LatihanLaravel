@@ -21,8 +21,8 @@ class UsersProfileController extends Controller
     }
 
     public function editProfile(Request $request) {
-        $name_data = User::where('id', '=', Auth::user()->id);
-        $data = UsersProfile::where('user_id', '=', Auth::user()->id);
+        $name_data = User::where('id', '=', Auth::user()->id)->first();
+        $data = UsersProfile::where('user_id', '=', Auth::user()->id)->first();
 
         if ($request->hasFile('photo')) {
             if ($request->file('photo')->isValid()) {
@@ -42,7 +42,7 @@ class UsersProfileController extends Controller
             }
         }
 
-        $name_data->update(['name' => $request->name]);
+        $name_data->save(['name' => $request->name]);
 
         UsersProfile::updateOrCreate(
             ['user_id' => Auth::user()->id],

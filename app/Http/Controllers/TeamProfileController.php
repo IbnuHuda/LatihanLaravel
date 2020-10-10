@@ -15,7 +15,7 @@ class TeamProfileController extends Controller
         return view('pages.vendor.team.create');
     }
 
-    public function createTeam(Request $request, $id = null) {
+    public function createTeam(Request $request) {
         $data = TeamProfile::where('id' , '=' , Auth::user()->team_id)->first();
 
         if (Auth::user()->team_id != null) 
@@ -34,16 +34,11 @@ class TeamProfileController extends Controller
                 if ($data != null && $data->photo != null) unlink(public_path('storage') . '/images/team/' . $data->photo);
 
                 $request->photo->storeAs('public/images/team/', Auth::user()->id . "_" . $photo);
-
-                TeamProfile::updateOrCreate(
-                    ['id' => $id],
-                    ['photo' => Auth::user()->id . "_" . $photo]
-                );
             }
 
-            $team = TeamProfile::updateOrCreate(
-                ['id' => $id],
+            $team = TeamProfile::create(
                 [
+                    'photo' => Auth::user()->id . "_" . $photo,
                     'name' => $request->name,
                     'address' => $request->address,
                     'bio' => $request->bio,
@@ -54,14 +49,14 @@ class TeamProfileController extends Controller
 
             User::where('id', '=', Auth::user()->id)->update(['team_id' => $team->id]);
 
-            return redirect()->route('usersDashboard')->with(session()->flash('alert-success', 'Team created!'));
+            return redirect()->route('usersProfileTeam')->with(session()->flash('alert-success', 'Team created!'));
         }
     }
 
     public function profileTeamForm() {
 
         if (Auth::user()->team_id == null) {
-            return "Not Joined Yet";
+            return redirect()->route('usersCreateTeam')->with(session()->flash('alert-danger', "You're not in team. Please create or join team."));
         }
         else {
             $data = TeamProfile::where('id' , '=' , Auth::user()->team_id)->first();

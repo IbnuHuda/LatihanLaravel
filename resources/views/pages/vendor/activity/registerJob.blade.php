@@ -1,28 +1,48 @@
 <style>
-    .img{
-        max-width: 10%;
+    div.card div.card-body hr {
+        width: 5%;
+        border: 1px solid #000;
+        margin-top: 0px;
     }
 </style>
 
 @extends('layouts.dashboard')
 
 @section('content')
-
-    <div class="container mr-5 mt-3">
-
+<div class="row">
+    <div class="col-md-12">
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">{{$job->jobs_name}}</h5>
+                <h4 class="card-title">Register Job</h4>
+                <hr class="float-left" />
+
+                <div style="clear: both;"></div>
+                
                 <p class="">{{$job->available_position}}</p>
 
-                <form action="{{route('usersJobsRegister')}}" method="post" enctype="multipart/form-data">
+                <form action="{{ route('usersJobsRegister') }}" method="post" enctype="multipart/form-data">
                 @csrf
-
                     <input type="hidden" name="job" value="{{ Request::route('id') }}">
 
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="company">Company</label>
+                                <input class="form-control" id="company" value="{{ $detail_companies->name }}" disabled></input>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="available_position">Job Available</label>
+                                <input class="form-control" id="available_position" value="{{ $job->available_positions }}" disabled></input>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="form-group">
-                        <label for="text-area-p">Proposal</label>
-                        <textarea name="proposal" class="form-control" id="text-area-p" rows="3" placeholder="Proposal"></textarea>
+                        <label for="text-area-p">Describe Yourself <span style="color: red">*</span></label>
+                        <textarea name="proposal" class="form-control" id="text-area-p" rows="3" placeholder="Type about yourself"></textarea>
                     </div>
 
                     <div class="form-group">
@@ -40,23 +60,27 @@
                         <textarea name="question" class="form-control" id="text-area-q" rows="3" placeholder="Any Question ?"></textarea>
                     </div>
 
-                    <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="portofolio" name="portofolios[]" multiple>
-                        <label class="custom-file-label" for="portofolio">Portofolio</label>
+                    <div class="form-group">
+                        <label for="portofolio">Portofolio <span style="color: red;">*max 4</span></label>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="portofolio" name="portofolios[]" multiple>
+                            <label class="custom-file-label form-control" for="portofolio">Portofolio</label>
+                        </div>
                     </div>
 
-                    <div class="mt-3">
-                        <button type="submit" class="btn btn-primary">Submit As Team</button>
-                        <button type="submit" class="btn btn-success">Submit As Personally</button>
+                    <div class="mt-4 float-right">
+                        @if (Auth::user()->team_id == null)
+                            <button type="submit" class="btn btn-primary" onclick="return apply('team')"><i class="fa fa-users"></i> Submit As Team</button>
+                        @else
+                            <button type="submit" class="btn btn-danger" onclick="return apply('team')" disabled><i class="fa fa-users"></i> Submit As Team</button>
+                        @endif
+                        <button type="submit" class="btn btn-success" onclick="return apply()"><i class="fa fa-user"></i> Submit As Personally</button>
                     </div>
-
-
                 </form>
             </div>
         </div>
-
     </div>
+</div>
 
-
-
+<script type="text/javascript" src="{{ asset('js/image.js') }}" defer></script>
 @endsection

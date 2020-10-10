@@ -17,11 +17,11 @@ class CreateUsersProfileTable extends Migration
             $table->id();
             $table->bigInteger('user_id')->unsigned()->nullable();
             $table->bigInteger('user_company_id')->unsigned()->nullable();
-            $table->string('gender');
-            $table->string('place_of_birth');
-            $table->string('date_of_birth');
-            $table->string('address');
-            $table->string('contact');
+            $table->string('gender')->nullable();
+            $table->string('place_of_birth')->nullable();
+            $table->string('date_of_birth')->nullable();
+            $table->string('address')->nullable();
+            $table->string('contact')->nullable();
             $table->string('photo')->nullable();
             $table->string('bio')->nullable();
             $table->timestamps();
