@@ -4,6 +4,14 @@
         border: 1px solid #000;
         margin-top: 0px;
     }
+    /* @media screen and (max-width: 991px) {
+        .large{
+            display: none;
+        }
+        .expired{
+            font-size: 11px;
+        }
+    } */
 </style>
 @extends('layouts.dashboard')
 
@@ -22,7 +30,7 @@
                 @else
                     <div class="row">
                         @foreach ($companies_jobs as $job)
-                        <div class="col-md-6 mt-2">
+                        <div class="col-lg-6 col-md-12 mt-2">
                             <div class="card">
                                 <div class="card-body">
                                     @foreach ($companies_profile as $profile)

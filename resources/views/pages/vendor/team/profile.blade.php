@@ -9,6 +9,16 @@
         max-width: 30%;
         margin-left: 35%;
     }
+
+    @media screen and (max-width: 991px) {
+        .card-title{
+            font-size: 20px;
+        }
+
+        li{
+            font-size: 13px;
+        }
+    }
 </style>
 
 @extends('layouts.dashboard')
@@ -16,14 +26,14 @@
 @section('content')
 <div class="row">
     <div class="flash-message col-lg-12">
-        @foreach (['danger', 'warning', 'success', 'info'] as $msg) 
+        @foreach (['danger', 'warning', 'success', 'info'] as $msg)
             @if (Session::has('alert-' . $msg))
                 <p class="alert alert-{{ $msg }} w-100">{{ Session::get('alert-' . $msg) }} <a href="" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
             @endif
         @endforeach
     </div>
-    
-    <div class="col-7">
+
+    <div class="col-sm-7 mt-3">
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">Team Profile</h4>
@@ -32,17 +42,19 @@
                 <div style="clear: both;"></div>
 
                 <img src="{{ ($data == null || $data->photo == null) ?  asset('images/websites/def_photo.png') : url('storage/images/team/'. $data->photo) }}" class="img rounded-circle" id="photo">
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Name : {{$data->name}}</li>
+                <ul class="list-group list-group-flush mt-4" style="font-weight: bold">
+                    {{-- <strong> --}}
+                    <li class="list-group-item">Name : {{ucfirst( $data->name)}}</li>
                     <li class="list-group-item">Owner : {{$data->owner}}</li>
                     <li class="list-group-item">Address : {{$data->address}}</li>
                     <li class="list-group-item">Bio : <br />{{$data->bio}}</li>
+                {{-- </strong> --}}
                 </ul>
             </div>
         </div>
     </div>
 
-    <div class="col-5">
+    <div class="col-sm-5 mt-3">
         <div class="row">
             <div class="col">
                 <div class="card">

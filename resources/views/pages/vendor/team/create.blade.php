@@ -11,14 +11,14 @@
 @section('content')
 <div class="row">
     <div class="flash-message col-lg-12">
-        @foreach (['danger', 'warning', 'success', 'info'] as $msg) 
+        @foreach (['danger', 'warning', 'success', 'info'] as $msg)
             @if (Session::has('alert-' . $msg))
                 <p class="alert alert-{{ $msg }} w-100">{{ Session::get('alert-' . $msg) }} <a href="" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
             @endif
         @endforeach
     </div>
-    
-    <div class="col-8">
+
+    <div class="col-lg-8 col-sm-7 mt-3">
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Create Team</h5>
@@ -70,7 +70,7 @@
     </div>
 
 
-    <div class="col-4">
+    <div class="col-lg-4 col-sm-5 mt-3">
         <div class="card">
             <div class="card-body">
                 <form action="{{ route('usersJoinTeam') }}" method="post">
