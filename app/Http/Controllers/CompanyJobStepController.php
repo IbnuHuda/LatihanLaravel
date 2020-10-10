@@ -9,6 +9,7 @@ use App\UsersJobRegistered;
 use App\UsersProfile;
 use App\User;
 use App\UserCompany;
+use App\Rating;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -38,7 +39,7 @@ class CompanyJobStepController extends Controller
         else return redirect()->route('companySelfProfile')->with(session()->flash('alert-warning', 'Please fill profile first before access page!'));
     }
 
-    function submissionProcess(Request $request){
+    public function submissionProcess(Request $request){
         $score_result = $request->session()->get('score');
 
         UsersJobRegistered::updateOrCreate(
@@ -49,13 +50,13 @@ class CompanyJobStepController extends Controller
         return redirect()->route('companyStepSubmission')->with(session()->flash('alert-success', 'Job publish successful!'));
     }
 
-    function assesmentForm(){
+    public function assesmentForm(){
 
         $result = UsersJobRegistered::orderBy('score','desc')->paginate(8);
         return view('pages.company.activity.assesment', compact('result'));
     }
 
-    function assesmentProcess(Request $request){
+    public function assesmentProcess(Request $request){
         $total = count($request->accept) ;
         for ($i=0; $i < $total; $i++) {
             $new = new CompanyJobStep;
@@ -71,7 +72,7 @@ class CompanyJobStepController extends Controller
         return redirect()->route('companyStepAssesment')->with(session()->flash('alert-success', 'Assesment successful!'));
     }
 
-    function assesmentDetailForm($id){
+    public function assesmentDetailForm($id){
         $user = User::find($id);
         $user_profile = UsersProfile::where('user_id', $id)->get();
         // dd($user_profile[0]);
@@ -80,10 +81,23 @@ class CompanyJobStepController extends Controller
 
     }
 
-    function approvalForm(){
+    public function approvalForm(){
 
         $result = CompanyJobStep::all();
         $company_profile = UserCompany::where('id', Auth::guard('company')->user()->id)->get();
         return view('pages.company.activity.approval', compact('result', 'company_profile'));
+    }
+
+    public function ratingProcess(Request $request){
+        $result = new Rating;
+        // $result->id = $request->user_id;
+        $result->user_id = $request->user_id;
+        $result->company_id =$request->company_id;
+        $result->rating = $request->star;
+        $result->save();
+        dd($result->save());
+
+    //return redirect()->route('companyStepApproval')->with(session()->flash('alert-success', 'Assesment successful!'));
+
     }
 }

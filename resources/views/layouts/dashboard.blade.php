@@ -23,7 +23,7 @@
 </head>
 <body class="dark-theme">
     <div id="app">
-        <div id="sidebar">
+        <div id="sidebar" class="sidebar-expanded d-none d-md-block col-4">
             <header>
                 <a href="{{ route('index') }}" class="d-flex justify-content-center align-items-center mt-3">
                     <img src="{{ asset('images/websites/Logo_VeCo.png') }}" id="VeCoLogo" class="img-responsive">
@@ -51,19 +51,19 @@
 
                         <span id="Jobs">
                             <li>
-                                <i class="fa fa-filter" id="iconJobs"></i> <span style="margin-left: 30px;" id="jobsTitle">Jobs</span> <i class="fa fa-chevron-right" id="jobsChevron"></i>
+                                <i class="fa fa-filter" id="iconJobs"></i> <span style="margin-left: 30px;" id="jobsTitle">Jobs</span> <i class="fa fa-chevron-right float-right" id="jobsChevron"></i>
                             </li>
                         </span>
 
                         <ul id="jobsMenus">
-                            <a href="{{ route('myCompanyJobs')}}"><li>My Job</li></a>
+                            <a href="{{ route('myCompanyJobs')}}   "><li>My Job</li></a>
                             <a href="{{ route('companyPublishJobs') }}"><li>Publish Job</li></a>
                             <a href="{{ route('companyListJobs')}}"><li>List Job</li></a>
                         </ul>
 
                         <span id="Activity">
                             <li>
-                                <i class="fa fa-list" id="iconActivity"></i> <span style="margin-left: 25px;" id="activityTitle">Activity</span> <i class="fa fa-chevron-right" id="activityChevron"></i>
+                                <i class="fa fa-list" id="iconActivity"></i> <span style="margin-left: 25px;" id="activityTitle">Activity</span> <i class="fa fa-chevron-right float-right" id="activityChevron"></i>
                             </li>
                         </span>
 
@@ -134,7 +134,11 @@
                 <br />
                 <br />
                 <br />
+                {{-- <div class="col-5"></div> --}}
+                {{-- <div class="col-md-9"> --}}
                 @yield('content')
+
+                {{-- </div> --}}
                 <br />
             </div>
         </main>

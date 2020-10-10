@@ -6,10 +6,10 @@ body.default-theme {
 
     --btn-color: #3490dc;
     --shadow-color: #888888;
-    --bg-navbar: #4a69bd;
+    --bg-navbar: #2E86DE;
     --bg-wave: #0099ff;
 
-    background-color: #eef9f3;
+    background-color: #F4F6F9;
     transition: 0.25s;
 }
 
@@ -20,12 +20,13 @@ body.dark-theme {
     --secondary-text-color: #fafafa;
 
     --shadow-color: #343a40;
-    --bg-navbar: #0c2461;
+    --bg-navbar: #2E86DE;
     --bg-wave: #0a3d62;
     --btn-color: #d81e1e;
 
     background-color: #0b0913;
     transition: 0.25s;
+    /* color: #de512e; */
 }
 
 /* Sidebar */
@@ -33,12 +34,18 @@ body.dark-theme {
 div#sidebar {
     float: left;
     width: 20%;
-    height: 100vh;
+    height: 120%;
+    /* position: sticky; */
+  /* z-index: 1; */
+  /* top: 0;
+  left: 0; */
+
+  /* margin-right: 100px; */
     background-color: var(--main-bg-color);
     color: var(--main-text-color);
     box-shadow: 2px 2px 10px var(--shadow-color);
     transition: 0.5s;
-}   
+}
 
 div#sidebar header a {
     text-decoration: none;
@@ -77,14 +84,14 @@ div#sidebar ul span {
 div#sidebar ul span i.fa.fa-chevron-right {
     font-size: 10px;
     margin-top: 10px;
-    float: right;
+    /* float: right; */
     transition: 0.25s;
     display: inline-block;
 }
 
 div#sidebar ul li {
     list-style: none;
-    padding: 15px;
+    padding: 15px 0px;
     color: var(--main-text-color);
 }
 
@@ -135,8 +142,12 @@ div#sidebar span#activityTitle {
 
 div#sidebar ul li i:hover li,
 div#sidebar ul a:hover li,
-div#sidebar ul span:hover li {
-    background-color: blue;
+div#sidebar ul span:hover li,
+div#sidebar #jobsMenus a:hover li,
+div#sidebar #activityMenus a:hover li
+
+{
+    color: #2E86DE;
 }
 
 div#sidebar ul#teamMenus {
@@ -192,7 +203,7 @@ nav.navbar img#photo {
     float: right;
     width: 37.5px;
     height: 35px;
-    cursor: pointer;    
+    cursor: pointer;
 }
 
 /* Icon Theme Toggler */
@@ -201,7 +212,7 @@ div#theme-toggler {
   width: 50px;
   height: 50px;
   padding: 10px;
-  background-color: #303f9f;
+  background-color: #2E86DE;
   border-radius: 50px;
   position: fixed;
   bottom: 20px;
@@ -227,7 +238,7 @@ div#profileBox {
     right: 20px;
     width: 120px;
     background-color: var(--main-bg-color);
-    color: var(--main-text-color);  
+    color: var(--main-text-color);
     border-radius: 5px;
     padding: 10px;
     z-index: 1000;
@@ -247,12 +258,12 @@ div#profileBox::after {
 
 div#profileBox hr {
     border-color: var(--main-text-color);
-    margin-top: 10px;   
+    margin-top: 10px;
 }
 
 div#profileBox a {
     color: var(--main-text-color);
     text-decoration: none;
     font-size: 15px;
-    margin-top: 0px;    
+    margin-top: 0px;
 }

@@ -16,7 +16,6 @@
                 <h4 class="card-title">Job Detail</h4>
                 <hr class="float-left" />
 
-                <br />
                 <div class="mt-2"></div>
 
                 <div class="row">
@@ -76,7 +75,7 @@
 
                         <div class="float-right mt-2">
                             <button onclick="window.history.back();" class="btn btn-md btn-danger"><i class="fa fa-arrow-left"></i> Back</button>
-                            
+
                             @if ($detail_jobs->user_company_id == Auth::guard('company')->user()->id)
                             <a href="{{ route('companyPublishJobs') }}?id={{ $detail_jobs->id }}" class="btn btn-md btn-primary"><i class="fa fa-pencil"></i> Edit</a>
                             @elseif (!Auth::guard('company')->check())
