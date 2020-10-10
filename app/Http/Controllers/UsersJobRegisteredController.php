@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\TeamProfile;
 use App\CompanyJobs;
 use App\UsersProfile;
 use App\CompanyProfile;
@@ -63,45 +64,85 @@ class UsersJobRegisteredController extends Controller
         $r_amount = 0;
 
         if($files = $request->file('portofolios')){
-            foreach($files as $file){
+            foreach($files as $file) $p_amount++;
+
+            if ($p_amount > 4) return redirect()->back()->with(session()->flash('alert-danger', "Portofolio must lower or equal then four."));
+
+            foreach ($files as $file) {
                 $name = $file->getClientOriginalName();
-                $file->storeAs('public/images/company/portofolios',Auth::user()->id . "_" . $name);
+                $file->storeAs('/public/images/portofolio/', Auth::user()->id . "_" . $name);
                 $portofolios[] = Auth::user()->id . "_" . $name;
-                $p_amount++;
             }
         }
 
         $result = implode("|", $portofolios);
         $r_amount++;
-        $data->insert([
-            'user_id' => Auth::user()->id,
-            'team_id' => Auth::user()->team_id,
-            'company_job_id' => $request->job,
-            'users_description' => $request->proposal,
-            'other_question' => $request->question,
-            'portofolio_uploaded' => $result,
-            'salary' => $request->salary
-        ]);
 
-        $stats = StatisticUsers::where('user_id', '=', Auth::user()->id)->first();
+        if ($request->apply == 1) {
+            $data_team = TeamProfile::where('id', '=', Auth::user()->team_id)->first();
 
-        if ($stats != null) {
-            $p_amount += $stats->portofolio_sent_amount;
-            $r_amount += $stats->job_registered_amount;
-            $stats->update([
-                'portofolio_sent_amount' => $p_amount,
-                'job_registered_amount' => $r_amount
-            ]);
+            if (Auth::user()->name != $data_team->owner) return redirect()->back()->with(session()->flash('alert-danger', "Only leader team can apply job as team."));
+            else {
+                $data->create([
+                    'team_id' => $data_team->id,
+                    'company_job_id' => $request->job,
+                    'users_description' => $request->proposal,
+                    'other_question' => $request->question,
+                    'portofolio_uploaded' => $result,
+                    'salary' => $request->salary
+                ]);
+
+                foreach ($data_team->users as $value) {
+                    $stats = StatisticUsers::where('user_id', '=', $value->id)->first();
+
+                    if ($stats != null) {
+                        $p_amount += $stats->portofolio_sent_amount;
+                        $r_amount += $stats->job_registered_amount;
+                        $stats->update([
+                            'portofolio_sent_amount' => $p_amount,
+                            'job_registered_amount' => $r_amount
+                        ]);
+                    }
+                    else {
+                        StatisticUsers::create([
+                            'user_id' => $value->id,
+                            'portofolio_sent_amount' => $p_amount,
+                            'job_registered_amount' => $r_amount,
+                        ]);
+                    }
+                }
+            }
+
         }
         else {
-            StatisticUsers::insert([
+            $data->create([
                 'user_id' => Auth::user()->id,
-                'portofolio_sent_amount' => $p_amount,
-                'job_registered_amount' => $r_amount,
-                'rating_granted' => 0
+                'company_job_id' => $request->job,
+                'users_description' => $request->proposal,
+                'other_question' => $request->question,
+                'portofolio_uploaded' => $result,
+                'salary' => $request->salary
             ]);
+
+            $stats = StatisticUsers::where('user_id', '=', Auth::user()->id)->first();
+
+            if ($stats != null) {
+                $p_amount += $stats->portofolio_sent_amount;
+                $r_amount += $stats->job_registered_amount;
+                $stats->update([
+                    'portofolio_sent_amount' => $p_amount,
+                    'job_registered_amount' => $r_amount
+                ]);
+            }
+            else {
+                StatisticUsers::create([
+                    'user_id' => Auth::user()->id,
+                    'portofolio_sent_amount' => $p_amount,
+                    'job_registered_amount' => $r_amount
+                ]);
+            }
         }
 
-        return redirect()->route('usersProfile')->with(session()->flash('alert-warning', 'Please fill profile first before access page!'));
+        return redirect()->route('usersSubmission')->with(session()->flash('alert-success', "You're apply are saved!"));
     }
 }

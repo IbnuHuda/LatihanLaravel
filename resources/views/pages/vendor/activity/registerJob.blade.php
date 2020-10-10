@@ -10,6 +10,14 @@
 
 @section('content')
 <div class="row">
+    <div class="flash-message col-lg-12">
+        @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+            @if (Session::has('alert-' . $msg))
+                <p class="alert alert-{{ $msg }} w-100">{{ Session::get('alert-' . $msg) }} <a href="" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
+            @endif
+        @endforeach
+    </div>
+    
     <div class="col-md-12">
         <div class="card">
             <div class="card-body">
@@ -69,12 +77,12 @@
                     </div>
 
                     <div class="mt-4 float-right">
-                        @if (Auth::user()->team_id == null)
-                            <button type="submit" class="btn btn-primary" onclick="return apply('team')"><i class="fa fa-users"></i> Submit As Team</button>
+                        @if (Auth::user()->team_id != null)
+                            <button type="submit" class="btn btn-primary" name="apply" value="1" onclick="return apply('team')"><i class="fa fa-users"></i> Submit As Team</button>
                         @else
                             <button type="submit" class="btn btn-danger" disabled><i class="fa fa-users"></i> Submit As Team</button>
                         @endif
-                        <button type="submit" class="btn btn-success" onclick="return apply()"><i class="fa fa-user"></i> Submit As Personally</button>
+                        <button type="submit" class="btn btn-success" name="apply" value="2" onclick="return apply()"><i class="fa fa-user"></i> Submit As Personally</button>
                     </div>
                 </form>
             </div>

@@ -94,9 +94,9 @@
 
                         <ul id="activityMenus">
                             <a href="{{ route('usersListJobs') }}"><li>List Job</li></a>
-                            <a href=""><li>Submission</li></a>
-                            <a href=""><li>Assesment</li></a>
-                            <a href=""><li>Approval</li></a>
+                            <a href="{{ route('usersSubmission') }}"><li>Submission</li></a>
+                            <a href="{{ route('usersAssesment') }}"><li>Assesment</li></a>
+                            <a href="{{ route('usersApporval') }}"><li>Approval</li></a>
                         </ul>
 
                     @endif
