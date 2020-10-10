@@ -16,7 +16,7 @@ class UsersRequestJoinTeam extends Mailable
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($data)
     {
         $this->email_data = $data;
     }
@@ -29,6 +29,5 @@ class UsersRequestJoinTeam extends Mailable
     public function build()
     {
         return $this->from(env('MAIL_FROM_ADDRESS'), 'VeCo.')->subject('Request to join your team')->view('emails.usersRequestJoinTeam', ['email_data' => $this->email_data]);
-        // return $this->view('view.name');
     }
 }

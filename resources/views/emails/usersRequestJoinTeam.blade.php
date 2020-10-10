@@ -1,4 +1,4 @@
-Hello, {{ $email_data['email'] }}!
+Hello!
 <br />
 Welcome to VeCo. Website
 <br />

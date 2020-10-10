@@ -25,13 +25,13 @@
 @section('content')
 <div class="row">
     <div class="flash-message col-lg-12">
-        @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+        @foreach (['danger', 'warning', 'success', 'info'] as $msg) 
             @if (Session::has('alert-' . $msg))
                 <p class="alert alert-{{ $msg }} w-100">{{ Session::get('alert-' . $msg) }} <a href="" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
             @endif
         @endforeach
     </div>
-
+    
     <div class="col-4">
         <div class="card">
             <div class="card-body">
@@ -93,12 +93,17 @@
                 <hr class="float-left" id="jobs" />
 
                 <div style="clear: both;"></div>
-
+                
                 <div class="row">
                     @foreach ($data_jobs as $job)
                         <div class="col-md-12 mt-2">
                             <div class="card">
                                 <div class="card-body">
+                                    @foreach ($companies_profile as $profile)
+                                        @if ($job->user_company_id == $profile->user_company_id)
+                                        <h5 class="card-title float-left">{{ $profile->name }}</h5>
+                                        @endif
+                                    @endforeach
                                     <p class="float-right" style="font-style: oblique;">Expired at {{ $job->jobs_expired }}</p>
                                     <div style="clear: both;"></div>
                                     <h6 class="card-subtitle text-muted mb-2 float-left">{{ $job->available_positions }}</h6>
@@ -129,7 +134,7 @@
                         <hr class="float-left" />
 
                         <div style="clear: both;"></div>
-
+                        
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">Name : {{ Auth::user()->name }}</li>
                             <li class="list-group-item">Email : {{ Auth::user()->email }}</li>
@@ -147,7 +152,7 @@
                         <hr class="float-left" />
 
                         <div style="clear: both;"></div>
-
+                        
                         @if (Auth::user()->team_id == null)
                             <p>You not joined to a team.</p>
                             <form method="post" action="{{ route('usersJoinTeam') }}">
@@ -163,9 +168,9 @@
                             </form>
                         @else
                             <ul class="list-group list-group-flush">
-                                <li class="list-group-item">Name Team : {{ $data_team->name }}</li>
-                                <!-- <li class="list-group-item">Owner : {{ Auth::user()->teamProfile }}</li> -->
-                                <a href="{{ route('usersProfileTeam') }}">Read More</a>
+                                <li class="list-group-item">Name Team : {{ Auth::user()->teamProfile->name }}</li>
+                                <li class="list-group-item">Owner : {{ Auth::user()->teamProfile->owner }}</li>
+                                <li class="list-group-item"><a href="{{ route('usersProfileTeam') }}" class="float-right">Read More</a></li>
                             </ul>
                         @endif
                     </div>

@@ -81,16 +81,6 @@ class CompanyController extends Controller
     	return redirect('/company-login')->withErrors(['password' => 'Email or password are wrong OR your account is not verified!']);
     }
 
-    public function profileForm()
-    {
-        
-    }
-
-    public function profile(Request $request)
-    {
-        
-    }
-
     public function validatePasswordRequestForm()
     {
         return view('auth.companyEmail');

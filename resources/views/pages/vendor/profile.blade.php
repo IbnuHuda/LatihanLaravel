@@ -1,6 +1,13 @@
 <style>
-    .img{
-        max-width: 10%;
+    div.card div.card-body hr {
+        width: 10%;
+        border: 1px solid #000;
+        margin-top: 0px;
+    }
+
+    .img-responsive.rounded-circle.mt-3 {
+        width: 50%;
+        margin-left: 25%;
     }
 </style>
 
@@ -21,22 +28,55 @@
     <div class="card-deck">
         <div class="card">
             <div class="card-body">
-                <img src="{{ (!$data->photo) ? asset('images/websites/def_photo.png') : url('storage/images/users/'. $data->photo) }}" class="img rounded-circle float-right h-10 w-10" id="photo">
-                <h5 class="card-title">{{ $data->name }}</h5>
+                <h4 class="card-title">Edit Profile</h4>
+                <hr class="float-left" />
 
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Gender : {{ (!$data->gender) ? '-' : $data->gender }}</li>
-                    <li class="list-group-item">Birth : {{ (!$data->place_of_birth && !$data->date_of_birth) ? '-' : $data->place_of_birth . ', ' . $data->date_of_birth }}</li>
-                    <li class="list-group-item">Address : {{ (!$data->address) ? '-' : $data->address }}</li>
-                    <li class="list-group-item">Contact : {{ (!$data->contact) ? '-' : $data->contact }}</li>
-                    <li class="list-group-item">Bio : <br />{{ (!$data->bio) ? '-' : $data->bio }}</li>
-                </ul>
+                <div style="clear: both;"></div>
+
+                <img src="{{ (!$data->photo) ? asset('images/websites/def_photo.png') : url('storage/images/users/'. $data->photo) }}" class="img-responsive rounded-circle mt-3" id="photo">
+                <table border="0" class="table table-striped mt-4"  style="font-size: 15px; color:black">
+                    <tbody>
+                        <tr>
+                            <td>Name</td>
+                            <td>:</td>
+                            <td>{{ $data->name }}</td>
+                        </tr>
+                        <tr>
+                            <td>Gender</td>
+                            <td>:</td>
+                            <td>{{ (!$data->gender) ? '-' : $data->gender }}</td>
+                        </tr>
+                        <tr>
+                            <td>Birth</td>
+                            <td>:</td>
+                            <td>{{ (!$data->place_of_birth && !$data->date_of_birth) ? '-' : $data->place_of_birth . ', ' . $data->date_of_birth }}</td>
+                        </tr>
+                        <tr>
+                            <td>Address</td>
+                            <td>:</td>
+                            <td>{{ (!$data->address) ? '-' : $data->address }}</td>
+                        </tr>
+                        <tr>
+                            <td>Contact</td>
+                            <td>:</td>
+                            <td>{{ (!$data->contact) ? '-' : $data->contact }}</td>
+                        </tr>
+                        <tr>
+                            <td>Bio</td>
+                            <td>:</td>
+                            <td>{{ (!$data->bio) ? '-' : $data->bio }}</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
 
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Edit Profile</h5>
+                <h4 class="card-title">Edit Profile</h4>
+                <hr class="float-left" />
+
+                <div style="clear: both;"></div>
 
                 <form action="{{ route('usersProfile') }}" method="post" enctype="multipart/form-data">
                 @csrf
@@ -100,7 +140,7 @@
                             <label for="uploadPhoto">Photo Profile</label>
                             <div class="custom-file">
                                 <input type="file" class="custom-file-input" id="uploadPhoto" name="photo">
-                                <label class="custom-file-label" for="customFile">Choose file</label>
+                                <label class="custom-file-label" id="imageLabel" for="customFile">Choose file</label>
                             </div>
                         </div>
                     </div>
@@ -116,4 +156,6 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript" src="{{ asset('js/image.js') }}" defer></script>
 @endsection

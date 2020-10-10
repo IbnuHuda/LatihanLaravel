@@ -21,6 +21,10 @@ class LiveDataController extends Controller
 
         $data = explode('|', $data[0]);
 
-        return $data;
+        $picture = [];
+
+        foreach ($data as $value) $picture[] = url(public_path('storage') . '/company/portofolios/' . $value);
+
+        return response()->json($picture);
     }
 }

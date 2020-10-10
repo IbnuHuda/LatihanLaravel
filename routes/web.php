@@ -50,7 +50,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 	Route::post('/users/team/create', 'TeamProfileController@createTeam');
     Route::get('/users/team/profile', 'TeamProfileController@profileTeamForm')->name('usersProfileTeam');
     Route::post('/users/team/join', 'TeamProfileController@joinTeam')->name('usersJoinTeam');
-    Route::post('/users/team/joined', 'TeamProfileController@joinedTeam');
+    Route::get('/users/team/joined', 'TeamProfileController@joinedTeam');
 
 	Route::get('/users/job/list', 'UsersJobRegisteredController@listJobsForm')->name('usersListJobs');
 	Route::get('/users/job/detail/{id}', 'UsersJobRegisteredController@detailJobsForm')->name('usersDetailJobs');

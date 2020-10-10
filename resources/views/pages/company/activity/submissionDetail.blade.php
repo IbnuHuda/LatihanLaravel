@@ -9,18 +9,18 @@
 
 @section('content')
 <div class="row">
-	<div class="col-md-12">
+    <div class="col-md-12">
         <div class="flash-message col-lg-12">
-            @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+            @foreach (['danger', 'warning', 'success', 'info'] as $msg) 
                 @if (Session::has('alert-' . $msg))
                     <p class="alert alert-{{ $msg }} w-100">{{ Session::get('alert-' . $msg) }} <a href="" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
                 @endif
             @endforeach
         </div>
 
-		<div class="card">
-			<div class="card-body">
-				<h4 class="card-title">Submission Jobs Detail</h4>
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Submission Jobs Detail</h4>
                 <hr class="float-left" />
 
                 <br />
@@ -42,7 +42,7 @@
                                     <th scope="col" colspan="2">Action</th>
                                 </tr>
                             </thead>
-
+                    
                             <tbody>
                                 @foreach ($list_user_jobs as $list)
                                 @php
@@ -53,8 +53,7 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $list->user->name }}</td>
                                     <td>{{ $list->user->email }}</td>
-                                    {{-- <td>{{  explode(' ', $list->created_at)[0] }}</td> --}}
-                                    <td>{{$result}}</td>
+                                    <td>{{ $result }}</td>
                                     <td>{{ count(explode('|', $list->portofolio_uploaded)) }}</td>
                                     <td>
                                         @if ($list->score == null)
@@ -81,7 +80,10 @@
                                             </div>
 
                                             <div class="modal-body">
-                                                <img src="">
+                                                <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+                                                    <div class="carousel-inner" id="submission">
+                                                    </div>
+                                                </div>
                                             </div>
 
                                             <div class="modal-footer">
@@ -100,9 +102,9 @@
                 <div class="float-left">
                     <button onclick="window.history.back();" class="btn btn-md btn-danger"><i class="fa fa-arrow-left"></i> Back</button>
                 </div>
-			</div>
-		</div>
-	</div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script type="text/javascript" src="{{ asset('js/submission.js') }}" defer></script>

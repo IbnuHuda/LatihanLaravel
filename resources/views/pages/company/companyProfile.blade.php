@@ -24,7 +24,7 @@
 				<h4 class="card-title">Company Profile</h4>
 				<hr class="float-left" />
 
-				<br />
+				<div style="clear: both;"></div>
 
 				<div class="text-center mb-3">
 					<img src="{{ ($data == null || $data->company_logo == null) ? asset('images/websites/def_photo.png') : url('storage/images/company/'. $data->company_logo) }}" class="w-50">

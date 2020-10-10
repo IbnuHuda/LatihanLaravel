@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use DateTime;
 use App\User;
 use App\UsersProfile;
 use Illuminate\Http\Request;
@@ -11,7 +12,8 @@ use Illuminate\Support\Facades\Auth;
 class UsersProfileController extends Controller
 {
     public function profileForm() {
-        $data = User::select('users.name', 'users_profile.contact', 'users_profile.gender', 'users_profile.place_of_birth', 'users_profile.date_of_birth', 'users_profile.address', 'users_profile.photo', 'users_profile.bio')
+        $data = User::where('users.id', '=', Auth::user()->id)
+            ->select('users.name', 'users_profile.contact', 'users_profile.gender', 'users_profile.place_of_birth', 'users_profile.date_of_birth', 'users_profile.address', 'users_profile.photo', 'users_profile.bio')
             ->leftJoin('users_profile', 'users_profile.user_id', '=', 'users.id')
             ->first();
 
@@ -19,8 +21,8 @@ class UsersProfileController extends Controller
     }
 
     public function editProfile(Request $request) {
-        $name_data = User::where('id', '=', Auth::user()->id)->first();
-        $data = UsersProfile::where('user_id', '=', Auth::user()->id)->first();
+        $name_data = User::where('id', '=', Auth::user()->id);
+        $data = UsersProfile::where('user_id', '=', Auth::user()->id);
 
         if ($request->hasFile('photo')) {
             if ($request->file('photo')->isValid()) {
@@ -37,7 +39,6 @@ class UsersProfileController extends Controller
                         'photo' => $name_data->id . '_' . str_replace(' ', '_', $name_data->name) . '_' . $filename
                     ]
                 );
-
             }
         }
 
@@ -66,3 +67,4 @@ class UsersProfileController extends Controller
         return view('pages.vendor.viewProfile', compact('data', 'pData'));
     }
 }
+
