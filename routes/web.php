@@ -56,6 +56,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
 	Route::get('/users/job/detail/{id}', 'UsersJobRegisteredController@detailJobsForm')->name('usersDetailJobs');
     Route::get('/users/job/register/{id}', 'UsersJobRegisteredController@registerJobsForm')->name('usersRegisterJobs');
 	Route::post('/users/job/register', 'UsersJobRegisteredController@registerJobs')->name('usersJobsRegister');
+
+	Route::get('/users/activity/submission', 'UsersActivityController@submission')->name('usersSubmission');
+	Route::get('/users/activity/assesment', 'UsersActivityController@assesment')->name('usersAssesment');
+	Route::get('/users/activity/approval', 'UsersActivityController@approval')->name('usersApporval');
 });
 
 Route::middleware('auth:company')->group(function () {

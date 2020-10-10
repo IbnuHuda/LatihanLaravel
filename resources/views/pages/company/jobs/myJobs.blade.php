@@ -34,7 +34,7 @@
                 <div class="mt-2"></div>
 
                 @if ($jobs->isEmpty())
-                    <p class="alert alert-danger w-100"><i class="fa fa-times-circle"></i> You not publish a job. <a href="{{ route('companyPublishJobs') }}">Publish now.</a></p>
+                    <p class="alert alert-warning w-100"><i class="fa fa-times-circle"></i> You not publish a job. <a href="{{ route('companyPublishJobs') }}">Publish now.</a></p>
                 @else
                     <div class="row">
                         @foreach($jobs as $job)

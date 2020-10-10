@@ -72,7 +72,7 @@
                         @if (Auth::user()->team_id == null)
                             <button type="submit" class="btn btn-primary" onclick="return apply('team')"><i class="fa fa-users"></i> Submit As Team</button>
                         @else
-                            <button type="submit" class="btn btn-danger" onclick="return apply('team')" disabled><i class="fa fa-users"></i> Submit As Team</button>
+                            <button type="submit" class="btn btn-danger" disabled><i class="fa fa-users"></i> Submit As Team</button>
                         @endif
                         <button type="submit" class="btn btn-success" onclick="return apply()"><i class="fa fa-user"></i> Submit As Personally</button>
                     </div>

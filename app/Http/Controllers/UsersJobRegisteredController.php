@@ -102,6 +102,6 @@ class UsersJobRegisteredController extends Controller
             ]);
         }
 
-        return response()->json($stats);
+        return redirect()->route('usersProfile')->with(session()->flash('alert-warning', 'Please fill profile first before access page!'));
     }
 }

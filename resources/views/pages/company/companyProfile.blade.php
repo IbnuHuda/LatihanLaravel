@@ -5,7 +5,6 @@
         margin-top: 0px;
     }
 </style>
-
 @extends('layouts.dashboard')
 
 @section('content')
@@ -31,15 +30,45 @@
 				</div>
 
 				<div class="card-text">
-					<ul class="list-group list-group-flush">
-	                    <li class="list-group-item">Company Name : {{ ($data == null || $data->name == null) ? '-' : $data->name }}</li>
-	                    <li class="list-group-item">Work Field : {{ ($data == null || $data->work_field == null) ? '-' : $data->work_field }}</li>
-	                    <li class="list-group-item">Date Built : {{ ($data == null || $data->date_of_built == null) ? '-' : $data->date_of_built	 }}</li>
-	                    <li class="list-group-item">Company Address : {{ ($data == null || $data->company_address == null) ? '-' : $data->company_address }}</li>
-	                    <li class="list-group-item">Email Address : {{ ($data == null || $data->contact_email == null) ? '-' : $data->contact_email }}</li>
-	                    <li class="list-group-item">Call Phone : {{ ($data == null || $data->contact_number == null) ? '-' : $data->contact_number }}</li>
-	                    <li class="list-group-item">Company Description : <br />{{ ($data == null || $data->company_description == null) ? '-' : $data->company_description }}</li>
-	                </ul>
+					<table border="0" class="table table-striped mt-4"  style="font-size: 15px; color:black">
+	                    <tbody>
+	                        <tr>
+	                            <td>Company Name</td>
+	                            <td>:</td>
+	                            <td>{{ ($data == null || $data->name == null) ? '-' : $data->name }}</td>
+	                        </tr>
+	                        <tr>
+	                            <td>Work Field</td>
+	                            <td>:</td>
+	                            <td>{{ ($data == null || $data->work_field == null) ? '-' : $data->work_field }}</td>
+	                        </tr>
+	                        <tr>
+	                            <td>Date Built</td>
+	                            <td>:</td>
+	                            <td>{{ ($data == null || $data->date_of_built == null) ? '-' : $data->date_of_built }}</td>
+	                        </tr>
+	                        <tr>
+	                            <td>Company Address</td>
+	                            <td>:</td>
+	                            <td>{{ ($data == null || $data->company_address == null) ? '-' : $data->company_address }}</td>
+	                        </tr>
+	                        <tr>
+	                            <td>Email</td>
+	                            <td>:</td>
+	                            <td>{{ ($data == null || $data->contact_email == null) ? '-' : $data->contact_email }}</td>
+	                        </tr>
+	                        <tr>
+	                            <td>Call Phone</td>
+	                            <td>:</td>
+	                            <td>{{ ($data == null || $data->contact_number == null) ? '-' : $data->contact_number }}</td>
+	                        </tr>
+	                        <tr>
+	                            <td style="width: 37.5%;">Company Description</td>
+	                            <td>:</td>
+	                            <td>{{ ($data == null || $data->company_description == null) ? '-' : $data->company_description }}</td>
+	                        </tr>
+	                    </tbody>
+	                </table>
 				</div>
 			</div>
 		</div>
@@ -79,7 +108,7 @@
 	                            <label for="uploadPhoto">Company Logo</label>
 	                            <div class="custom-file">
 	                                <input type="file" class="custom-file-input" id="uploadPhoto" name="photo">
-	                                <label class="custom-file-label" for="customFile">Choose file</label>
+	                                <label class="custom-file-label" id="imageLabel" for="customFile">Choose file</label>
 	                            </div>
 	                        </div>
 	                    </div>
@@ -131,5 +160,5 @@
 	</div>
 </div>
 
-    
+<script type="text/javascript" src="{{ asset('js/image.js') }}" defer></script>
 @endsection
