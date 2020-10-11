@@ -12,6 +12,7 @@ use App\CompanyJobStep;
 use App\UsersJobRegistered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\MailController;
 
 class CompanyJobStepController extends Controller
 {
@@ -33,7 +34,7 @@ class CompanyJobStepController extends Controller
 
         if ($data != null) {
             $list_user_jobs = UsersJobRegistered::
-                        where('score', '=', 'null')
+                        where('id', '=', $id)
                         ->orWhereNull('score')
                         ->orderBy('created_at','asc')
                         ->paginate(8);
@@ -76,42 +77,72 @@ class CompanyJobStepController extends Controller
         return redirect()->route('companyStepSubmission')->with(session()->flash('alert-success', 'Score was submitted.'));
     }
 
-    public function assesmentForm(){
+    public function assesmentForm()
+    {
+        $data = CompanyProfile::where('user_company_id', '=', Auth::guard('company')->user()->id)->first();
 
-        $result = UsersJobRegistered::orderBy('score','desc')->paginate(8);
-        return view('pages.company.activity.assesment', compact('result'));
+        if ($data != null) {
+            $jobs = CompanyJobs::where('user_company_id', '=', Auth::guard('company')->user()->id)->get();
+
+            return view('pages.company.activity.assesment', compact('jobs'));
+        }
+        else return redirect()->route('companySelfProfile')->with(session()->flash('alert-warning', 'Please fill profile first before access page!'));
+    }
+
+    public function assesmentDetailForm($id)
+    {
+        $result = UsersJobRegistered::
+                    where('score', '!=', 'null')
+                    ->where('id', '=', $id)
+                    ->orderBy('score','desc')
+                    ->get();
+
+        return view('pages.company.activity.assesmentDetail', compact('result'));
     }
 
     public function assesmentProcess(Request $request){
-        $total = count($request->accept) ;
-        for ($i=0; $i < $total; $i++) {
-            $new = new CompanyJobStep;
-            $new->company_job_id = $request->company_job_id[$i];
-            $new->step_name = $request->step_name[$i];
-            $new->user_id_accepted   = $request->user_id_accept[$i];
-            $new->inweb_message_to_vendor = $request->inweb_message_to_vendor[$i];
-        $new->save();          # code...
+        $data = CompanyJobs::where('user_company_id', '=', Auth::guard('company')->user()->id)->first();
 
+        if (count($request->approval) > $data->vendor_accepted_total) 
+            return redirect()->route('companyStepAssesment')->with(session()->flash('alert-danger', 'Vendor accepted must less or equal then ' . $data->vendor_accepted_total));
+
+        foreach ($request->approval as $user) {
+            $vendor = UsersJobRegistered::where('id', '=', $user)->first();
+
+            CompanyJobStep::create([
+                'company_job_id' => $data->id,
+                'step_name' => 'approved',
+                'user_id_accepted' => $vendor->user->id,
+                'inweb_message_to_vendor' => null
+            ]);
         }
 
+        $vendor_data = UsersJobRegistered::where('company_job_id', '=', $data->id)->get();
 
-        return redirect()->route('companyStepAssesment')->with(session()->flash('alert-success', 'Assesment successful!'));
+        foreach ($vendor_data as $value) UsersJobRegistered::find($value->id)->delete();
+
+        return redirect()->route('companyStepApproval')->with(session()->flash('alert-success', 'Assesment successful!'));
     }
 
-    public function assesmentDetailForm($id){
-        $user = User::find($id);
-        $user_profile = UsersProfile::where('user_id', $id)->get();
-        // dd($user_profile[0]);
-        return view('pages.company.activity.user-profile', compact('user','user_profile'));
+    public function approvalForm()
+    {
+        $data = CompanyProfile::where('user_company_id', '=', Auth::guard('company')->user()->id)->first();
 
+        if ($data != null) {
+            $jobs = CompanyJobs::where('user_company_id', '=', Auth::guard('company')->user()->id)->get();
 
+            return view('pages.company.activity.approval', compact('jobs'));
+        }
+        else return redirect()->route('companySelfProfile')->with(session()->flash('alert-warning', 'Please fill profile first before access page!'));
     }
 
-    public function approvalForm(){
+    public function approvalDetailForm($id)
+    {
+        $data = CompanyJobStep::where('company_job_id', '=', $id)->paginate(8);
+        $data_job = CompanyJobs::where('id', '=', $id)->first();
+        $data_job = $data_job->available_positions;
 
-        $result = CompanyJobStep::all();
-        $company_profile = UserCompany::where('id', Auth::guard('company')->user()->id)->get();
-        return view('pages.company.activity.approval', compact('result', 'company_profile'));
+        return view('pages.company.activity.approvalDetail', compact('data', 'data_job'));
     }
 
     public function ratingProcess(Request $request){

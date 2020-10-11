@@ -9,15 +9,15 @@
 
 @section('content')
 <div class="row">
+    <div class="flash-message col-lg-12">
+        @foreach (['danger', 'warning', 'success', 'info'] as $msg) 
+            @if (Session::has('alert-' . $msg))
+                <p class="alert alert-{{ $msg }} w-100">{{ Session::get('alert-' . $msg) }} <a href="" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
+            @endif
+        @endforeach
+    </div>
+    
     <div class="col-md-12">
-        <div class="flash-message col-lg-12">
-            @foreach (['danger', 'warning', 'success', 'info'] as $msg) 
-                @if (Session::has('alert-' . $msg))
-                    <p class="alert alert-{{ $msg }} w-100">{{ Session::get('alert-' . $msg) }} <a href="" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
-                @endif
-            @endforeach
-        </div>
-
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">Submission Jobs Detail</h4>
@@ -55,6 +55,7 @@
                                     <td>{{ ($list->user_id == null) ? $list->teamProfile->name : $list->user->name }}</td>
                                     <td>{{ ($list->user_id == null) ? "-" : $list->user->email }}</td>
                                     <td>{{ ($list->user_id == null) ? "Team" : "Person" }}</td>
+                                    <td>{{ $result }}</td>
                                     <td>{{ count(explode('|', $list->portofolio_uploaded)) }}</td>
                                     <td>
                                         @if ($list->score == null)

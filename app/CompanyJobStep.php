@@ -14,4 +14,9 @@ class CompanyJobStep extends Model
     {
 		return $this->belongsTo(CompanyJobs::class);
     }
+
+    public function user()
+    {
+    	return $this->belongsTo(User::class, 'user_id_accepted', 'id');
+    }
 }

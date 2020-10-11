@@ -60,6 +60,7 @@ class UsersJobRegisteredController extends Controller
     public function registerJobs(Request $request)
     {
         $data = UsersJobRegistered::where('id', '=', Auth::user()->id);
+        $portofolios = [];
         $p_amount = 0;
         $r_amount = 0;
 
