@@ -88,7 +88,7 @@ class CompanyJobsController extends Controller
         $data = CompanyProfile::where('user_company_id', '=', Auth::guard('company')->user()->id)->first();
 
         if ($data != null) {
-            $detail_jobs = CompanyJobs::where('id', '=', $id)->first();
+            $detail_jobs = CompanyJobs::where('company_job_id', '=', $id)->first();
 
             return view('pages.company.jobs.detail', compact('data', 'detail_jobs'));
         }
