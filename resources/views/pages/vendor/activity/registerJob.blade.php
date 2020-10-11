@@ -17,7 +17,7 @@
             @endif
         @endforeach
     </div>
-
+    
     <div class="col-md-12">
         <div class="card">
             <div class="card-body">
@@ -49,14 +49,14 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="text-area-p">Describe Your Team/Yourself <span style="color: red">*</span></label>
-                        <textarea name="proposal" class="form-control" id="text-area-p" rows="3" placeholder="Type about yourself" required></textarea>
+                        <label for="text-area-p">Describe Yourself <span style="color: red">*</span></label>
+                        <textarea name="proposal" class="form-control" id="text-area-p" rows="3" placeholder="Type about yourself"></textarea>
                     </div>
 
                     <div class="form-group">
                         <label for="salary">Salary</label>
                         <div class="input-group">
-                            <input type="number" class="form-control" name="salary" id="salary" placeholder="Rp. 10.000.000" required>
+                            <input type="number" class="form-control" name="salary" id="salary" placeholder="Rp. 10.000.000">
                             <div class="input-group-append">
                                 <div class="input-group-text">IDR</div>
                             </div>
@@ -71,8 +71,8 @@
                     <div class="form-group">
                         <label for="portofolio">Portofolio <span style="color: red;">*max 4</span></label>
                         <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="portofolio" name="portofolios[]" multiple required>
-                            <label class="custom-file-label form-control" id="imageLabel" for="portofolio">Portofolio</label>
+                            <input type="file" class="custom-file-input" id="portofolio" name="portofolios[]" multiple>
+                            <label class="custom-file-label form-control" for="portofolio">Portofolio</label>
                         </div>
                     </div>
 

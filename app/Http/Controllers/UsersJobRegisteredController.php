@@ -66,26 +66,23 @@ class UsersJobRegisteredController extends Controller
         if($files = $request->file('portofolios')){
             foreach($files as $file) $p_amount++;
 
-            if ($p_amount > 4) return redirect()->back()->with(session()->flash('alert-danger', "Portofolio must lower or equal then 4."));
+            if ($p_amount > 4) return redirect()->back()->with(session()->flash('alert-danger', "Portofolio must lower or equal then four."));
+
+            foreach ($files as $file) {
+                $name = $file->getClientOriginalName();
+                $file->storeAs('/public/images/portofolio/', Auth::user()->id . "_" . $name);
+                $portofolios[] = Auth::user()->id . "_" . $name;
+            }
         }
+
+        $result = implode("|", $portofolios);
+        $r_amount++;
 
         if ($request->apply == 1) {
             $data_team = TeamProfile::where('id', '=', Auth::user()->team_id)->first();
 
             if (Auth::user()->name != $data_team->owner) return redirect()->back()->with(session()->flash('alert-danger', "Only leader team can apply job as team."));
-
             else {
-                if($files = $request->file('portofolios')){
-                    foreach ($files as $file) {
-                        $name = $file->getClientOriginalName();
-                        $file->storeAs('/public/images/company/portofolio/', Auth::user()->id . "_" . $name);
-                        $portofolios[] = Auth::user()->id . "_" . $name;
-                    }
-                }
-
-                $result = implode("|", $portofolios);
-                $r_amount++;
-
                 $data->create([
                     'team_id' => $data_team->id,
                     'company_job_id' => $request->job,
@@ -118,17 +115,6 @@ class UsersJobRegisteredController extends Controller
 
         }
         else {
-            if($files = $request->file('portofolios')){
-                foreach ($files as $file) {
-                    $name = $file->getClientOriginalName();
-                    $file->storeAs('/public/images/company/portofolio/', Auth::user()->id . "_" . $name);
-                    $portofolios[] = Auth::user()->id . "_" . $name;
-                }
-            }
-
-            $result = implode("|", $portofolios);
-            $r_amount++;
-                
             $data->create([
                 'user_id' => Auth::user()->id,
                 'company_job_id' => $request->job,
