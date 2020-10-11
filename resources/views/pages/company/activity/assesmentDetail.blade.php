@@ -24,11 +24,11 @@
                 <hr class="float-left" />
 
                 <div style="clear: both;"></div>
-                <div class="mt-2"></div> 
+                <div class="mt-2"></div>
 
                 <form action="{{ route('companyAssesment') }}" method="POST">
                     @csrf
-                    
+
                     @if ($result->isEmpty())
                     <p class="alert alert-danger w-100"><i class="fa fa-times-circle"></i> <a href="{{ route('companyStepSubmission') }}">Please validate vendor submission first!</a></p>
                     @else
@@ -62,11 +62,12 @@
                             @endforeach
                         </tbody>
                     </table>
-                    @endif
+                    <input type="hidden" name="job" value="{{ Request::route('id') }}">
 
                     <div class="float-right mt-3">
                         <button type="submit" class="btn btn-md btn-success"><i class="fa fa-plus"></i> Submit</button>
                     </div>
+                    @endif
                 </form>
             </div>
         </div>

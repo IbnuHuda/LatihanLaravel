@@ -65,7 +65,6 @@ label.star:before {
                         <tr class="bg-primary text-light ">
                             <th scope="col">#</th>
                             <th scope="col">Name</th>
-                            <th scope="col">Position</th>
                             <th scope="col">Message</th>
                             <th scope="col">Action</th>
                         </tr>
@@ -75,7 +74,6 @@ label.star:before {
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $list->user->name }}</td>
-                            <td>{{ $data_job }}</td>
                             <td>{{ ($list->inweb_message_to_vendor == null) ? '-' : $list->inweb_message_to_vendor == null }}</td>
                             <td>
                                 <button class="btn btn-warning" data-toggle="modal" data-target="#rating">End Projects</button>

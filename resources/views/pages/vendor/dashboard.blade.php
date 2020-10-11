@@ -91,13 +91,13 @@
 
                 <div class="card-text">
                     <div class="float-left" id="rating">
+                        <i class="fa fa-star fa-2x"></i>
+                        {{-- <i class="fa fa-star"></i>
                         <i class="fa fa-star"></i>
                         <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i> --}}
                     </div>
-                    <p id="font" class="float-right">{{( $data_stat == null || $data_stat->rating_granted_amount == null) ? '0.0' : $data_stat->rating_granted_amount }}/5.0</p>
+                    <p id="font" class="float-right">{{( $data_stat == null || $data_stat->rating_granted == null) ? '0.0' : $data_stat->rating_granted }} / 5.0</p>
                 </div>
             </div>
         </div>
@@ -321,11 +321,8 @@
 
                             <div class="card-text">
                                 <div class="float-left" id="rating">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star fa-2x"></i>
+
                                 </div>
                                 <p id="font" class="float-right">{{( $data_stat == null || $data_stat->rating_granted == null) ? '0.0' : $data_stat->rating_granted }}/5.0</p>
                             </div>

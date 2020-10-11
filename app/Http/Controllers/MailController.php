@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Mail\CompanyRegister;
 use App\Mail\CompanyResetPassword;
 use App\Mail\UsersRequestJoinTeam;
+use App\Mail\UsersAcceptedJob;
+use App\Mail\UsersRejectedJob;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 

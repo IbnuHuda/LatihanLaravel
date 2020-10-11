@@ -23,7 +23,7 @@
 </head>
 <body class="dark-theme">
     <div id="app">
-        <div id="sidebar" class="sidebar-expanded d-none d-md-block col-4">
+        <div id="sidebar" class="sidebar-expanded d-block col-4">
             <header>
                 <a href="{{ route('index') }}" class="d-flex justify-content-center align-items-center mt-3">
                     <img src="{{ asset('images/websites/Logo_VeCo.png') }}" id="VeCoLogo" class="img-responsive">
@@ -117,17 +117,17 @@
                 @csrf
                 <input type="hidden" id="tokenUsers" value="{{ csrf_token() }}">
 
-                <div class="input-group w-25 float-left">
+                {{-- <div class="input-group w-25 float-left">
                     <input type="text" class="form-control" id="searchUsers" placeholder="Search user ..." aria-label="Recipient's username" aria-describedby="basic-addon2">
 
                     <div class="input-group-append">
                         <span class="input-group-text" id="basic-addon2">@</span>
                     </div>
-                </div>
+                </div> --}}
                 @if (Auth::guard('company')->check())
-                    <img src="{{ (Auth::user()->usersProfile->isEmpty() || Auth::user()->usersProfile[0]->photo == null) ? asset('/images/websites/def_photo.png') : url('storage/images/company'. Auth::user()->usersProfile[0]->photo) }}" class="rounded-circle float-right" id="photo" data-toggle="tooltip" data-html="true">
+                    <img src="{{ (Auth::guard('company')->user()->usersProfile->isEmpty() || Auth::guard('company')->user()->usersProfile[0]->photo == null) ? asset('images/websites/def_photo.png') : url('storage/images/company/'. Auth::guard('company')->user()->usersProfile[0]->photo) }}" style="border: 0.5px solid #fff;" class="rounded-circle float-right" id="photo" data-toggle="tooltip" data-html="true">
                 @else
-                    <img src="{{ (Auth::user()->usersProfile->isEmpty() || Auth::user()->usersProfile[0]->photo == null) ? asset('/images/websites/def_photo.png') : url('storage/images/company'. Auth::user()->usersProfile[0]->photo) }}" class="rounded-circle float-right" id="photo" data-toggle="tooltip" data-html="true">
+                    <img src="{{ (Auth::user()->usersProfile->isEmpty() || Auth::user()->usersProfile[0]->photo == null) ? asset('images/websites/def_photo.png') : url('storage/images/users/'. Auth::user()->usersProfile[0]->photo) }}" class="rounded-circle float-right" id="photo" style="border: 0.5px solid #fff;" data-toggle="tooltip" data-html="true">
                 @endif
                 {{-- <img src="{{ asset('/images/users/1/示例图片_01.jpg') }}" > --}}
             </div>
@@ -155,7 +155,6 @@
             @if (Auth::guard('company')->check())
                 <span>Logged as <br /><strong>{{ Auth::guard('company')->user()->name }}</strong></span>
                 <hr width="100%" />
-                <a href="">Profile</a><br />
                 <a href="{{ route('companyLogout') }}">Logout</a>
         </div>
             @else

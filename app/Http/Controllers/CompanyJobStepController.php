@@ -64,7 +64,7 @@ class CompanyJobStepController extends Controller
         if (is_array($data_image)) $count = count($data_image);
 
         $score = [];
-        
+
         if (isset($request->portofolio1)) $score[] = $request->portofolio1;
         if (isset($request->portofolio2)) $score[] = $request->portofolio2;
         if (isset($request->portofolio3)) $score[] = $request->portofolio3;
@@ -102,7 +102,7 @@ class CompanyJobStepController extends Controller
     }
 
     public function userDetail($id)
-    {        
+    {
         $data = UsersProfile::where('user_id', '=', $id)->first();
         $data_stat = StatisticUsers::where('user_id', '=', $id)->first();
 
@@ -113,43 +113,65 @@ class CompanyJobStepController extends Controller
     {
         $data = TeamProfile::where('id', '=', $id)->first();
         $total = User::where('team_id' , '=' , $data->id)->orderBy('id', 'desc')->get();
-        
+
         $i = 0;
         foreach ($total as $tot) $i++;
 
         return view('pages.company.activity.teamProfile', compact('data', 'i', 'total'));
     }
 
-    public function assesmentProcess(Request $request){
+    public function assesmentProcess(Request $request) {
         $data = CompanyJobs::where('user_company_id', '=', Auth::guard('company')->user()->id)->first();
+        $company = CompanyProfile::where('user_company_id', '=', $data->user_company_id)->first();
 
-        if (count($request->approval) > $data->vendor_accepted_total) 
+        if (count($request->approval) > $data->vendor_accepted_total)
             return redirect()->route('companyStepAssesment')->with(session()->flash('alert-danger', 'Vendor accepted must less or equal then ' . $data->vendor_accepted_total));
 
         foreach ($request->approval as $user) {
             $vendor = UsersJobRegistered::where('id', '=', $user)->first();
 
-            MailController::acceptedJob($data->userCompany->companyProfile->name, $data->available_positions, $vendor->user->email);
+            if ($vendor->team_id != null) {
+                $data_team = TeamProfile::where('id', '=', $vendor->team_id)->first();
+                $user = User::where('name', '=', $data_team->owner)->first();
 
-            CompanyJobStep::create([
-                'company_job_id' => $data->id,
-                'step_name' => 'approved',
-                'user_id_accepted' => $vendor->user->id,
-                'inweb_message_to_vendor' => null
-            ]);
+                MailController::acceptedJob($company->name, $data->available_positions, $user->email);
+
+                CompanyJobStep::create([
+                    'company_job_id' => $data->id,
+                    'step_name' => 'approved',
+                    'user_id_accepted' => $data_team->id,
+                    'inweb_message_to_vendor' => null
+                ]);
+            }
+            else {
+                $user = User::where('id', '=', $vendor->user_id)->first();
+
+                MailController::acceptedJob($company->name, $data->available_positions, $user->email);
+
+                CompanyJobStep::create([
+                    'company_job_id' => $data->id,
+                    'step_name' => 'approved',
+                    'user_id_accepted' => $vendor->user->id,
+                    'inweb_message_to_vendor' => null
+                ]);
+            }
+
+            $vendor->delete();
         }
 
         $vendor_data = UsersJobRegistered::where('company_job_id', '=', $data->id)->get();
 
         foreach ($vendor_data as $value) {
-            if ($value->user_id != null) 
-                MailController::rejectedJob($data->userCompany->companyProfile->name, $data->available_positions, $value->user->email);
+            $user = User::where('id', '=', $value->user_id)->first();
+
+            if ($value->user_id != null)
+                MailController::rejectedJob($company->name, $data->available_positions, $user->email);
 
             else {
                 $data_team = TeamProfile::where('id', '=', $value->team_id)->first();
                 $user = User::where('name', '=', $data_team->owner)->first();
 
-                MailController::rejectedJob($data->userCompany->companyProfile->name, $data->available_positions, $user->email);
+                MailController::rejectedJob($company->name, $data->available_positions, $user->email);
             }
 
             UsersJobRegistered::find($value->id)->delete();
@@ -173,19 +195,25 @@ class CompanyJobStepController extends Controller
     public function approvalDetailForm($id)
     {
         $data = CompanyJobStep::where('company_job_id', '=', $id)->paginate(8);
-        $data_job = CompanyJobs::where('id', '=', $id)->first();
-        $data_job = $data_job->available_positions;
 
-        return view('pages.company.activity.approvalDetail', compact('data', 'data_job'));
+        return view('pages.company.activity.approvalDetail', compact('data'));
     }
 
     public function ratingProcess(Request $request){
         $data = CompanyJobStep::where('company_job_id', '=', $request->job)->first();
 
         $vendor_data = StatisticUsers::where('user_id', '=', $data->user_id_accepted)->first();
+        $rat = 0;
+        if ($vendor_data != null && $vendor_data->rating_granted != null) {
+            $rat = $vendor_data->rating_granted;
+            $rat += $request->rating;
+            $rat /= 2;
+        }
+        else {
+            $rat = $request->rating;
+        }
 
-        $rating = $vendor_data->rating_granted + $request->rating;
-        $vendor_data->update(['rating_granted' => $rating]);
+        $vendor_data->update(['rating_granted' => $rat]);
 
         $temp = $data->where('user_id_accepted', '=', $vendor_data->user_id)->delete();
 
