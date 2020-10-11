@@ -37,4 +37,26 @@ class MailController extends Controller
 
         Mail::to($owner_email)->send(new UsersRequestJoinTeam($data));
     }
+
+    public static function acceptedJob($company_name, $position, $email_to)
+    {
+    	$data = [
+            'company_name' => $company_name,
+            'position' => $position,
+            'email_to' => $email_to
+        ];
+
+        Mail::to($email_to)->send(new UsersAcceptedJob($data));
+    }
+
+    public static function rejectedJob($company_name, $position, $email_to)
+    {
+    	$data = [
+            'company_name' => $company_name,
+            'position' => $position,
+            'email_to' => $email_to
+        ];
+
+        Mail::to($email_to)->send(new UsersRejectedJob($data));
+    }
 }

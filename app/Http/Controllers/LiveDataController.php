@@ -14,17 +14,4 @@ class LiveDataController extends Controller
 
     	return json_encode($result);
     }
-
-    public function getImage(Request $request) 
-    {
-        $data = UsersJobRegistered::where('id', '=', $request->user_registered_id)->pluck('portofolio_uploaded');
-
-        $data = explode('|', $data[0]);
-
-        $picture = [];
-
-        foreach ($data as $value) $picture[] = url(public_path('storage') . '/company/portofolios/' . $value);
-
-        return response()->json($picture);
-    }
 }

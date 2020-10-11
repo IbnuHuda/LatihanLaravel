@@ -129,6 +129,8 @@ class CompanyJobStepController extends Controller
         foreach ($request->approval as $user) {
             $vendor = UsersJobRegistered::where('id', '=', $user)->first();
 
+            MailController::acceptedJob($data->userCompany->companyProfile->name, $data->available_positions, $vendor->user->email);
+
             CompanyJobStep::create([
                 'company_job_id' => $data->id,
                 'step_name' => 'approved',
@@ -139,7 +141,19 @@ class CompanyJobStepController extends Controller
 
         $vendor_data = UsersJobRegistered::where('company_job_id', '=', $data->id)->get();
 
-        foreach ($vendor_data as $value) UsersJobRegistered::find($value->id)->delete();
+        foreach ($vendor_data as $value) {
+            if ($value->user_id != null) 
+                MailController::rejectedJob($data->userCompany->companyProfile->name, $data->available_positions, $value->user->email);
+
+            else {
+                $data_team = TeamProfile::where('id', '=', $value->team_id)->first();
+                $user = User::where('name', '=', $data_team->owner)->first();
+
+                MailController::rejectedJob($data->userCompany->companyProfile->name, $data->available_positions, $user->email);
+            }
+
+            UsersJobRegistered::find($value->id)->delete();
+        }
 
         return redirect()->route('companyStepApproval')->with(session()->flash('alert-success', 'Assesment successful!'));
     }

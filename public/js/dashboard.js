@@ -430,28 +430,28 @@ $('#photo').on('click', function() {
 	else profileBox.style.display = 'block';
 });
 
-// $('#searchUsers').keyup(function() {
-// 	var context = $('#searchUsers');
-// 	var textInput = document.getElementById('searchUsers');
+$('#searchUsers').keyup(function() {
+	var context = $('#searchUsers');
+	var textInput = document.getElementById('searchUsers');
 
-// 	if (context.val() != null) {
+	if (context.val() != null) {
 		
-// 		$.ajax({
-// 			url: '/search/users',
-// 			type: 'POST',
-// 			dataType: 'json',
-// 			data: { _token: $('#tokenUsers').val(), name: context.val() },
-// 		})
-// 		.done(function(res) {
+		$.ajax({
+			url: '/search/users',
+			type: 'POST',
+			dataType: 'json',
+			data: { _token: $('#tokenUsers').val(), name: context.val() },
+		})
+		.done(function(res) {
 
-// 			$('#listUsers').empty();
+			$('#listUsers').empty();
 
-// 			textInput.style.borderBottom = '1px solid #888888';
+			textInput.style.borderBottom = '1px solid #888888';
 
-// 			if (res.length == 0) $('#listUsers').append('<p class="list-group-item list-group-item-action flex-column align-items-start"><strong>Users not found!</strong></p>');
-// 			else $.each(res, function(index, value) {
-// 				$('#listUsers').append('<a href="#" class="list-group-item list-group-item-action flex-column align-items-start"><strong>' + value.name + '</strong><br><small>' + value.email + '</small></a>');
-// 			});
-// 		});
-// 	}
-// });
+			if (res.length == 0) $('#listUsers').append('<p class="list-group-item list-group-item-action flex-column align-items-start"><strong>Users not found!</strong></p>');
+			else $.each(res, function(index, value) {
+				$('#listUsers').append('<a href="#" class="list-group-item list-group-item-action flex-column align-items-start"><strong>' + value.name + '</strong><br><small>' + value.email + '</small></a>');
+			});
+		});
+	}
+});
