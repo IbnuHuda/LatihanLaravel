@@ -16,7 +16,7 @@
 @section('content')
 <div class="row">
     <div class="flash-message col-lg-12">
-        @foreach (['danger', 'warning', 'success', 'info'] as $msg) 
+        @foreach (['danger', 'warning', 'success', 'info'] as $msg)
             @if (Session::has('alert-' . $msg))
                 <p class="alert alert-{{ $msg }} w-100">{{ Session::get('alert-' . $msg) }} <a href="" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
             @endif
@@ -31,14 +31,14 @@
 
                 <br />
 
-                <div class="mt-2"></div>
+                {{-- <div class="mt-2"></div> --}}
 
                 @if ($jobs->isEmpty())
                     <p class="alert alert-warning w-100"><i class="fa fa-times-circle"></i> You not publish a job. <a href="{{ route('companyPublishJobs') }}">Publish now.</a></p>
                 @else
                     <div class="row">
                         @foreach($jobs as $job)
-                            <div class="col-md-4">
+                            <div class="col-lg-4 col-md-6 mt-3">
                                 <div class="card">
                                     <div class="card-body">
                                         <h5 class="card-title">{{ $job->available_positions }}</h5>
@@ -48,7 +48,7 @@
                                         <br />
 
                                         <p class="card-text">{{ (str_word_count($job->jobs_description) > 2) ? substr($job->jobs_description, 0, 75)."..." : $job->jobs_description}}</p>
-                                        <a href="{{ route('companyJobsDetail', $job->id) }}" class="card-link float-right">Read more</a>
+                                        <a href="{{ route('companyJobsDetail', $job->id) }}" class="btn btn-sm btn-primary card-link float-right">Read more</a>
                                     </div>
                                 </div>
                             </div>

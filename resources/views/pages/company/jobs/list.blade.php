@@ -37,7 +37,7 @@
                                     <div style="clear: both;"></div>
 
                                     <p class="card-text">{{ (str_word_count($job->jobs_description) > 2) ? substr($job->jobs_description, 0, 75)."..." : $job->jobs_description}}</p>
-                                    <a href="{{ route('companyJobsDetail', $job->id) }}" class="card-link float-right">Read more</a>
+                                    <a href="{{ route('companyJobsDetail', $job->id) }}" class="btn btn-sm btn-primary card-link float-right">Read more</a>
                                 </div>
                             </div>
                         </div>
@@ -53,27 +53,16 @@
 
     <!-- <div class="container">
         <div class="flash-message">
-            @foreach (['danger', 'warning', 'success', 'info'] as $msg) 
+            @foreach (['danger', 'warning', 'success', 'info'] as $msg)
                 @if (Session::has('alert-' . $msg))
                     <p class="alert alert-{{ $msg }} w-100">{{ Session::get('alert-' . $msg) }} <a href="" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
                 @endif
             @endforeach
         </div>
 
-        <div class="row">
-        <table class="table table-hover">
-            <thead>
-              <tr class="bg-primary text-light">
-                <th scope="col">#</th>
-                <th scope="col">Company Name</th>
-                <th scope="col">Jobs Description</th>
-                <th scope="col">Publisher</th>
-                <th scope="col">Action</th>
-              </tr>
-            </thead>
-            <tbody>
+
                 @php
-                    $number = 1;    
+                    $number = 1;
                 @endphp
                 @foreach ($companies_jobs as $list_jobs)
                     <tr>

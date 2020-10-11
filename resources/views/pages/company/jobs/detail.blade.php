@@ -18,13 +18,15 @@
 
                 <div style="clear: both;"></div>
 
+                <h3 class="text-center">{{ $data->name }}</h3>
+
                 <div class="row">
-                    <div class="col-md-4 text-center">
-                        <h4>{{ $data->name }}</h4>
-                        <img src="{{ url('storage/images/company/'. $data->company_logo) }}" class="w-100 mt-4">
+
+                    <div class="col-md-4">
+                        <img src="{{ url('storage/images/company/'. $data->company_logo) }}" class="img-fluid w-100 mt-4">
                     </div>
 
-                    <div class="col-md-8">
+                    <div class="col-md-8 mt-4">
                         <table border="0" class="table table-striped"  style="font-size: 15px; color:black">
                             <tbody>
                                 <tr>

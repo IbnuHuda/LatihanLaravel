@@ -4,19 +4,43 @@
         border: 1px solid #000;
         margin-top: 0px;
     }
+
+    @media screen and (max-width: 991px) {
+        /* .large{
+            display: none;
+        } */
+        table{
+            font-size: 13px;
+        }
+        /* table button{
+            width: 100%;
+            height: 40px;
+        } */
+        td .btn{
+            /* padding:  0px 55px; */
+            /* width: 120%; */
+        }
+    }
+
+
+    @media screen and (min-width: 992px) {
+        /* .small{
+            display: none;
+        } */
+    }
 </style>
 @extends('layouts.dashboard')
 
 @section('content')
 <div class="row">
     <div class="flash-message col-lg-12">
-        @foreach (['danger', 'warning', 'success', 'info'] as $msg) 
+        @foreach (['danger', 'warning', 'success', 'info'] as $msg)
             @if (Session::has('alert-' . $msg))
                 <p class="alert alert-{{ $msg }} w-100">{{ Session::get('alert-' . $msg) }} <a href="" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
             @endif
         @endforeach
     </div>
-    
+
     <div class="col-md-12">
         <div class="card">
             <div class="card-body">
@@ -30,7 +54,7 @@
                     <p class="alert alert-danger w-100"><i class="fa fa-times-circle"></i> Wait for vendor to apply your job!</p>
                 @else
                     <div class="table-responsive">
-                        <table class="table table-light">
+                        <table class="table table-light btn-table">
                             <thead>
                                 <tr class="bg-primary text-light">
                                     <th scope="col">#</th>
@@ -43,7 +67,7 @@
                                     <th scope="col">Action</th>
                                 </tr>
                             </thead>
-                    
+
                             <tbody>
                                 @foreach ($list_user_jobs as $list)
                                 @php
@@ -59,9 +83,11 @@
                                     <td>{{ count(explode('|', $list->portofolio_uploaded)) }}</td>
                                     <td>
                                         @if ($list->score == null)
+
                                             <button class="btn btn-sm btn-danger rounded-pill"><i class="fa fa-times-circle"></i> Not Validated</button>
+
                                         @else
-                                            <button class="btn btn-sm btn-success rounded-pill"><i class="fa fa-times"></i> Validated</button>
+                                            <button class="btn btn-sm btn-success rounded-pill"><i class="fa fa-check"></i> Validated</button>
                                         @endif
                                     </td>
                                     <td>
