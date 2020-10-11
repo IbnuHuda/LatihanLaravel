@@ -10,14 +10,14 @@
 @section('content')
 <div class="row">
 	<div class="flash-message col-lg-12">
-	    @foreach (['danger', 'warning', 'success', 'info'] as $msg) 
+	    @foreach (['danger', 'warning', 'success', 'info'] as $msg)
 	        @if (Session::has('alert-' . $msg))
 	            <p class="alert alert-{{ $msg }} w-100">{{ Session::get('alert-' . $msg) }} <a href="" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
 	        @endif
 	    @endforeach
 	</div>
 
-	<div class="col-lg-6" id="card-profile">
+	<div class="col-lg-6 mt-3" id="card-profile">
 		<div class="card">
 			<div class="card-body">
 				<h4 class="card-title">Company Profile</h4>
@@ -74,7 +74,7 @@
 		</div>
 	</div>
 
-	<div class="col-lg-6">
+	<div class="col-lg-6 mt-3">
 		<div class="card">
 			<div class="card-body">
 				<h4 class="card-title">Edit Company Profile</h4>
@@ -132,7 +132,7 @@
                                     <div class="input-group-prepend">
                                         <div class="input-group-text">+62</div>
                                     </div>
-                          
+
                                     <input type="text" name="contact_number" class="form-control" id="inlineFormInputGroupUsername" placeholder="123456789" value="{{ ($data == null || $data->contact_number == null) ? '' : explode(' ', $data->contact_number)[1] }}">
                                 </div>
 	                        </div>

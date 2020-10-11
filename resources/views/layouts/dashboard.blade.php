@@ -129,7 +129,7 @@
                 @else
                     <img src="{{ (Auth::user()->usersProfile->isEmpty() || Auth::user()->usersProfile[0]->photo == null) ? asset('/images/websites/def_photo.png') : url('storage/images/company'. Auth::user()->usersProfile[0]->photo) }}" class="rounded-circle float-right" id="photo" data-toggle="tooltip" data-html="true">
                 @endif
-                <img src="{{ asset('/images/users/1/示例图片_01.jpg') }}" >
+                {{-- <img src="{{ asset('/images/users/1/示例图片_01.jpg') }}" > --}}
             </div>
         </nav>
 
