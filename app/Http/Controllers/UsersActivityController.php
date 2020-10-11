@@ -3,17 +3,23 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\UsersJobRegistered;
+use Illuminate\Support\Facades\Auth;
 
 class UsersActivityController extends Controller
 {
     public function submission()
     {
-    	return view('pages.vendor.activity.submission');
+        $data = UsersJobRegistered::where('user_id', '=', Auth::user()->id)->first();
+
+        return view('pages.vendor.activity.submission', compact('data'));
     }
 
     public function assesment()
     {
-    	return view('pages.vendor.activity.assesment');
+        $data = UsersJobRegistered::where('user_id', '=', Auth::user()->id)->first();
+
+        return view('pages.vendor.activity.assesment', compact('data'));
     }
 
     public function approval()
