@@ -84,7 +84,7 @@ div#sidebar ul span {
 div#sidebar ul span i.fa.fa-chevron-right {
     font-size: 10px;
     margin-top: 10px;
-    /* float: right; */
+    float: right;
     transition: 0.25s;
     display: inline-block;
 }
@@ -144,7 +144,8 @@ div#sidebar ul li i:hover li,
 div#sidebar ul a:hover li,
 div#sidebar ul span:hover li,
 div#sidebar #jobsMenus a:hover li,
-div#sidebar #activityMenus a:hover li
+div#sidebar #activityMenus a:hover li,
+div#sidebar #teamMenus a:hover li
 
 {
     color: #2E86DE;

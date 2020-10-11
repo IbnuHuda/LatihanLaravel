@@ -22,10 +22,10 @@
                 <div class="row">
                     <div class="col-md-4 text-center">
                         <h4>{{ $detail_companies->name }}</h4>
-                        <img src="{{ url('storage/images/company/'. $detail_companies->company_logo) }}" class="w-100 mt-4">
+                        <img src="{{ url('storage/images/company/'. $detail_companies->company_logo) }}" class="img img-fluid mt-3">
                     </div>
 
-                    <div class="col-md-8">
+                    <div class="col-md-8 mt-5">
                         <table border="0" class="table table-striped"  style="font-size: 15px; color:black">
                             <tbody>
                                 <tr>
@@ -77,7 +77,7 @@
                         <div class="float-right mt-2">
 
                             <button onclick="window.history.back();" class="btn btn-md btn-danger"><i class="fa fa-arrow-left"></i> Back</button>
-                            <a href="{{ route('usersRegisterJobs', $detail_jobs->id) }}" class="btn btn-md btn-primary">Enroll</a>
+                            <a href="{{ route('usersRegisterJobs', $detail_jobs->id) }}" class="btn btn-md btn-primary"><i class="fa fa-edit"></i> Enroll</a>
 
 
                         </div>

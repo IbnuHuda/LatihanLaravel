@@ -51,7 +51,7 @@
 
                         <span id="Jobs">
                             <li>
-                                <i class="fa fa-filter" id="iconJobs"></i> <span style="margin-left: 30px;" id="jobsTitle">Jobs</span> <i class="fa fa-chevron-right float-right" id="jobsChevron"></i>
+                                <i class="fa fa-filter" id="iconJobs"></i> <span style="margin-left: 30px;" id="jobsTitle">Jobs</span> <i class="fa fa-chevron-right" id="jobsChevron"></i>
                             </li>
                         </span>
 
@@ -63,7 +63,7 @@
 
                         <span id="Activity">
                             <li>
-                                <i class="fa fa-list" id="iconActivity"></i> <span style="margin-left: 25px;" id="activityTitle">Activity</span> <i class="fa fa-chevron-right float-right" id="activityChevron"></i>
+                                <i class="fa fa-list" id="iconActivity"></i> <span style="margin-left: 25px;" id="activityTitle">Activity</span> <i class="fa fa-chevron-right" id="activityChevron"></i>
                             </li>
                         </span>
 
