@@ -78,7 +78,9 @@ Route::middleware('auth:company')->group(function () {
 
 	Route::get('/company/step/submission', 'CompanyJobStepController@submissionForm')->name('companyStepSubmission');
 	Route::get('/company/step/submission/{id}', 'CompanyJobStepController@submissionDetailForm')->name('companyStepDetailSubmission');
-	Route::post('/company/step/submission', 'CompanyJobStepController@submissionProcess');
+	Route::get('/company/step/submission/score/{id}', 'CompanyJobStepController@submissionScoreForm')->name('companySubmissionScoreForm');
+    Route::post('/company/step/submission/score', 'CompanyJobStepController@submissionScore')->name('companySubmissionScore');
+
 	Route::get('/company/step/assesment', 'CompanyJobStepController@assesmentForm')->name('companyStepAssesment');
 	Route::get('/company/step/assesment/{id}', 'CompanyJobStepController@assesmentDetailForm')->name('companyStepDetailAssesment');
 	Route::post('/company/step/assesment', 'CompanyJobStepController@assesmentProcess');

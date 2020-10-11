@@ -19,4 +19,9 @@ class UsersJobRegistered extends Model
     {
         return $this->belongsTo('App\User');
     }
+
+    public function teamProfile()
+    {
+        return $this->belongsTo(TeamProfile::class, 'team_id', 'id');
+    }    
 }
