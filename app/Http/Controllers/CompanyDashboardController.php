@@ -16,6 +16,5 @@ class CompanyDashboardController extends Controller
         $data_approval = CompanyJobStep::all();
 
         return view('pages.company.dashboard', compact( 'data_jobs', 'data_user_registered','data_approval'));
-    	// return view('pages.company.dashboard');
     }
 }

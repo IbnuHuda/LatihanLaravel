@@ -10,7 +10,6 @@
         height: 200px;
     }
 </style>
-
 @extends('layouts.dashboard')
 
 @section('content')

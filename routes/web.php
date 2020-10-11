@@ -85,6 +85,9 @@ Route::middleware('auth:company')->group(function () {
 	Route::get('/company/step/assesment/{id}', 'CompanyJobStepController@assesmentDetailForm')->name('companyDetailAssesment');
 	Route::post('/company/step/assesment', 'CompanyJobStepController@assesmentProcess')->name('companyAssesment');
 
+	Route::get('/company/user/{id}', 'CompanyJobStepController@userDetail')->name('companyUserDetail');
+	Route::get('/company/team/{id}', 'CompanyJobStepController@teamDetail')->name('companyTeamDetail');
+
 	Route::get('/company/step/approval', 'CompanyJobStepController@approvalForm')->name('companyStepApproval');
     Route::get('/company/step/approval/{id}', 'CompanyJobStepController@approvalDetailForm')->name('companyDetailApproval');
     Route::post('/company/step/approval', 'CompanyJobStepController@ratingProcess')->name('companyApprove');

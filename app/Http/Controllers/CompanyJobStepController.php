@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use App\UserCompany;
 use App\CompanyJobs;
+use App\TeamProfile;
 use App\UsersProfile;
 use App\CompanyProfile;
 use App\CompanyJobStep;
@@ -93,11 +94,30 @@ class CompanyJobStepController extends Controller
     {
         $result = UsersJobRegistered::
                     where('score', '!=', 'null')
-                    ->where('id', '=', $id)
+                    ->where('company_job_id', '=', $id)
                     ->orderBy('score','desc')
                     ->get();
 
         return view('pages.company.activity.assesmentDetail', compact('result'));
+    }
+
+    public function userDetail($id)
+    {        
+        $data = UsersProfile::where('user_id', '=', $id)->first();
+        $data_stat = StatisticUsers::where('user_id', '=', $id)->first();
+
+        return view('pages.company.activity.userProfile', compact('data', 'data_stat'));
+    }
+
+    public function teamDetail($id)
+    {
+        $data = TeamProfile::where('id', '=', $id)->first();
+        $total = User::where('team_id' , '=' , $data->id)->orderBy('id', 'desc')->get();
+        
+        $i = 0;
+        foreach ($total as $tot) $i++;
+
+        return view('pages.company.activity.teamProfile', compact('data', 'i', 'total'));
     }
 
     public function assesmentProcess(Request $request){

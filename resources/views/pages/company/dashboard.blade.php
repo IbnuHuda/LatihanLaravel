@@ -95,6 +95,7 @@
                         <div class="col-md-12 mt-2">
                             <div class="card">
                                 <div class="card-body">
+                                    <h5 class="card-title float-left">{{ $job->userCompany->companyProfile[0]->name }}</h5>
                                     <p class="float-right" style="font-style: oblique;">Expired at {{ $job->jobs_expired }}</p>
                                     <div style="clear: both;"></div>
                                     <h6 class="card-subtitle text-muted mb-2 float-left">{{ ucfirst($job->available_positions) }}</h6>

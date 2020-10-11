@@ -62,9 +62,7 @@ class TeamProfileController extends Controller
             $data = TeamProfile::where('id' , '=' , Auth::user()->team_id)->first();
             $total = User::where('team_id' , '=' , $data->id)->orderBy('id', 'desc')->get();
             $i = 0;
-            foreach ($total as $tot){
-                $i++;
-            }
+            foreach ($total as $tot) $i++;
 
             return view('pages.vendor.team.profile', compact('data', 'i', 'total'));
         }

@@ -60,7 +60,6 @@ class UsersProfileController extends Controller
     }
 
     public function searchUsers($id) {
-
         $data = User::where('id','=',$id)->first();
         $pData = UsersProfile::where('user_id','=',$data->id)->first();
 

@@ -56,7 +56,7 @@
                                 <td>{{ $list->score }}</td>
                                 <td>Rp. {{ $list->salary }}</td>
                                 <td>
-                                    <a href="{{ route('companySubmissionScoreForm', $list->id) }}" class="btn btn-warning"><i class="fa fa-eye"></i> View Profile</a>
+                                    <a href="{{ ($list->user_id == null) ? route('companyTeamDetail', $list->team_id) : route('companyUserDetail', $list->user_id) }}" class="btn btn-warning"><i class="fa fa-eye"></i> Profile</a>
                                 </td>
                             </tr>
                             @endforeach

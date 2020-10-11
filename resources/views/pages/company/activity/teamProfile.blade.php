@@ -41,7 +41,7 @@
                 <div style="clear: both;"></div>
 
                 <img src="{{ ($data == null || $data->photo == null) ?  asset('images/websites/def_photo.png') : url('storage/images/team/'. $data->photo) }}" class="img rounded-circle" id="photo">
-                <ul class="list-group list-group-flush mt-4" style="font-weight: bold">
+                <ul class="list-group list-group-flush mt-4">
                     <li class="list-group-item">Name : {{ucfirst( $data->name)}}</li>
                     <li class="list-group-item">Owner : {{$data->owner}}</li>
                     <li class="list-group-item">Address : {{$data->address}}</li>
@@ -51,28 +51,7 @@
         </div>
     </div>
 
-    <div class="col-sm-5 mt-3">
-        <div class="row">
-            <div class="col">
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="card-title">Team Data</h4>
-                        <hr class="float-left" />
-
-                        <div style="clear: both;"></div>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">Member Total : {{ $i }} </li>
-                            @if ($data->owner == Auth::user()->name)
-                                <li class="list-group-item">Access Code : {{$data->access_code}}</button></li>
-                            @else
-                                <li class="list-group-item"><button class="btn btn-danger">Leave Team</button></li>
-                            @endif
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-
+    <div class="col-sm-5">
         <div class="row mt-3">
             <div class="col colspan-2">
                 <div class="card">
@@ -83,8 +62,15 @@
                         <div style="clear: both;"></div>
                         <ul class="list-group list-group-flush">
                             @foreach ($total as $item)
-                                <li class="list-group-item">{{ ($item->name == $data->owner) ? $item->name . ' (Leader)' : $item->name }}</li>
+                                <li class="list-group-item">
+                                    <a href="{{ route('companyUserDetail', $item->id) }}">{{ $item->name }}</a> {{ ($item->name == $data->owner) ? '(Leader)' : '' }}
+                                </li>
                             @endforeach
+                            <li class="list-group-item">
+                                <div class="float-right">
+                                    <button onclick="window.history.back();" class="btn btn-md btn-danger"><i class="fa fa-arrow-left"></i> Back</button>
+                                </div>
+                            </li>
                         </ul>
                     </div>
                 </div>
