@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\User;
-use App\Rating;
 use App\UserCompany;
 use App\CompanyJobs;
 use App\UsersProfile;
 use App\CompanyProfile;
 use App\CompanyJobStep;
+use App\StatisticUsers;
 use App\UsersJobRegistered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -146,15 +146,15 @@ class CompanyJobStepController extends Controller
     }
 
     public function ratingProcess(Request $request){
-        $result = new Rating;
-        // $result->id = $request->user_id;
-        $result->user_id = $request->user_id;
-        $result->company_id =$request->company_id;
-        $result->rating = $request->star;
-        $result->save();
-        dd($result->save());
+        $data = CompanyJobStep::where('company_job_id', '=', $request->job)->first();
 
-    //return redirect()->route('companyStepApproval')->with(session()->flash('alert-success', 'Assesment successful!'));
+        $vendor_data = StatisticUsers::where('user_id', '=', $data->user_id_accepted)->first();
 
+        $rating = $vendor_data->rating_granted + $request->rating;
+        $vendor_data->update(['rating_granted' => $rating]);
+
+        $temp = $data->where('user_id_accepted', '=', $vendor_data->user_id)->delete();
+
+        return redirect()->back()->with(session()->flash('alert-success', 'Project ended and rating gived success'));
     }
 }

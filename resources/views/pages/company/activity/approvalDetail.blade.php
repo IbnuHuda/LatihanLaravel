@@ -55,6 +55,8 @@
                     <div id="rating" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLiveLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <form method="post" action="{{ route('companyApprove') }}">
+                                @csrf
+
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="exampleModalLiveLabel">Rating Forms</h5>
@@ -70,9 +72,13 @@
                                         <i class="fa fa-star fa-2x" id="star-four"></i>
                                         <i class="fa fa-star fa-2x" id="star-five"></i>
                                     </div>
+
+                                    <input type="hidden" name="job" value="{{ Request::route('id') }}">
+                                    <input type="hidden" name="rating" value="0" id="rated">
+
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-primary">Save changes</button>
+                                        <button type="submit" class="btn btn-primary">Save changes</button>
                                     </div>
                                 </div>
                             </form>
@@ -84,4 +90,6 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript" src="{{ asset('js/rating.js') }}" defer></script>
 @endsection
